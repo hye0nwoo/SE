@@ -68,4 +68,4 @@ app.post('/signup', function (req, res) {
 app.listen(3000, function () {
     console.log('server on!');
 });
-//소스트리 커밋테스트
+//소스트리 커밋테스트2
