@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-console-app2",
+  "version": "0.0.0",
+  "description": "NodejsConsoleApp2",
+  "main": "app.js",
+  "author": {
+    "name": "kimhy",
+    "email": ""
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "mysql": "^2.10.2"
+  }
+}
