@@ -31,6 +31,7 @@ app.post('/login', function (req, res) {
                 if (result.Pass == pass) {
                     req.session.id = id;
                     //메인 화면으로 넘어감
+                     
                 }
                 else {
                     //비밀번호가 다릅니다 신호
