@@ -1,4 +1,26 @@
+/* ***
+*
+*
 
+Copyright (C) 2010  Leandro Vázquez Cervantes (leandro[-at-]leandro[-dot-]org)
+Copyright (C) 2010  Octavio Benedí Sánchez (octaviobenedi[-at-]gmail[-dot-]com)
+Copyright (C) 2010  Verónica Pazos (verocorella[-at-]gmail-dot-]com)
+
+GNU LESSER GENERAL PUBLIC LICENSE
+
+Version 3, 29 June 2007
+
+Copyright © 2007 Free Software Foundation, Inc. <http://fs.org/>
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+This version of the GNU Lesser General Public License incorporates the terms and conditions of version 3 of the GNU General Public License, supplemented by the additional permissions listed below.
+
+version 0.3g Leandro  18 NOV 2012
+AGPL to LGPL v3 change
+*
+*
+*** */
 
 $(document).ready(function() {
 
@@ -36,7 +58,7 @@ $(document).ready(function() {
 			WIP<br/><input onkeypress="javascript:save_edit_h(event)" class="input header_input_name" value="'+wip+'" /> \
 		</div>  \
 		<div class="small"> \
-			<div class="option save_header"><button class="btn btn-success btn-mini"><i class="glyphicon glyphicon-ok"></i></button></div> \
+			<div class="option save_header"><button class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 		</div> \
 		<div class="clear"></div> \
 		';
@@ -51,9 +73,9 @@ $(document).ready(function() {
 		    wip=0; // Primera columna debe tener el wip ilimitado
 		}
 		if(wip>0){
-    		$(this).parent().parent().html('<div class="header_name click"><img class="title_bullet" src="kanban/bullet.png" /><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: '+wip+'</div>');
+    		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: '+wip+'</div>');
 		}else{
-        	$(this).parent().parent().html('<div class="header_name click"><img class="title_bullet" src="kanban/bullet.png" /><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: Unlimited</div>');
+        	$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: Unlimited</div>');
     	}
 	});
 
@@ -66,11 +88,12 @@ $(document).ready(function() {
 				  <div id="name'+id+'" class="name">Item '+id+'</div> \
 				  <div class="dotted_hr"></div> \
 				  <div id="resp'+id+'" class="name">Resp '+id+'</div> \
+				  <div n="0" id="checkbox'+id+'"></div> \
 				  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
 				  <div class="small"> \
 					  <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="#f7941d"></div> \
-					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-mini"><span class="glyphicon glyphicon-remove"></i></button></div> \
-					  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-mini"><i class="glyphicon glyphicon-pencil"></i></button></div> \
+					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
+					  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 				  </div> \
 				  <div class="clear"></div> \
 			  </div> \
@@ -94,6 +117,10 @@ $(document).ready(function() {
 	});
 
 	$('.colorete_background').live('colorpicked', function () {
+	$('#page-wrapper').css('background',$(this).val());
+	});
+
+	$('.colorete_theme').live('colorpicked', function () {
     $('.main_div').css('background',$(this).val());
 	});
 
@@ -102,22 +129,27 @@ $(document).ready(function() {
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name_input'+id).val();
 		var box_itm_resp=$('#resp_input'+id).val();
+		var box_itm_checklist=$('#checkbox'+id).html();
 		var pbar_value=parseInt($('#progress_input'+id).val());
 		pbar_value = check_number(pbar_value);
-		var box_itm_new_html=' \
+		var box_itm_new_html_start=' \
 		    <div class="big_container"> \
 				  <div id="name'+id+'" class="name">'+box_itm_name+'</div> \
 				  <div class="dotted_hr"></div> \
 				  <div id="resp'+id+'" class="name">'+box_itm_resp+'</div> \
+		';
+		var checklist_html='<div n='+$("#checkbox"+id).attr("n")+' id="checkbox'+id+'">'+box_itm_checklist+'</div>';
+		var box_itm_new_html_last=' \
 				  <progress max="100" id="progress_bar'+id+'" class="pbar" value="'+pbar_value+'"></progress> \
 				  <div class="small"> \
 				    <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="#f7941d"></div> \
-					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-mini"><i class="glyphicon glyphicon-remove"></i></button></div> \
-					  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-mini"><i class="glyphicon glyphicon-pencil"></i></button></div> \
+					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
+					  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 				  </div> \
 				  <div class="clear"></div> \
 				<div> \
 		';
+		var box_itm_new_html = box_itm_new_html_start + checklist_html + box_itm_new_html_last;
 		$('#box_itm'+id).html(box_itm_new_html);
 		$( "#box_itm"+id+" .itm_box_option input" ).mColorPicker();
 
@@ -132,25 +164,56 @@ $(document).ready(function() {
       $('#box_itm'+$(this).attr('n')).css('background',$(this).val());
 	  });
 
+	  var boxH = $('#box_itm'+id).height();
+	  $('#box_itm'+id).css('height',boxH-50+"px");
 	});
 
+	$(".addcheck").live('click', function(){
+		var id = $(this).attr("n");
+		$("#checkbox"+id).attr("n",Number($("#checkbox"+id).attr("n"))+1);
+		$("#checkbox"+id).append(' \
+			<div class="checkbox-list"><div n="'+id+'" class="deletecheck "><button type="button" class="close" aria-label="Close" style="height:20px;margin:5px;"><span aria-hidden="true">&times;</span></button></div>\
+			<span class="small_left">\
+      			<input onkeypress="javascript:save_edit(event)" id="name_input'+id+'check" class="inputcheck"/>\
+    		</span></div><!-- /input-group -->\
+		');
+		var boxH = $('#box_itm'+id).height();
+		$('#box_itm'+id).css('height',boxH+43+"px");
+	});
+
+	$(".deletecheck").live('click',function(){
+		var id = $(this).attr("n");
+		$("#checkbox"+id).attr("n",Number($("#checkbox"+id).attr("n"))-1);
+		$(this).parent().remove();
+		var boxH = $('#box_itm'+id).height();
+		$('#box_itm'+id).css('height',boxH-18+"px");
+	});
 
 	$('.edit').live('click', function() {
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name'+id).html();
 		var box_itm_resp=$('#resp'+id).html();
+		var box_itm_checklist=$('#checkbox'+id).html();
 		var pbar_value=parseInt($('#progress_bar'+id).prop('value'));
 		if (isNaN(pbar_value)){ var pbar_value=0;}
-		var box_itm_new_html=' \
-				<div><span class="small">Name of the task:</span><input onkeypress="javascript:save_edit(event)" id="name_input'+id+'" class="input" value="'+box_itm_name+'" /></div>  \
-				<div><span class="small">Responsible:</span><input onkeypress="javascript:save_edit(event)" id="resp_input'+id+'" class="input" value="'+box_itm_resp+'" /></div>  \
-				<div><span class="small">Progress:</span><input onkeypress="javascript:save_edit(event)" id="progress_input'+id+'" class="input" value="'+pbar_value+'" /></div>  \
+		var box_itm_new_html_start=' \
+				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="name_input'+id+'" class="input" value="'+box_itm_name+'" /></span><span class="small_right">title</span></div>  \
+				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="resp_input'+id+'" class="input" value="'+box_itm_resp+'" /></span><span class="small_right">content</span></div>  \
+		';
+		var checklist_html='<div n="'+$("#checkbox"+id).attr("n")+'" id="checkbox'+id+'">'+box_itm_checklist+'</div>';
+		var box_itm_new_html_last=' \
 				<div class="small"> \
-					<div n="'+id+'" class="option save"><button class="btn btn-success btn-mini"><i class="glyphicon glyphicon-ok"></i></button></div> \
+					<div n="'+id+'" class="option addcheck"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button><div>\
+				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="progress_input'+id+'" class="input" value="'+pbar_value+'" /></span><span class="small_right">percent</span></div>  \
+				<div class="small"> \
+					<div n="'+id+'" class="option save"><button class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 				</div> \
 				<div class="clear"></div> \
 		';
+		var box_itm_new_html = box_itm_new_html_start + checklist_html + box_itm_new_html_last;
 		$('#box_itm'+id).html(box_itm_new_html);
+		var boxH = $('#box_itm'+id).height();
+		$('#box_itm'+id).css('height',boxH+50+"px");
 	});
 
 	$('.close').live('click', function() {
