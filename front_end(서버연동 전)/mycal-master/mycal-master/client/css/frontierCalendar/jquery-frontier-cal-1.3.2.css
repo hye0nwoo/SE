@@ -11,7 +11,7 @@ will look messed up.
 Root calendar element
 */
 .JFrontierCal {
-	border: 0px solid #dddddd;
+	border: 0px solid #CFF5CD;
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
@@ -52,8 +52,8 @@ Style for day cells on the current month.
 */
 .JFrontierCal .JFrontierCal-Day-Cell,
 .JFrontierCal .JFrontierCal-Day-Cell-Last{
-	background-color: #efefef;
-	color: #444444;	
+	background-color: #F5FDF3;
+	color: #95E491;	
 	background-image:url('images/dayCellCurrentMonth.png');
 	background-repeat:repeat-y;
 }
@@ -159,7 +159,7 @@ Style for agenda items. These are simply default values. Some values can be conf
 	*/
 	overflow: hidden;
 	font: 11px verdana;
-	background-color: #7fad00;
+	background-color: #BBE548;
 	color: #ffffff;
 	margin: 0px;
 	white-space: nowrap;

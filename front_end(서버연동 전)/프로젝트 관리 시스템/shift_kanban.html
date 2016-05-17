@@ -1,23 +1,15 @@
-
-<script type="javascript">
-    function write_work_check() {
-        var form = document.write_work_form;
-
-        if (!form.)
-    }
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
+
+<style id="css_disabled_color_picker" type="text/css">.mColorPicker[disabled] + span, .mColorPicker[disabled="disabled"] + span, .mColorPicker[disabled="true"] + span {filter:alpha(opacity=50);-moz-opacity:0.5;-webkit-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;cursor:default;}</style>
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
@@ -35,45 +27,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        #board {
-            display: table;
-            margin: 0;
-            padding: 0;
-            border-spacing: 5px;
-        }
-        .section {
-            display: table-cell;
-            margin: 0;
-            border: 1px solid #666;
-            padding: 5px;
-            width: 300px;
-        }
-        .section.droppable {
-            border: 1px dashed #666;
-        }
-        .section > h1 {
-            margin: 0;
-            border-bottom: 1px solid #999;
-            padding: 0;
-            font-size: 12pt;
-            text-align: center;
-        }
-        .card {
-            display: inline-block;
-            vertical-align: top;
-            margin: 10px 5px;
-            padding: 10px;
-            width: 100px;
-            height: 100px;
-            color: black;
-            background: #ff8;
-            cursor: move;
-            text-align: center;
-            font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-            box-shadow: 2px 2px 2px #eee;
-        }
-    </style>
+
+    <script type="text/javascript" async="" src="./kanban/ga.js"></script><script src="./kanban/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./kanban/kanban.js"></script>
+    <script src="./kanban/jquery-ui.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./kanban/mColorPicker_min.js" charset="UTF-8"></script>
+
+    <link rel="stylesheet" href="./kanban/kanban.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./kanban/jquery-ui.css" type="text/css" media="all">
 </head>
 
 <body>
@@ -228,14 +189,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a href="workboard.html"><i class="fa fa-fw fa-file"></i> Workboard</a>
                     </li>
                 </ul>
             </div>
@@ -250,133 +208,50 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Work Board
-                            <small>project name</small>
+                            Blank Page
+                            <small>Subheading</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Work Board
+                                <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-    <div id="board">
-        <div id="todo" class="section">
-            <h1>To Do</h1>
-            <div id="c2" class="card">
-                <div>Make Killer App
-                </div>
-            </div>
-            <div id="c3" class="card"><em>Retire!</em></div>
+    <div class="main_div" style="background: rgb(255, 255, 255);">
+        <div>
+            <button id="add_task" type="button" value="NEW TASK" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button id="add_col" type="button" value="NEW COLUMN" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span></button>
+            <button id="remove_col" type="button" value="DELETE COLUMN" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span></button>
+            <button id="change_background" type="button" value="colorete" class="btn btn-xs"><input id="chang_background" class="color colorete_background" type="color" data-text="hidden" data-colorlink="main_div" value="#f7941d"></button>
+            <button id="change_background" type="button" value="colorete" class="btn btn-xs"><input id="chang_theme" class="color colorete_theme" type="color" data-text="hidden" data-colorlink="row" value="#f7941d"></button>
         </div>
-        <div id="doing" class="section">
-            <h1>Doing</h1>
-            <div id="c1" class="card">Learn HTML5</div>
-        </div>
-        <div id="done" class="section">
-            <h1>Done</h1>
-        </div>
+        <table class="table rounded" border="1">
+            <tbody><tr id="task_pool_header_container">
+            <th class="task_pool_header  dotted_separator"><div class="header_name click"><span class="title_text">Backlog</span></div><div wip="0" class="WIP">WIP: Unlimited</div></th>
+            <th class="task_pool_header  dotted_separator"><div class="header_name click"><span class="title_text">In Process</span></div><div wip="0" class="WIP">WIP: Unlimited</div></th>
+            <th class="task_pool_header"><div class="header_name click"><span class="title_text">Finished</span></div><div wip="0" class="WIP">WIP: Unlimited</div></th>
+        </tr>
+        <tr id="task_pool_container">
+            <td class="task_pool dotted_separator ui-sortable"><div></div></td>
+            <td class="task_pool dotted_separator ui-sortable"><div></div></td>
+            <td class="task_pool ui-sortable"><div></div></td>
+            </tr>
+        </tbody></table>
     </div>
-
-    <script>
-        var cards = document.querySelectorAll('.card');
-        for (var i = 0, n = cards.length; i < n; i++) {
-            var card = cards[i];
-            card.draggable = true;
-        };
-        var board = document.getElementById('board');
-        var hideMe;
-        board.onselectstart = function(e) {
-            e.preventDefault();
-        }
-        board.ondragstart = function(e) {
-            console.log('dragstart');
-            hideMe = e.target;
-            e.dataTransfer.setData('card', e.target.id);
-            e.dataTransfer.effectAllowed = 'move';
-        };
-        board.ondragend = function(e) {
-            e.target.style.visibility = 'visible';
-        };
-        var lastEneterd;
-        board.ondragenter = function(e) {
-            console.log('dragenter');
-            if (hideMe) {
-                hideMe.style.visibility = 'hidden';
-                hideMe = null;
-            }
-            // Save this to check in dragleave.
-            lastEntered = e.target;
-            var section = closestWithClass(e.target, 'section');
-            // TODO: Check that it's not the original section.
-            if (section) {
-                section.classList.add('droppable');
-                e.preventDefault(); // Not sure if these needs to be here. Maybe for IE?
-                return false;
-            }
-        };
-        board.ondragover = function(e) {
-            // TODO: Check data type.
-            // TODO: Check that it's not the original section.
-            if (closestWithClass(e.target, 'section')) {
-                e.preventDefault();
-            }
-        };
-        board.ondragleave = function(e) {
-            // FF is raising this event on text nodes so only check elements.
-            if (e.target.nodeType === 1) {
-                // dragleave for outer elements can trigger after dragenter for inner elements
-                // so make sure we're really leaving by checking what we just entered.
-                // relatedTarget is missing in WebKit: https://bugs.webkit.org/show_bug.cgi?id=66547
-                var section = closestWithClass(e.target, 'section');
-                if (section && !section.contains(lastEntered)) {
-                    section.classList.remove('droppable');
-                }
-            }
-            lastEntered = null; // No need to keep this around.
-        };
-        board.ondrop = function(e) {
-            var section = closestWithClass(e.target, 'section');
-            var id = e.dataTransfer.getData('card');
-            if (id) {
-                var card = document.getElementById(id);
-                // Might be a card from another window.
-                if (card) {
-                    if (section !== card.parentNode) {
-                        section.appendChild(card);
-                    }
-                } else {
-                    alert('couldn\'t find card #' + id);
-                }
-            }
-            section.classList.remove('droppable');
-            e.preventDefault();
-        };
-        function closestWithClass(target, className) {
-            while (target) {
-                if (target.nodeType === 1 &&
-                    target.classList.contains(className)) {
-                    return target;
-                }
-                target = target.parentNode;
-            }
-            return null;
-        }
-    </script>
             </div>
             <!-- /.container-fluid -->
+
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

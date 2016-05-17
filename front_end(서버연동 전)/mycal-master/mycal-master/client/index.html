@@ -3,7 +3,48 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>일정관리 Calendar</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<style>
+.left {
+   display:inline-block;
+   width:200px;
+}
+.main {
+   display:inline-block;
+   width: 50%;
+
+}
+.timeline {
+   display:block;
+   width: 300px;
+   height: 40px;
+   line-height: 40px;
+   color: white;
+   text-align: center;
+   margin: 15px 0;
+
+}
+.div_button {
+   display: inline-block;
+   width: 150px;
+   height: 25px;
+   line-height: 25px;
+   color: #000;
+   border: solid 1px #000;
+   text-align: center;
+   margin: 15px;
+}
+.private {
+   background-color: purple;
+}
+.public {
+   background-color: grey;
+}
+</style>
+
+
+<title>일정관리</title>
 
 <!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
 <link rel="stylesheet" type="text/css" href="css/frontierCalendar/jquery-frontier-cal-1.3.2.css" />
@@ -13,7 +54,7 @@
 
 <!-- Include CSS for JQuery UI (Required for calendar plugin.) -->
 <link rel="stylesheet" type="text/css" href="css/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css" />
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
 <!--
 Include JQuery Core (Required for calendar plugin)
 ** This is our IE fix version which enables drag-and-drop to work correctly in IE. See README file in js/jquery-core folder. **
@@ -51,7 +92,7 @@ body font-size to 62.5% isn't an option, or not one you want, you can set the fo
 to 1em or set it to px.
 http://osdir.com/ml/jquery-ui/2009-04/msg00071.html
 */
-body { font-size: 62.5%; }
+documentbody { font-size: 62.5%; }
 .shadow {
 	-moz-box-shadow: 3px 3px 4px #aaaaaa;
 	-webkit-box-shadow: 3px 3px 4px #aaaaaa;
@@ -118,7 +159,7 @@ $(document).ready(function(){
 		}
 		
 		var displayData = "";
-		
+		var calcal = agendaItem.calcal; /*수정 수정 개인일정 표시 */
 		var title = agendaItem.title;
 		var startDate = agendaItem.startDate;
 		var endDate = agendaItem.endDate;
@@ -306,13 +347,38 @@ $(document).ready(function(){
 	/**
 	 * Initialize iCal test button
 	 */
-	$("#BtnICalTest").button();
-	$("#BtnICalTest").click(function() {
-		// Please note that in Google Chrome this will not work with a local file. Chrome prevents AJAX calls
-		// from reading local files on disk.		
-		jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");	
-		return false;
-	});	
+	 
+	 /* 한번 시도 */
+	 $( document ).ready(function() {
+   
+
+     $('#public_click').click( function(){
+      if( $('.public').css("display") == "none")
+      {
+         $('.public').css("display", "");
+      }
+      else
+      {
+         $('.public').css("display", "none");
+      }
+
+    });
+
+
+    $('#private_click').click( function(){
+      if( $('.private').css("display") == "none")
+      {
+         $('.private').css("display", "");
+      }
+      else
+      {
+         $('.private').css("display", "none");
+      }
+    });
+ });
+
+/* 한번 시도당 */
+
 
 	/**
 	 * Initialize add event modal form
@@ -324,6 +390,7 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			'Add Event': function() {
+				/* 여기에 무엇을 추가?? */
 
 				var what = jQuery.trim($("#what").val());
 			
@@ -520,7 +587,9 @@ $(document).ready(function(){
 		},
 		open: function(event, ui){
 			if(clickAgendaItem != null){
+				var calcal = clickAgendaItem.calcal;  /* 개인일정 추가 */
 				var title = clickAgendaItem.title;
+				
 				var startDate = clickAgendaItem.startDate;
 				var endDate = clickAgendaItem.endDate;
 				var allDay = clickAgendaItem.allDay;
@@ -567,6 +636,8 @@ $(document).ready(function(){
 });
 </script>
 
+
+
 <h1 style="font-size: 30px; font-weight: bold;">일정관리</h1>
 
 <div id="tabs">
@@ -598,7 +669,13 @@ $(document).ready(function(){
 		as they are wide.
 		-->
 		
+<<<<<<< HEAD
 		
+=======
+	
+	
+	<!--
+>>>>>>> 0fc2a458c7238825423a9895f6a8ca9b23bcf28e
           <div id="popup_layer" style="position:absolute; border:double; top:100px; left:100px; width:500px;  visibility:hidden;
 background-color:white; "> 
       		<div id="mycal"></div>
@@ -608,7 +685,9 @@ background-color:white; ">
          
          
 
-    <div id="mycal"></div>
+
+
+    	<div id="mycal"></div>
 
 		<!-- debugging-->
 		<div id="calDebug"></div>
@@ -622,14 +701,17 @@ background-color:white; ">
 			.ui-dialog .ui-state-error { padding: .3em; }
 			.validateTips { border: 1px solid transparent; padding: 0.3em; }
 		</style>
-		<div id="add-event-form" title="Add New Event">
-			<p class="validateTips">All form fields are required.</p>
+		<div id="add-event-form" title="일정추가">
+			<p class="validateTips">일정을 채워 놓으세요.</p>
 			<form>
 			<fieldset>
 			  <label for="selector">개인일정 or 공식일정</label>
-			  <select id="calcal" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
-				  		<option value="personal" SELECTED>개인일정</option>
-				  		<option value="gongsik" SELECTED>공식일정</option>
+			  
+			  <!-- <select id="div_button" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+				  		<option id="private_click" SELECTED>개인일정</option>
+				  		<option id="public_click" SELECTED>공식일정</option> -->
+				  		<div id="div_button" class="timeline public">공통일정</div> 
+				  		<div id="div_button" class="timeline private">개인일정 </div>
 				<label for="name">What?</label>
 				<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>
 				<table style="width:100%; padding:5px;">
@@ -746,17 +828,12 @@ background-color:white; ">
 		</div>		
 
 		<p>&nbsp;</p>
-		
-			<script type="text/javascript">
-window.onload =function () {
-   window.open("popup. html",  "popupNo1", "width=300, height=360");
-}
-</script>
-<input type="button" name="버튼" value="테스트" onclick="window.open('calDebug')";>
+	
 
 
 	</div><!-- end example tab -->
-<!--
+
+
 <div id="popup_layer" 
 style="position:absolute; //절대위치다. 현재화면의 위에 겹쳐서 보여준다. 
 border:double; //border의 종류는 인터넷을 찾아보면 많이 나온다. 
@@ -782,19 +859,26 @@ layer.style.visibility="visible"; //반대는 hidden
 } 
 </script> 
 
--->
 
-	
-<input type="button" value="click" onclick="fn_layer_popup()"> 
-
-<script> 
-function fn_layer_popup(){ 
-var layer = document.getElementById("popup_layer"); 
-layer.style.visibility="visible"; //반대는 hidden 
-} 
-</script>
 
 <p>&nbsp;</p>
+
+<div class="left">
+      <div class="div_button" id="public_click">공통일정 보기</div>
+      <div class="div_button" id="private_click">개인일정 보기</div>
+</div>
+<div class="main">
+   <div class="timeline public">
+      공통일정
+   </div>
+   <div class="timeline private">
+      개인일정
+   </div>
+</div>
+<p>This is a paragraph.</p>
+
+<button>Toggle between hide() and show()</button>
+
 
 
 </body>
