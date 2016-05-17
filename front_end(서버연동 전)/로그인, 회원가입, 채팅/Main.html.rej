@@ -1,0 +1,9 @@
+diff a/front_end(서버연동 전)/로그인, 회원가입, 채팅/Main.html b/front_end(서버연동 전)/로그인, 회원가입, 채팅/Main.html	(rejected hunks)
+@@ -34,6 +34,7 @@
+             if (!$this.hasClass('panel-collapsed')) {
+                 $this.parents('.panel').find('.col').slideUp();
+                 $this.addClass('panel-collapsed');
++                $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+             } else {
+                 $this.parents('.panel').find('.col').slideDown();
+                 $this.removeClass('panel-collapsed');

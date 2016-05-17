@@ -74,12 +74,12 @@
 	 * @param allDay    - (boolean) - True if an all day event (do not show start time on agenda div element), false otherwise. False by default.
 	 * @param hashData  - (Hashtable from jshashtable.js) - A Hashtable that contains all data for the agenda item.
 	 */	
-	function CalendarAgendaItem(title,startDate,endDate,allDay,hashData) {
+	function CalendarAgendaItem(calcal, title,startDate,endDate,allDay,hashData) {
 		
 		// a unique ID to identify this agenda item. The Calendar will use this internal ID to locate this agenda item for various purposes.
 		// users can store their own ID in the agenda data hash.
 		this.id = 0;
-		
+		this.calcalValue = calcal;
 		// agenda title to be displayed on div element
 		this.titleValue = title; 
 		// start date & time

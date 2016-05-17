@@ -1,9 +1,150 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset=utf-8>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
 
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+  
+
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <script type="text/javascript" src="/js/html2canvas.js">
+
+  html2canvas($('#mycal'), {
+            onrendered: function(canvas) {
+                document.body.appendChild(canvas);
+            }
+        });
+  </script>
+  <script type="text/javascript" src="/js/FileSaver.js">
+  
+  var canvas = document.getElementById('YourCanvas');
+context = canvas.getContext('2d');
+// Draw image within
+context.drawImage(base_image, 0,0);
+
+  x_canvas.toBlob(function(blob) {
+saveAs(blob, "screenshot.png");
+}, "image/png");
+  </script>
+  <!-- html2canvas 이용 화면 image로 만들기 -->
+
+  <style type="text/css">
+    	body {
+	    background-color:#555657;
+	    padding:0;
+	    margin:0;
+	    overflow:hidden;
+	    font-family:sans-serif;
+	    -webkit-user-select: none;
+	    -khtml-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+	canvas {
+	    border:1px solid #000;
+	    float:left;
+	    clear:both;
+	}
+	#download {
+	    clear:both;
+	    float:left;
+	    cursor:pointer;
+	    color:#ccc;
+	    padding:3px;
+	}
+	#download:hover {
+	    color:#fff;
+	}
+	/*
+	div, input {
+	    font-size:16px;
+	    font-family:sans-serif;
+	    border:1px solid #000;
+	    border-radius: 5px;
+	    float:left;
+	    padding:5px;
+	    width:50px;
+	    margin:1px 1px;
+	    background-color:#bbb;
+	}
+	input[type='text'] {
+	    font-size:16px;
+	    font-weight:bold;
+	    width:70px;
+	    text-align:center;
+	    background-color:#fff;
+	    padding-bottom:4px;
+	}
+	input[type='button'] {
+	    font-size:16px;
+	    font-weight:bold;
+	    width:110px;
+	    text-align:center;
+	    background-color:#333;
+	    color:#eee;
+	    padding-bottom:4px;
+	}
+	input[type='button']:hover {
+	    background-color:#fff463;
+	    color:#000;
+	}
+	input[type='range'] {
+	    width:100px;
+	    margin:0 0 0 10px;
+	}
+*/
+	
+  </style>
+<script language="javascript"> 
+		function openWin(_url, _width, _height) { 
+			  window.open(_url, "popup", "width="+_width+", height="+_height+", resizable=no, scrollbars=no") ; 
+		} 
+	/*
+	옵션 설명
+	menubar yes/no : 윈도우 menubar 표시여부 
+	toolbar yes/no : 윈도우 toolbar 표시여부 
+	location yes/no : 윈도우 location box 표시여부 
+	directories yes/no : 윈도우 directory button들의 표시여부 
+	status yes/no : 윈도우 상태표시바 표시여부 
+	scrollbars yes/no : 윈도우 scrollbar 표시여부 
+	resizable yes/no : 윈도우 크기가 조정될 수 있는 지 여부
+	width : 윈도우 너비 
+	height : 윈도우 높이
+	*/
+	
+
+
+
+	</script> 
+	
+	
+
+
+
+	
+	<script src="Scripts/jquer_latest_2.11_.min.js" type="text/javascript"></script>
+<script src="Scripts/html2canvas.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
 <style>
 .left {
@@ -41,6 +182,8 @@
 .public {
    background-color: grey;
 }
+
+	
 </style>
 
 
@@ -92,6 +235,9 @@ body font-size to 62.5% isn't an option, or not one you want, you can set the fo
 to 1em or set it to px.
 http://osdir.com/ml/jquery-ui/2009-04/msg00071.html
 */
+
+
+    
 documentbody { font-size: 62.5%; }
 .shadow {
 	-moz-box-shadow: 3px 3px 4px #aaaaaa;
@@ -227,6 +373,8 @@ $(document).ready(function(){
 	 * Called when user clicks day cell
 	 * use reference to plugin object to add agenda item
 	 */
+	 
+	 
 	function myDayClickHandler(eventObj){
 		// Get the Date of the day that was clicked from the event object
 		var date = eventObj.data.calDayDate;
@@ -634,6 +782,8 @@ $(document).ready(function(){
 	});
 	
 });
+
+
 </script>
 
 
@@ -669,21 +819,8 @@ $(document).ready(function(){
 		as they are wide.
 		-->
 		
-<<<<<<< HEAD
-		
-=======
 	
 	
-	<!--
->>>>>>> 0fc2a458c7238825423a9895f6a8ca9b23bcf28e
-          <div id="popup_layer" style="position:absolute; border:double; top:100px; left:100px; width:500px;  visibility:hidden;
-background-color:white; "> 
-      		<div id="mycal"></div>
-
-		
-         </div>
-         
-         
 
 
 
@@ -705,14 +842,17 @@ background-color:white; ">
 			<p class="validateTips">일정을 채워 놓으세요.</p>
 			<form>
 			<fieldset>
-			  <label for="selector">개인일정 or 공식일정</label>
 			  
 			  <!-- <select id="div_button" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 				  		<option id="private_click" SELECTED>개인일정</option>
 				  		<option id="public_click" SELECTED>공식일정</option> -->
-				  		<div id="div_button" class="timeline public">공통일정</div> 
-				  		<div id="div_button" class="timeline private">개인일정 </div>
-				<label for="name">What?</label>
+				
+				<label>일정 분류</label>
+						<select id="calcal" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<option value="private" SELECTED>공식일정</option>
+							<option value="public">개인일정</option>
+							
+				<label for="name">일정 내용</label>
 				<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>
 				<table style="width:100%; padding:5px;">
 					<tr>
@@ -803,7 +943,7 @@ background-color:white; ">
 				<table>
 					<tr>
 						<td>
-							<label>Background Color</label>
+							<label>배경 색</label>
 						</td>
 						<td>
 							<div id="colorSelectorBackground"><div style="background-color: #333333; width:30px; height:30px; border: 2px solid #000000;"></div></div>
@@ -811,7 +951,7 @@ background-color:white; ">
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<label>Text Color</label>
+							<label>글자 색</label>
 						</td>
 						<td>
 							<div id="colorSelectorForeground"><div style="background-color: #ffffff; width:30px; height:30px; border: 2px solid #000000;"></div></div>
@@ -834,34 +974,6 @@ background-color:white; ">
 	</div><!-- end example tab -->
 
 
-<div id="popup_layer" 
-style="position:absolute; //절대위치다. 현재화면의 위에 겹쳐서 보여준다. 
-border:double; //border의 종류는 인터넷을 찾아보면 많이 나온다. 
-top:100px; //화면상단에서부터 100px(pixel)떨어진 위치에 레이어를 위치한다. 
-left:100px; //화면왼쪽에서부터 100px(pixel)떨어진 위치에 레이어를 위치한다. 
-width:100px; //div_layer의 좌우사이즈를 설정한다. 
-height:100px; //div_layer의 높이를 설정한다. 
-z-index:1; //이건 나도잘... 
-visibility:hidden; //숨김옵션 
-background-color:white; //div_layer의 뒷배경색을 설정한다. 미설정시 투명. 
-"> 
-내용을 입력한다. 
-</div> 
-
-버튼을 클릭시 레이어팝업이뜨게한다. 
-
-<input type="button" value="click" onclick="fn_layer_popup()"> 
-
-<script> 
-function fn_layer_popup(){ 
-var layer = document.getElementById("popup_layer"); 
-layer.style.visibility="visible"; //반대는 hidden 
-} 
-</script> 
-
-
-
-<p>&nbsp;</p>
 
 <div class="left">
       <div class="div_button" id="public_click">공통일정 보기</div>
@@ -875,11 +987,17 @@ layer.style.visibility="visible"; //반대는 hidden
       개인일정
    </div>
 </div>
-<p>This is a paragraph.</p>
-
-<button>Toggle between hide() and show()</button>
 
 
+<a id="download" download="일정관리.png">Download as image</a>
+
+
+<br> 
+	<div> 
+		<a href="javascript:openWin('popup2.html','500','300')">달력 보기</a> 
+	</div>   
 
 </body>
 </html>
+
+/*html2canvas 로 한 영역을 canvas로 만들고 FileSaver 로 저장

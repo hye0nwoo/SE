@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+div#testdiv
+{
+    height:200px;
+    width:200px;
+    background:#222;
+}
+div#map_canvas
+{
+    height: 500px;
+    width: 800px;
+    position: absolute !important;
+    left: 500px;
+    top: 0;
+}
+</style>
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+<script type="text/javascript" src="html2canvas.min.js"></script>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script language="javascript">
+$(window).load(function(){
+     var mapOptions = {
+        backgroundColor: '#fff',
+        center: new google.maps.LatLng(1.355, 103.815),
+        overviewMapControl: true,
+        overviewMapControlOptions: { opened: false },
+        mapTypeControl: true,
+        mapTypeControlOptions: { position: google.maps.ControlPosition.TOP_LEFT, style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+        panControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+        zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+        streetViewControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+        disableDoubleClickZoom: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        minZoom: 1,
+        zoom: 12
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+    $('#load').click(function(){
+
+            html2canvas($('#testdiv'), {
+                onrendered: function (canvas) {
+                    var img = canvas.toDataURL("image/png")
+                    window.open(img);
+                }
+            });
+
+    });
+});
+</script>
+</head>
+<body>
+<div id="testdiv">
+</div>
+<div id="map_canvas"></div>
+<input type="button" value="Save" id="load"/>
+</body>
+</html>
