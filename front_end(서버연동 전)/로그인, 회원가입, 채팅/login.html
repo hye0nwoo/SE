@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>로그인</title>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#login').on('click',function(){
+			if(totalcheck()){
+				alert("성공적으로 로그인 되었습니다");
+			}
+		});
+
+	});
+
+//아이디 체크 함수	
+function id_check() {
+
+	
+	var strid = document.getElementById('id').value;
+
+	//공백 체크
+	if(strid === ""){
+	alert("아이디를 입력하세요");
+	return false;
+	}
+
+	return true;
+} 
+
+//비밀번호 체크 함수
+function pw_check() {
+
+
+	var strpass = document.getElementById('pass').value; 
+	
+	//공백 체크
+	if(strpass === ""){
+	alert("비밀번호를 입력하세요");
+	return false;
+	}	
+
+	return true;
+}
+
+// 전부 체크 함수
+function totalcheck() {
+
+
+        if(id_check() && pw_check()){
+	return true;
+	}
+
+	return false;
+}
+</script>
+</head>
+
+<body>
+<center>
+<div style="padding:20px; width:500px; height:250px; background-color:#00afff;">
+<form>
+<font size="10"><p1>프로젝트 매니져!!</p1></font><p>
+<input type="text" id="id" placeholder="아이디를 입력"/><p>
+<input type="password" id="pass" placeholder="비밀번호를 입력"/><p>
+<input type="button" id="login" value="로그인"/><p>
+<a href="회원가입 링크">회원가입</a><p>
+
+<script type="text/javascript">
+var today = new Date();
+var currentTime =
+(today.getYear()+1900)+"-"+
+(today.getMonth()+1)+"-"+
+today.getDate()+" "+
+today.getHours()+":" +
+today.getMinutes()+ ":"+
+today.getSeconds();  
+document.write(currentTime)
+</script>
+
+</form>
+</div></center>
+</body>
+
+</html>
