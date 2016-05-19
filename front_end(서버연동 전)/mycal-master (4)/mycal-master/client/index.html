@@ -4,191 +4,10 @@
 <meta charset=utf-8>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
-
-  
-  
-
-  
-  
-  
-
-  
-
   <script type="text/javascript" src="/js/lib/dummy.js"></script>
 
-  
-
-  
-
-  
-
-  
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-  
-  <script type="text/javascript" src="/js/html2canvas.js">
-
-  html2canvas($('#mycal'), {
-            onrendered: function(canvas) {
-                document.body.appendChild(canvas);
-            }
-        });
-  </script>
-  <script type="text/javascript" src="/js/FileSaver.js">
-  
-  var canvas = document.getElementById('YourCanvas');
-context = canvas.getContext('2d');
-// Draw image within
-context.drawImage(base_image, 0,0);
-
-  x_canvas.toBlob(function(blob) {
-saveAs(blob, "screenshot.png");
-}, "image/png");
-  </script>
-  <!-- html2canvas 이용 화면 image로 만들기 -->
-
-  <style type="text/css">
-    	body {
-	    background-color:#555657;
-	    padding:0;
-	    margin:0;
-	    overflow:hidden;
-	    font-family:sans-serif;
-	    -webkit-user-select: none;
-	    -khtml-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    user-select: none;
-	}
-	canvas {
-	    border:1px solid #000;
-	    float:left;
-	    clear:both;
-	}
-	#download {
-	    clear:both;
-	    float:left;
-	    cursor:pointer;
-	    color:#ccc;
-	    padding:3px;
-	}
-	#download:hover {
-	    color:#fff;
-	}
-	/*
-	div, input {
-	    font-size:16px;
-	    font-family:sans-serif;
-	    border:1px solid #000;
-	    border-radius: 5px;
-	    float:left;
-	    padding:5px;
-	    width:50px;
-	    margin:1px 1px;
-	    background-color:#bbb;
-	}
-	input[type='text'] {
-	    font-size:16px;
-	    font-weight:bold;
-	    width:70px;
-	    text-align:center;
-	    background-color:#fff;
-	    padding-bottom:4px;
-	}
-	input[type='button'] {
-	    font-size:16px;
-	    font-weight:bold;
-	    width:110px;
-	    text-align:center;
-	    background-color:#333;
-	    color:#eee;
-	    padding-bottom:4px;
-	}
-	input[type='button']:hover {
-	    background-color:#fff463;
-	    color:#000;
-	}
-	input[type='range'] {
-	    width:100px;
-	    margin:0 0 0 10px;
-	}
-*/
-	
-  </style>
-<script language="javascript"> 
-		function openWin(_url, _width, _height) { 
-			  window.open(_url, "popup", "width="+_width+", height="+_height+", resizable=no, scrollbars=no") ; 
-		} 
-	/*
-	옵션 설명
-	menubar yes/no : 윈도우 menubar 표시여부 
-	toolbar yes/no : 윈도우 toolbar 표시여부 
-	location yes/no : 윈도우 location box 표시여부 
-	directories yes/no : 윈도우 directory button들의 표시여부 
-	status yes/no : 윈도우 상태표시바 표시여부 
-	scrollbars yes/no : 윈도우 scrollbar 표시여부 
-	resizable yes/no : 윈도우 크기가 조정될 수 있는 지 여부
-	width : 윈도우 너비 
-	height : 윈도우 높이
-	*/
-	
-
-
-
-	</script> 
-	
-	
-
-
-
-	
-	<script src="Scripts/jquer_latest_2.11_.min.js" type="text/javascript"></script>
-<script src="Scripts/html2canvas.js" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-<style>
-.left {
-   display:inline-block;
-   width:200px;
-}
-.main {
-   display:inline-block;
-   width: 50%;
-
-}
-.timeline {
-   display:block;
-   width: 300px;
-   height: 40px;
-   line-height: 40px;
-   color: white;
-   text-align: center;
-   margin: 15px 0;
-
-}
-.div_button {
-   display: inline-block;
-   width: 150px;
-   height: 25px;
-   line-height: 25px;
-   color: #000;
-   border: solid 1px #000;
-   text-align: center;
-   margin: 15px;
-}
-.private {
-   background-color: purple;
-}
-.public {
-   background-color: grey;
-}
-
-	
-</style>
-
-
 <title>일정관리</title>
-
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
 <!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
 <link rel="stylesheet" type="text/css" href="css/frontierCalendar/jquery-frontier-cal-1.3.2.css" />
 
@@ -224,6 +43,7 @@ Include JQuery Core (Required for calendar plugin)
 <script type="text/javascript" src="js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js"></script>
 
 </head>
+
 <body style="background-color: #aaaaaa;">
 
 <!-- Some CSS for our example. (Not required for calendar plugin. Used for example.)-->
@@ -236,13 +56,9 @@ to 1em or set it to px.
 http://osdir.com/ml/jquery-ui/2009-04/msg00071.html
 */
 
-
-    
-documentbody { font-size: 62.5%; }
+documentbody { font-size: 80.5%; }
 .shadow {
-	-moz-box-shadow: 3px 3px 4px #aaaaaa;
-	-webkit-box-shadow: 3px 3px 4px #aaaaaa;
-	box-shadow: 3px 3px 4px #aaaaaa;
+	-webkit-box-shadow: 3px 3px 4px white;
 	/* For IE 8 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#aaaaaa')";
 	/* For IE 5.5 - 7 */
@@ -251,6 +67,41 @@ documentbody { font-size: 62.5%; }
 </style>
 
 <script type="text/javascript">
+
+
+
+	 $( document ).ready(function() {
+   
+
+     $('#public_click').click( function(){
+      if(calcalValue=public){
+      	if(
+      		$('JFrontierCal-Agenda-Item').css("display") == "none")
+      {
+         $('.JFrontierCal-Agenda-Item').css("display", "");
+      }
+      else
+      {
+         $('.JFrontierCal-Agenda-Item').css("display", "none");
+      }
+
+    });
+
+
+    $('#private_click').click( function(){
+    	if(calcalValue=private){
+      if( $('.JFrontierCal-Agenda-Item').css("display") == "none")
+      {
+         $('.JFrontierCal-Agenda-Item).css("display", "");
+      }
+      else
+      {
+         $('.JFrontierCal-Agenda-Item').css("display", "none");
+      }
+    });
+ });
+    
+    
 $(document).ready(function(){	
 
 	var clickDate = "";
@@ -539,6 +390,7 @@ $(document).ready(function(){
 		buttons: {
 			'Add Event': function() {
 				/* 여기에 무엇을 추가?? */
+				var calcal = calcalValue;
 
 				var what = jQuery.trim($("#what").val());
 			
@@ -604,6 +456,7 @@ $(document).ready(function(){
 					// add new event to the calendar
 					jfcalplugin.addAgendaItem(
 						"#mycal",
+						calcal,
 						what,
 						startDateObj,
 						endDateObj,
@@ -785,22 +638,12 @@ $(document).ready(function(){
 
 
 </script>
-
-
-
 <h1 style="font-size: 30px; font-weight: bold;">일정관리</h1>
-
 <div id="tabs">
-	
-	<div id="tabs-2">
-
+		<div id="tabs-2">
 		<div id="example" style="margin: auto; width:80%;">
-		
-		<br>
-		
-
-		
-		<br><br>
+				<br>
+				<br><br>
 
 		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
 			<button id="BtnPreviousMonth">이전 달</button>

@@ -74,7 +74,7 @@
 	 * @param allDay    - (boolean) - True if an all day event (do not show start time on agenda div element), false otherwise. False by default.
 	 * @param hashData  - (Hashtable from jshashtable.js) - A Hashtable that contains all data for the agenda item.
 	 */	
-	function CalendarAgendaItem(calcal, title,startDate,endDate,allDay,hashData) {
+	function CalendarAgendaItem(calcal,title,startDate,endDate,allDay,hashData) {
 		
 		// a unique ID to identify this agenda item. The Calendar will use this internal ID to locate this agenda item for various purposes.
 		// users can store their own ID in the agenda data hash.
@@ -215,14 +215,7 @@
 			var s = "Title: " + this.titleValue + "\n";
 			s += "Start Date: " + this.startDt + "\n";
 			s += "End Date: " + this.endDt + "\n";
-			if(this.agendaData != null && this.agendaData.size() > 0){
-				var keys = this.agendaData.keys();
-				for(var keyIndex = 0; keyIndex < keys.length; keyIndex++){
-					var keyName = keys[keyIndex];
-					var val = this.getAgendaData(keyName);
-					s += keyName + ": " + val + "\n";
-				}
-			}
+			if(this.agendaData != null && this.agendaData.size() > 0)
 			return s;
 		};
 	
@@ -1379,6 +1372,7 @@
 			var agendaId = agi.getAgendaId();
 			var agendaStartDate = agi.getStartDate();
 			var agendaEndDate = agi.getEndDate();
+			
 			if(agendaStartDate == null || agendaEndDate == null){
 				// no agenda dates, can't render
 				return;
@@ -3729,7 +3723,9 @@
 		 * }
 		 *
 		 */
-		this.addAgendaItem = function(calId,title,startDate,endDate,allDay,data,displayProp){
+		 
+		 //수정-prios90
+		this.addAgendaItem = function(calId,calcal,title,startDate,endDate,allDay,data,displayProp){
 			if(calId != null && title != null && startDate != null && endDate != null && allDay != null){
 				// make sure start date comes before end date
 				if(DateUtil.secondsDifferenceDirection(startDate,endDate) < 0){

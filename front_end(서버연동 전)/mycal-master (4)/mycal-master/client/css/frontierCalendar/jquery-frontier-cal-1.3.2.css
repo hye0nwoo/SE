@@ -86,10 +86,10 @@ Style for hover effect on droppable day cells (drag and drop agenda items.)
 Style for current date day cell
 */
 .JFrontierCal .JFrontierCal-Day-Cell-Today {
-	background-color: #d6e2ff;
+	background-color: #F5939E;
 	color: #444444;
-	/*background-image: none;*/
-	background-image:url('images/dayCellToday.png');
+	background-image: none;
+	/*background-image:url('images/dayCellToday.png');*/
 }
 /*
 Style for header cells (day name cells at top of calendar)
