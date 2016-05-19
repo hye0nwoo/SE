@@ -1,9 +1,9 @@
 var express = require('express');
-var config = require('../../config/config.json');
 var router = express.Router();
+var config = require('../../config/config.json');
 /*
 router.get('/', function(req, res, next) {
-	res.redirect('/sche');
+	res.redirect('/calendar');
 	//res.send('개발 중');
 });
 */

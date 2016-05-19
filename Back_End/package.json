@@ -1,15 +1,11 @@
 {
-  "name": "nodejs-console-app2",
-  "version": "0.0.0",
-  "description": "NodejsConsoleApp2",
-  "main": "app.js",
-  "author": {
-    "name": "kimhy",
-    "email": ""
-  },
+  "name": "SE_team2",
+  "version": "0.0.1"
+  ,
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "express-session": "^1.9.3",
     "mysql": "^2.10.2",
     "socket.io": "^1.4.6",
     "swig": "^1.4.2"
