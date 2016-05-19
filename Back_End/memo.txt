@@ -1,0 +1,2 @@
+view 폴더에 index 파일 마저 완성하기
+view - calendar, schedule폴더에 기본 swig 파일 마저 완성하기
