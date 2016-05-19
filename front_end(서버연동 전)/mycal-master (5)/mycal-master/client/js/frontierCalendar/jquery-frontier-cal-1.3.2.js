@@ -74,12 +74,12 @@
 	 * @param allDay    - (boolean) - True if an all day event (do not show start time on agenda div element), false otherwise. False by default.
 	 * @param hashData  - (Hashtable from jshashtable.js) - A Hashtable that contains all data for the agenda item.
 	 */	
-	function CalendarAgendaItem(calcal,title,startDate,endDate,allDay,hashData) {
+	function CalendarAgendaItem(title,startDate,endDate,allDay,hashData,opt1) {
 		
 		// a unique ID to identify this agenda item. The Calendar will use this internal ID to locate this agenda item for various purposes.
 		// users can store their own ID in the agenda data hash.
 		this.id = 0;
-		this.calcalValue = calcal;
+		//this.calcalValue = calcal;
 		// agenda title to be displayed on div element
 		this.titleValue = title; 
 		// start date & time
@@ -93,6 +93,20 @@
 		// if we set these variables.
 		this.backgroundColor = null;
 		this.foregroundColor = null;
+		
+		
+		//수정, opt1을 이용하여 private과 public 구분
+		if(opt1 == 'public')
+		{
+			this.opt1 = 'public';
+		}
+		else
+		{
+			this.opt1 = 'private';
+		}
+		
+		//디버깅용
+		//console.log(this.opt1+" d");
 		
 		// using jshashset.js library
 		// an agenda item can store arbitrary data. we have no idea what the user will want to
@@ -1629,6 +1643,18 @@
 					});
 				}
 				d.addClass("JFrontierCal-Agenda-Item");
+				
+				//수정 - class부여하는부분
+				//console.log(agi.opt1+" 도나안도나/ ");
+				if( agi.opt1 == "public")
+				{
+					d.addClass("public");
+				}
+				else
+				{
+					d.addClass("private");
+				}
+				
 				if(agi.getBackgroundColor() != null){
 					d.css("background-color",agi.getBackgroundColor());
 				}
@@ -3164,7 +3190,9 @@
 							hashData.put('RDATE',((event.rdate != null) ? event.rdate.value : ""));
 							hashData.put('RRULE',((event.rrule != null) ? event.rrule.value : ""));
 							hashData.put('X-',((event.xprop != null) ? event.xprop.value : ""));
-							var agi = new CalendarAgendaItem(summary,startDt,endDt,false,hashData);
+							var agi = new CalendarAgendaItem(summary,startDt,endDt,false,hashData, "");
+							//opt1에 public이나 private 넘겨줘야함
+							
 							cal.addAgendaItem(agi);
 						}			
 					}
@@ -3725,9 +3753,13 @@
 		 */
 		 
 		 //수정-prios90
-		this.addAgendaItem = function(calId,calcal,title,startDate,endDate,allDay,data,displayProp){
+		this.addAgendaItem = function(calId,title,startDate,endDate,allDay,data,displayProp){
 			if(calId != null && title != null && startDate != null && endDate != null && allDay != null){
 				// make sure start date comes before end date
+				
+				// 디버깅용
+				//console.log(data.opt);
+				
 				if(DateUtil.secondsDifferenceDirection(startDate,endDate) < 0){
 					alert("Sorry, you can't create an event that ends before it starts");
 					return;
@@ -3739,7 +3771,7 @@
 						hashData.put(key,data[key]);
 					}
 				}
-				var agi = new CalendarAgendaItem(title,startDate,endDate,allDay,hashData);
+				var agi = new CalendarAgendaItem(title,startDate,endDate,allDay,hashData,data.opt);
 				if(displayProp != null){
 					if(displayProp.backgroundColor != null){
 						agi.setBackgroundColor(displayProp.backgroundColor);
