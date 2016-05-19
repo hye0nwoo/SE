@@ -1,12 +1,12 @@
 ﻿//필요 모듈 import
 var express = require('express');
 var http = require('http');
-var swig = require('swig');
-var fs = require('fs')
+var fs = require('fs');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mysql = require("mysql");
 var http = require('http');
+var swig = require('swig');
 
 var app = express();
 
