@@ -1,0 +1,15 @@
+{
+    "default": {
+        "port": 8089,
+        "db": {
+            "host": "",
+			"port": "3306",
+            "username": "",
+            "password": "",
+            "database": "",
+            "dialect": "mysql",
+            "logging": true,
+            "timezone": "+09:00"
+        }
+    }
+}

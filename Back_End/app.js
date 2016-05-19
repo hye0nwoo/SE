@@ -14,6 +14,7 @@ var connection = mysql.createConnection({
     password : 'apmsetup',
     database : 'SW'
 })
+
 app.use(express.static(__dirname));
 connection.connect();
 var httpServer = http.createServer(app).listen(3000, function (req, res) {
@@ -100,6 +101,3 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('nicknames', nicknames);
     });
 });
-
-
-//소스트리 커밋테스트2
