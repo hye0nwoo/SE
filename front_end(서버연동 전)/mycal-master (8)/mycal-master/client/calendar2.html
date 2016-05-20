@@ -138,7 +138,6 @@ $(function() {
             onrendered: function(canvas) {
                 theCanvas = canvas;
 
-
                 canvas.toBlob(function(blob) {
                     saveAs(blob, "일정관리달력.png"); 
                 });
@@ -459,8 +458,6 @@ $(document).ready(function(){
 		return false;
 	});	
 	
-	
-
 	/**
 	 * Initialize add event modal form
 	 */
@@ -543,15 +540,15 @@ $(document).ready(function(){
 						{
 							/*opt: $('#calcal option:selected').val(),
 							fname: "Santa",
-							lname: "Claus",
+							lname: "Caus",
 							leadReindeer: "Rudolph",
 							myDate: new Date(),
 							myNum: 42*/
 						},
 						{
-						/*	backgroundColor: $("#colorBackground").val(),
+							backgroundColor: $("#colorBackground").val(),
 							foregroundColor: $("#colorForeground").val()
-						*/}
+						}
 					);
 
 					$(this).dialog('close');
@@ -732,16 +729,16 @@ $(document).ready(function(){
 		
 		<br>
 	
-		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+		<div id="toolbar" class="ui-widget-header ui-corner-all" style="backgroundColor: black; font-color: white; padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
 			<button id="BtnPreviousMonth">이전 달</button>
 			<button id="BtnNextMonth">다음 달</button>
 			
 			&nbsp;&nbsp;&nbsp;
 			Date: <input type="text" id="dateSelect" size="20"/>
-			<button id="public_click" class="btn btn-primary">공식일정 보기</button>
-  			<button id="private_click" class="btn btn-success">개인일정보기</button>
-  			<button class="btn btn-warning" ><a href="javascript:openWin('popup2.html','500','300')">달력보기</a></button>
-			<button id="test33" class="btn btn-danger">달력저장</button>
+			<button id="private_click" class="btn btn-danger">공식일정보기</button>
+			<button id="public_click" class="btn btn-warning">개인일정보기</button>
+  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','500','300')">달력보기</a></button>
+			<button id="test33" class="btn btn-primary">달력저장</button>
 			
 			&nbsp;&nbsp;&nbsp;
 		</div>

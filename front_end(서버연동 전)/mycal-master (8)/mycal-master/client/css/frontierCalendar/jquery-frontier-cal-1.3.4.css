@@ -11,7 +11,7 @@ will look messed up.
 Root calendar element
 */
 .JFrontierCal {
-	border: 2px solid black;
+	border: 0px solid black;
 	padding: px;
 	margin: 0px;
 	width: 101%;
@@ -35,7 +35,7 @@ Style shared by all day cells.
 .JFrontierCal .JFrontierCal-Day-Cell-Droppable,
 .JFrontierCal .JFrontierCal-Day-Cell-Today {
 	padding: 0px;
-	border-bottom: 0px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
 	border-left: 0px solid #ffffff;
 	font: 13px verdana;
 	float: left;
