@@ -1,85 +1,54 @@
-<!DOCTYPE html>
-<html>
+ï»¿<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>·Î±×ÀÎ</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<link href="css/form_signup.css" rel="stylesheet">
+
+    <title>Log In</title>
+
+<script src="js/login.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-	$(document).ready(function(){
-		$('#login').on('click',function(){
-			if(totalcheck()){
-				alert("¼º°øÀûÀ¸·Î ·Î±×ÀÎ µÇ¾ú½À´Ï´Ù");
-			}
-		});
-
-	});
-
-//¾ÆÀÌµğ Ã¼Å© ÇÔ¼ö	
-function id_check() {
-
-	
-	var strid = document.getElementById('id').value;
-
-	//°ø¹é Ã¼Å©
-	if(strid === ""){
-	alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	}
-
-	return true;
-} 
-
-//ºñ¹Ğ¹øÈ£ Ã¼Å© ÇÔ¼ö
-function pw_check() {
-
-
-	var strpass = document.getElementById('pass').value; 
-	
-	//°ø¹é Ã¼Å©
-	if(strpass === ""){
-	alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	}	
-
-	return true;
-}
-
-// ÀüºÎ Ã¼Å© ÇÔ¼ö
-function totalcheck() {
-
-
-        if(id_check() && pw_check()){
-	return true;
-	}
-
-	return false;
-}
+    $(document).ready(function(){
+        $('#login').on('click',function(){
+            if(totalcheck()){
+                alert("ì„±ê³µì ìœ¼ë¡œ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤");
+            }           
+        });
+    });
 </script>
 </head>
 
 <body>
-<center>
-<div style="padding:20px; width:500px; height:250px; background-color:#00afff;">
-<form>
-<font size="10"><p1>ÇÁ·ÎÁ§Æ® ¸Å´ÏÁ®!!</p1></font><p>
-<input type="text" id="id" placeholder="¾ÆÀÌµğ¸¦ ÀÔ·Â"/><p>
-<input type="password" id="pass" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·Â"/><p>
-<input type="button" id="login" value="·Î±×ÀÎ"/><p>
-<a href="È¸¿ø°¡ÀÔ ¸µÅ©">È¸¿ø°¡ÀÔ</a><p>
-
-<script type="text/javascript">
-var today = new Date();
-var currentTime =
-(today.getYear()+1900)+"-"+
-(today.getMonth()+1)+"-"+
-today.getDate()+" "+
-today.getHours()+":" +
-today.getMinutes()+ ":"+
-today.getSeconds();  
-document.write(currentTime)
-</script>
-
-</form>
-</div></center>
+<div>
+    <div>
+        <div>         
+            <div class="wrap">
+                <p class="form-title">
+                 í”„ë¡œì íŠ¸ ë§¤ë‹ˆì ¸</p>
+                <form class="signup">
+                ì•„ì´ë”” : <input type="text" id="id" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”" /><p>
+                ë¹„ë°€ë²ˆí˜¸ : <input type="password" id="pass" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" /><p>                
+                <input type="button" id="login" value="ë¡œê·¸ì¸" />
+                <div class="DateIp">
+                <a href="sign up.html"> íšŒì›ê°€ì… </a><p>
+                <script type="text/javascript">
+                    var now = getdate();
+                    document.write("í˜„ì¬ì‹œê° : ");
+                    document.write(now);
+                </script><br>
+                <a>ì ‘ì† IP : {{user ip}}</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
 </body>
-
 </html>

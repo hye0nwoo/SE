@@ -1,236 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>È¸¿ø°¡ÀÔ</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<link href="css/form_signup.css" rel="stylesheet">
+
+    <title>Sign Up</title>
+
+<script src="js/signup.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-	$(document).ready(function(){
-		$('#signup').on('click',function(){
-			if(totalcheck()){
-				alert("¼º°øÀûÀ¸·Î È¸¿ø°¡ÀÔ µÇ¾ú½À´Ï´Ù");
-			}			
-		});
-	});
-
-//Æ¯¼ö¹®ÀÚ Ã¼Å© ÇÔ¼ö, Æ÷ÇÔÇÏ°í ÀÖÀ¸¸é 1 ¾Æ´Ï¸é 0 ¸®ÅÏ	
-function containChars(str, chars) {
-
-	for (var i = 0 ; i < str.length; i++){
-  
-		if(chars.indexOf(str.charAt(i)) !== -1){             
-		return 1;
-		}
-	}
-         
-	return 0;                 
-}
-
-//¼Ò¹®ÀÚ ¼ıÀÚ Ã¼Å© ÇÔ¼ö, ¼Ò¹®ÀÚ ¼ıÀÚ ¾Æ´Ñ°ÍÀÌ ÀÖÀ¸¸é 1¸®ÅÏ ¾Æ´Ï¸é 0¸®ÅÏ
-function alphabet_decimal_check(str)
-{
-
-        for (var i = 0; i < str.length; i++){
-        
-	var ch = str.charAt(i);
-                
-                if(((ch < 'a') || (ch > 'z')) && ((ch < '0') ||(ch > '9'))){
-                return 1;
-		}
-	}
-         
-	return 0;    
-
-}
-
-//¾ÆÀÌµğ Ã¼Å© ÇÔ¼ö	
-function id_check() {
-
-	
-	var strid = document.getElementById('id').value;
-
-	//°ø¹é Ã¼Å©
-	if(strid === ""){
-	alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	}
-     
-	// Æ¯¼ö¹®ÀÚ ÀÔ·Â ¿©ºÎ Á¡°Ë
-	if (containChars(strid, "!,*&^%$#;~") === 1){ 
-        
-	alert("Æ¯¼ö¹®ÀÚ¸¦ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.");
-	return false;
-
-	}
-
-	// ¼Ò¹®ÀÚ ¼ıÀÚ ±¸¼ºÃ¼Å©
-	if(alphabet_decimal_check(strid) === 1){
-
-	alert("¼Ò¹®ÀÚ³ª ¼ıÀÚ¸¸ »ç¿ëÇØÁÖ¼¼¿ä");
-	return false;
-	
-	}
-        
-	// ¾ÆÀÌµğ ÀÚ¸´¼ö Á¡°Ë : 6~12 ÀÚ¸®        
-	if ((strid.length < 6) || (strid.length > 12)){
-
-	alert("¾ÆÀÌµğ´Â 6ÀÚ ÀÌ»ó 12ÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.");
-	return false;
-
-	}
-
-	return true;
-} 
-
-//ºñ¹Ğ¹øÈ£ Ã¼Å© ÇÔ¼ö
-function pw_check() {
-
-
-	var strpass = document.getElementById('pass').value; 
-	var strcheck = document.getElementById('passcheck').value; 
-
-	//°ø¹é Ã¼Å©
-	if(strpass === ""){
-	alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	}
-
-	//°ø¹é Ã¼Å©
-	if(strcheck === ""){
-	alert("ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇÏ¼¼¿ä");
-	return false;
-	}  
-
-	//ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎ ºñ±³
-        if (strpass !==  strcheck)  {
-        
-	alert("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·Â ÇÏ½Ê½Ã¿À");
-	return false;
-                
-        }
-        
-        // ºñ¹Ğ¹øÈ£ ÀÚ¸´¼ö Á¡°Ë : 6~12 ÀÚ¸®        
-        if ((strpass.length < 6) || (strpass.length > 12)) {
-        
-	alert("ºñ¹Ğ¹øÈ£´Â 6ÀÚ ÀÌ»ó 12ÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.");
-	return false;     
-        
-        }       
-
-	return true;
-}
-
-//ÀÌ¸§ Ã¼Å© ÇÔ¼ö
-function name_check(){
-
-
-	var strname = document.getElementById('name').value; 
-	
-	//°ø¹é Ã¼Å©
-	if(strname === ""){
-	alert("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	} 
-
-	return true;
-}
-
-// ÀÌ¸ŞÀÏ Ã¼Å© ÇÔ¼ö
-function email_check(){
-
-
-	var stremail = document.getElementById('email').value; 
-
-	//°ø¹é Ã¼Å©
-	if(stremail === ""){
-	alert("emailÀ» ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	} 
-
-	//'@'¶Ç´Â '.com' ÀÖ´ÂÁö È®ÀÎ
-	if((containChars(stremail,"@")===0) || (stremail.indexOf(".com") === -1)){
-
-	alert("email ¾ç½Ä´ë·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
-	return false;
-	}
-
-	//'@'µÚ¿¡ '.com' ÀÌ ÀÖ´ÂÁö È®ÀÎ
-	if(stremail.indexOf("@") > stremail.indexOf(".com")){
-	alert("email ¾ç½Ä´ë·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
-	return false;
-	}
-	
-	return true;
-}
-
-// ÀüÈ­¹øÈ£ Ã¼Å© ÇÔ¼ö
-function phone_check(){
-
-
-	var strphone = document.getElementById('phone').value; 
-
-	//°ø¹é Ã¼Å©
-	if(strphone === ""){
-	alert("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-	return false;
-	} 
-
-	//11ÀÚ¸® Ã¼Å©
-	if(strphone.length !== 11){
-	alert("ÀüÈ­¹øÈ£´Â 11ÀÚ¸® ÀÔ´Ï´Ù.");
-	return false;
-	}
-
-	//¼ıÀÚ Ã¼Å©
-	for (i = 0; i < strphone.length; i++) {
-        
-	ch = strphone.charAt(i);
-                
-		if((ch < '0') ||(ch > '9')){
-		alert("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä");
-		return false;
-		}
-	}
-
-	return true;
-}
-
-// ÀüºÎ Ã¼Å© ÇÔ¼ö
-function totalcheck() {
-
-
-        if(id_check() && pw_check() && name_check() && email_check() && phone_check()){
-	return true;
-	}
-
-	return false;
-}
+    $(document).ready(function(){
+        $('#signup').on('click',function(){
+            if(totalcheck()){
+                alert("ì„±ê³µì ìœ¼ë¡œ íšŒì›ê°€ì… ë˜ì—ˆìŠµë‹ˆë‹¤");
+            }           
+        });
+    });
 </script>
 </head>
 
 <body>
-<center>
-<div id="sign up" style="padding:10px; width:500px; height:400px; background-color:#00afff;">
-<h1>È¸¿ø°¡ÀÔ</h1>
-<form name="f" id="f">
-¾ÆÀÌµğ : <input type="text" id="id"  placeholder="¾ÆÀÌµğ ÀÔ·Â"/><p>
-
-ºñ¹Ğ¹øÈ£ : <input type="password" id="pass" placeholder="ºñ¹Ğ¹øÈ£ ÀÔ·Â"/><p>
-
-ºñ¹Ğ¹øÈ£ È®ÀÎ : <input type="password" id="passcheck" placeholder="ºñ¹Ğ¹øÈ£ ÀçÀÔ·Â"/> <p>
-
-ÀÌ¸§ : <input type="text" id="name" placeholder="ÀÌ¸§ ÀÔ·Â"/><p>
-
-E-mail : <input type="text" id="email" placeholder="ÀÌ¸ŞÀÏ ÀÔ·Â"/><p>
-
-ÀüÈ­¹øÈ£ :<input type="text" id="phone" placeholder="'-' »©°í ¼ıÀÚ¸¸ ÀÔ·Â"/><p>
-
-<input type="button" id="signup" value="°¡ÀÔÇÏ±â"/>
-
-<input type="reset" id="reset" value="´Ù½ÃÀÔ·Â"/>
-</form>
-</div>
-</center>
+<div>
+    <div>
+        <div>         
+            <div class="wrap">
+                <p class="form-title">
+                 íšŒì›ê°€ì…</p>
+                <form class="signup">
+                ì•„ì´ë”” : <input type="text" id="id" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”" /><p>
+                ë¹„ë°€ë²ˆí˜¸ : <input type="password" id="pass" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" /><p>
+                ë¹„ë°€ë²ˆí˜¸ í™•ì¸: <input type="password" id="passcheck" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" /><p>
+                ì´ë¦„ : <input type="text" id="name" placeholder="ì´ë¦„ ì…ë ¥"/><p>
+                E-mail : <input type="text" id="email" placeholder="ì´ë©”ì¼ ì…ë ¥"/><p>
+                ì „í™”ë²ˆí˜¸ :<input type="text" id="phone" placeholder="'-' ë¹¼ê³  ìˆ«ìë§Œ ì…ë ¥"/><p>
+                <input type="button" id="signup" value="ê°€ì…í•˜ê¸°" />
+                </form>
+            </div>
+        </div>
+    </div>
+   
 </body>
-
 </html>
-
