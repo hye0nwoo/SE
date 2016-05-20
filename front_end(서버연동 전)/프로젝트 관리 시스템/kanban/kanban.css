@@ -28,3 +28,146 @@
 .save{width:24px;height:24px;}
 .WIP{font-size:0em;text-align:right;margin:5px;color:#888888;padding-right:10px}
 
+
+/* Color Declarations */
+/* Color Config */
+/* Menu Config */
+#side-nav a {
+  text-decoration: none;
+}
+#side-nav a i {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+nav {
+	max-height: 94%;
+    top: 0;
+	-moz-transition: right 0.2s linear;
+	-o-transition: right 0.2s linear;
+	-webkit-transition: right 0.2s linear;
+	transition: right 0.2s linear;
+	width: 200px;
+	background-color: rgba(0, 0, 0, 0.6);
+	height: 95%;
+	position: fixed;
+	right: -200px;
+	z-index: 9001;
+}
+#side-collapse-well{
+	align: center;
+	width: 80%;
+}
+nav #menuToggle {
+  background: rgba(0, 0, 0, 0.6);
+  display: block;
+  position: relative;
+  height: 30px;
+  left: -30px;
+  top: 75px;
+  width: 30px;
+}
+nav #menuToggle span {
+  background: white;
+  display: block;
+  height: 10%;
+  left: 10%;
+  position: absolute;
+  top: 45%;
+  width: 80%;
+}
+nav #menuToggle span:before, nav #menuToggle span:after {
+  background: white;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: -250%;
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  width: 100%;
+}
+nav #menuToggle span:after {
+  top: 250%;
+}
+.collapse-activity{
+	max-height: 50%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+nav div .side-nav-list:nth-child(n) {
+  color: white;
+  display: block;
+  font-size: 1.2em;
+  margin: 24px 0 24px 24px;
+}
+nav div .side-nav-list:nth-child(n):after {
+  background: #ffffff;
+  content: '';
+  display: block;
+  height: 2px;
+  -moz-transition: width 0.2s;
+  -o-transition: width 0.2s;
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s;
+  width: 0;
+}
+nav div .side-nav-list:nth-child(n):hover:after {
+  width: 100%;
+}
+hr{
+	align: center;
+	width: 80%;
+}
+.open {
+  right: 0;
+}
+.open #menuToggle span {
+  background: transparent;
+  left: 10%;
+  top: 45%;
+}
+.open #menuToggle span:before, .open #menuToggle span:after {
+  background: white;
+  top: 0;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.open #menuToggle span:after {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#menuToggle .navClosed {
+  -moz-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  -webkit-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+#menuToggle .navClosed:before, #menuToggle .navClosed:after {
+  -moz-transition: top 0.2s linear 0.1s, -moz-transform 0.2s linear 0.1s;
+  -o-transition: top 0.2s linear 0.1s, -o-transform 0.2s linear 0.1s;
+  -webkit-transition: top 0.2s linear, -webkit-transform 0.2s linear;
+  -webkit-transition-delay: 0.1s, 0.1s;
+  transition: top 0.2s linear 0.1s, transform 0.2s linear 0.1s;
+}
+#menuToggle .navOpen {
+  -moz-transition: background 0.1s linear 0.2s;
+  -o-transition: background 0.1s linear 0.2s;
+  -webkit-transition: background 0.1s linear;
+  -webkit-transition-delay: 0.2s;
+  transition: background 0.1s linear 0.2s;
+}
+#menuToggle .navOpen:before, #menuToggle .navOpen:after {
+  -moz-transition: top 0.2s linear, -moz-transform 0.2s linear;
+  -o-transition: top 0.2s linear, -o-transform 0.2s linear;
+  -webkit-transition: top 0.2s linear, -webkit-transform 0.2s linear;
+  transition: top 0.2s linear, transform 0.2s linear;
+}

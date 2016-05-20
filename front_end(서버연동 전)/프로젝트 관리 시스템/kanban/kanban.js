@@ -117,11 +117,8 @@ $(document).ready(function() {
 	});
 
 	$('.colorete_background').live('colorpicked', function () {
-	$('#page-wrapper').css('background',$(this).val());
-	});
-
-	$('.colorete_theme').live('colorpicked', function () {
-    $('.main_div').css('background',$(this).val());
+	changeBackground($(this).val());
+	$('.container-fluid').css('background',$(this).val());
 	});
 
 
@@ -229,6 +226,25 @@ $(document).ready(function() {
         intialize_sortables();
 });
 
+(function($){
+	// Menu Functions
+	$(document).ready(function(){
+  	$('#menuToggle').click(function(e){
+    	var $parent = $(this).parent('nav');
+      $parent.toggleClass("open");
+      var navState = $parent.hasClass('open') ? "hide" : "show";
+      $(this).attr("title", navState + " navigation");
+			// Set the timeout to the animation length in the CSS.
+			setTimeout(function(){
+				console.log("timeout set");
+				$('#menuToggle > span').toggleClass("navClosed").toggleClass("navOpen");
+			}, 200);
+    	e.preventDefault();
+  	});
+  });
+})(jQuery);
+
+
 /* Funciones auxiliares */
 function intialize_sortables(){
 	$( ".task_pool" ).sortable({
@@ -292,4 +308,7 @@ function save_edit_h(e){
 	else if (e.which) code = e.which;
 
 	if(code==13) { $(".save_header").click(); }
+}
+function changeBackground(color) {
+   document.body.style.background = color;
 }
