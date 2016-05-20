@@ -36,14 +36,14 @@ function id_check() {
 
     //공백 체크
     if(strid === ""){
-    alert("아이디를 입력하세요");
+    alert("아이디를 입력해 주세요");
     return false;
     }
      
     // 특수문자 입력 여부 점검
-    if (containChars(strid, "!,*&^%$#;~") === 1){ 
+    if (containChars(strid, "`~!@#$^&*()_-+={[}]:;<,>.?/") === 1){ 
         
-    alert("특수문자를 사용할 수 없습니다.");
+    alert("아이디는 영어 소문자 및 숫자만 사용해 주세요");
     return false;
 
     }
@@ -51,7 +51,7 @@ function id_check() {
     // 소문자 숫자 구성체크
     if(alphabet_decimal_check(strid) === 1){
 
-    alert("소문자나 숫자만 사용해주세요");
+    alert("아이디는 영어 소문자 및 숫자만 사용해 주세요");
     return false;
     
     }
@@ -76,20 +76,44 @@ function pw_check() {
 
     //공백 체크
     if(strpass === ""){
-    alert("비밀번호를 입력하세요");
+    alert("비밀번호를 입력해 주세요");
     return false;
     }
 
     //공백 체크
     if(strcheck === ""){
-    alert("비밀번호를 확인하세요");
+    alert("비밀번호를 확인해 주세요");
     return false;
-    }  
+    } 
+
+    //영어 소문자 사용여부 체크
+     if (containChars(strpass, "`abcdefghijklmnopqrstuvwxyz") !== 1){ 
+        
+    alert("영어소문자 숫자 특수문자를 혼합해 주세요");
+    return false;
+
+    }
+
+    //숫자 사용여부 체크
+     if (containChars(strpass, "0123456789") !== 1){ 
+        
+    alert("영어소문자 숫자 특수문자를 혼합해 주세요");
+    return false;
+
+    }
+
+    //특수문자 사용여부 체크
+     if (containChars(strpass, "`~!@#$^&*()_-+={[}]:;<,>.?/") !== 1){ 
+        
+    alert("영어소문자 숫자 특수문자를 혼합해 주세요");
+    return false;
+
+    }
 
     //비밀번호와 비밀번호 확인 비교
         if (strpass !==  strcheck)  {
         
-    alert("비밀번호가 일치하지 않습니다. 다시 입력 하십시오");
+    alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
     return false;
                 
         }
@@ -113,7 +137,7 @@ function name_check(){
     
     //공백 체크
     if(strname === ""){
-    alert("이름을 입력하세요");
+    alert("이름을 입력해 주세요");
     return false;
     } 
 
@@ -128,20 +152,20 @@ function email_check(){
 
     //공백 체크
     if(stremail === ""){
-    alert("email을 입력하세요");
+    alert("email을 입력해 주세요");
     return false;
     } 
 
     //'@'또는 '.com' 있는지 확인
-    if((containChars(stremail,"@")===0) || (stremail.indexOf(".com") === -1)){
+    if((containChars(stremail,"@")===0) || (stremail.indexOf(".") === -1)){
 
-    alert("email 양식대로 다시 입력해주세요");
+    alert("email 양식대로 다시 입력해 주세요");
     return false;
     }
 
     //'@'뒤에 '.com' 이 있는지 확인
-    if(stremail.indexOf("@") > stremail.indexOf(".com")){
-    alert("email 양식대로 다시 입력해주세요");
+    if(stremail.indexOf("@") > stremail.indexOf(".")){
+    alert("email 양식대로 다시 입력해 주세요");
     return false;
     }
     
@@ -156,7 +180,7 @@ function phone_check(){
 
     //공백 체크
     if(strphone === ""){
-    alert("전화번호를 입력하세요");
+    alert("전화번호를 입력해 주세요");
     return false;
     } 
 
@@ -172,7 +196,7 @@ function phone_check(){
     ch = strphone.charAt(i);
                 
         if((ch < '0') ||(ch > '9')){
-        alert("숫자만 입력하세요");
+        alert("전화번호는 숫자만 입력해 주세요");
         return false;
         }
     }

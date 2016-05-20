@@ -32,6 +32,7 @@ form
 {
     width: 250px;
     margin: 0 auto;
+    color:#FFFFFF;
 }
 
 form.login input[type="text"], form.login input[type="password"]
@@ -81,23 +82,12 @@ form.login .forgot-pass-content
     margin-top: 10px;
     margin-bottom: 10px;
 }
-form.login label, form.login a
+form.login a
 {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 400;
     color: #FFFFFF;
 }
-
-form.login a
-{
-    transition: color 0.5s ease;
-}
-
-form.login a:hover
-{
-    color: #2ecc71;
-}
-
 .posted-by
 {
     position: absolute;
@@ -112,5 +102,5 @@ form.login a:hover
 div.DateIp
 {
     color:#FFFFFF;
-    font-size:12px;
+    font-size:15px;
 }
