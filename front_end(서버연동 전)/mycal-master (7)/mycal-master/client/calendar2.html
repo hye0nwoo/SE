@@ -3,6 +3,14 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>일정관리</title>
 
 <!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
@@ -61,6 +69,7 @@ Include JQuery Core (Required for calendar plugin)
 		
 		
 <style>
+
 .left {
    display:inline-block;
    width:200px;
@@ -449,6 +458,8 @@ $(document).ready(function(){
 		jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");	
 		return false;
 	});	
+	
+	
 
 	/**
 	 * Initialize add event modal form
@@ -530,17 +541,17 @@ $(document).ready(function(){
 						endDateObj,
 						false,
 						{
-							opt: $('#calcal option:selected').val(),
+							/*opt: $('#calcal option:selected').val(),
 							fname: "Santa",
 							lname: "Claus",
 							leadReindeer: "Rudolph",
 							myDate: new Date(),
-							myNum: 42
+							myNum: 42*/
 						},
 						{
-							backgroundColor: $("#colorBackground").val(),
+						/*	backgroundColor: $("#colorBackground").val(),
 							foregroundColor: $("#colorForeground").val()
-						}
+						*/}
 					);
 
 					$(this).dialog('close');
@@ -722,10 +733,16 @@ $(document).ready(function(){
 		<br>
 	
 		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-			<button id="BtnPreviousMonth">Previous Month</button>
-			<button id="BtnNextMonth">Next Month</button>
+			<button id="BtnPreviousMonth">이전 달</button>
+			<button id="BtnNextMonth">다음 달</button>
+			
 			&nbsp;&nbsp;&nbsp;
 			Date: <input type="text" id="dateSelect" size="20"/>
+			<button id="public_click" class="btn btn-primary">공식일정 보기</button>
+  			<button id="private_click" class="btn btn-success">개인일정보기</button>
+  			<button class="btn btn-warning" ><a href="javascript:openWin('popup2.html','500','300')">달력보기</a></button>
+			<button id="test33" class="btn btn-danger">달력저장</button>
+			
 			&nbsp;&nbsp;&nbsp;
 		</div>
 
@@ -882,24 +899,6 @@ $(document).ready(function(){
 
 <p>&nbsp;</p>
 
-	<div> 
-		<a href="javascript:openWin('popup2.html','500','300')">달력 보기</a> 
-	</div>   
-	<div class="left">
-      <div class="div_button" id="public_click">공통일정 보기</div>
-      <div class="div_button" id="private_click">개인일정 보기</div>
-</div>
-<div class="main">
-   <div class="timeline public">
-      공통일정
-   </div>
-   <div class="timeline private">
-      개인일정
-   </div>
-</div>
 
-<div class="left">
-      <div class="div_button" id="test33">달력저장</div>
-</div>
 </body>
 </html>

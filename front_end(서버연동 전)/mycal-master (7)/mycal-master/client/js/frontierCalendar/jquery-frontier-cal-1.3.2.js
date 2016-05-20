@@ -3761,7 +3761,7 @@
 				//console.log(data.opt);
 				
 				if(DateUtil.secondsDifferenceDirection(startDate,endDate) < 0){
-					alert("Sorry, you can't create an event that ends before it starts");
+					alert("시작하는 날과 끝나는 날을 확인하세요.");
 					return;
 				}
 				calId = stripNumberSign(calId);
