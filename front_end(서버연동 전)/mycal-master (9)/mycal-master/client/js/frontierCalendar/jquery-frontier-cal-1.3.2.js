@@ -1386,7 +1386,7 @@
 			var agendaId = agi.getAgendaId();
 			var agendaStartDate = agi.getStartDate();
 			var agendaEndDate = agi.getEndDate();
-			
+						
 			if(agendaStartDate == null || agendaEndDate == null){
 				// no agenda dates, can't render
 				return;
@@ -1429,7 +1429,19 @@
 				firstRenderDate = firstVisDt;
 			}else{
 				// the agenda start date is the first render date.
-				firstRenderDate = agendaStartDate;
+			    firstRenderDate = agendaStartDate;
+			    while (DateUtil.daysDifferenceDirection(firstVisDt, agendaStartDate) != 0)
+			    {
+			        this.renderAgendaDivElement(
+							agi,
+							'',
+							this.getCalendarDayObjByDate(firstVisDt),
+							this.getCalendarDayObjByDate(firstVisDt),
+							true,
+							false
+					);
+			        firstVisDt = DateUtil.getNextDay(firstVisDt);
+			    }
 			}
 			
 			if(DateUtil.daysDifferenceDirection(lastVisDt,agendaEndDate) > 0){
@@ -1450,8 +1462,8 @@
 			var firstDtIndex = firstRenderDate.getDay();
 			var lastDtIndex = lastRenderDate.getDay();
 			
-			if((DateUtil.daysDifference(firstRenderDate,lastRenderDate) + firstDtIndex) > 6){
-			
+			if((DateUtil.daysDifference(firstRenderDate,lastRenderDate) + firstDtIndex) > 1){
+			    var Day = firstRenderDate;
 				// we need to create multiple <div> elements because the agenda item spans more than one week
 			
 				// create first <div> from firstRenderDate to the last day in the same week
@@ -1461,49 +1473,73 @@
 				}else{
 					displayMessage = DateUtil.getAgendaDisplayTime(agi.getStartDate())+" " + agi.getTitle();
 				}
-				var lastDaySameWeekDate = DateUtil.getLastDayInSameWeek(firstRenderDate);
-				isBegining = ((DateUtil.daysDifferenceDirection(agendaStartDate,firstRenderDate) == 0) ? true : false);
-				isEnd = ((DateUtil.daysDifferenceDirection(agendaEndDate,lastDaySameWeekDate) == 0) ? true : false);
+				
 				this.renderAgendaDivElement(
 					agi,
 					displayMessage,
 					this.getCalendarDayObjByDate(firstRenderDate),
-					this.getCalendarDayObjByDate(lastDaySameWeekDate),
-					isBegining,
-					isEnd
+					this.getCalendarDayObjByDate(firstRenderDate),
+					true,
+					true,
+                    true
 				);
 				// render the rest of the div elements till we get to the end
-				displayMessage = agi.getTitle();
-				while(DateUtil.daysDifferenceDirection(lastRenderDate,lastDaySameWeekDate) < 0){
-					var firstDayNextWeekDate = DateUtil.getFirstDayNextWeek(lastDaySameWeekDate);	
-					lastDaySameWeekDate = DateUtil.getLastDayInSameWeek(firstDayNextWeekDate);
-					if(DateUtil.daysDifferenceDirection(lastRenderDate,lastDaySameWeekDate) < 0){
-						// render div from firstDayNextWeekDate to lastDaySameWeekDate
-						this.renderAgendaDivElement(
+				
+				Day = firstRenderDate;
+				while(DateUtil.daysDifferenceDirection(lastRenderDate,Day) < 0){
+				    Day = DateUtil.getnextDay(Day);
+				    if (Day.getDay()==0)
+				    {
+				        displayMessage = agi.getTitle();
+				    }
+				    else if (Day.getDay() == 6)
+				    {
+				        displayMessage = '';
+				    }
+				    else
+				    {
+				      displayMessage = '';
+				    }
+					if(DateUtil.daysDifferenceDirection(lastRenderDate,Day) < 0){
+					    // render div from firstDayNextWeekDate to lastDaySameWeekDate
+                        this.renderAgendaDivElement(
 							agi,
 							displayMessage,
-							this.getCalendarDayObjByDate(firstDayNextWeekDate),
-							this.getCalendarDayObjByDate(lastDaySameWeekDate),
-							false,
-							false
-						);						
+							this.getCalendarDayObjByDate(Day),
+							this.getCalendarDayObjByDate(Day),
+							true,
+							true,
+                            true
+						);
 					}else{
 						// render div from firstDayNextWeekDate to lastRenderDate
-						isBegining = ((DateUtil.daysDifferenceDirection(agendaStartDate,firstDayNextWeekDate) == 0) ? true : false);
-						isEnd = ((DateUtil.daysDifferenceDirection(agendaEndDate,lastRenderDate) == 0) ? true : false);
+					    if (Day.getDay() == 0) {
+					        isBeginning = false;
+					        isEnd = true;
+
+					    }
+					    else if (Day.getDay() == 6) {
+					        isBeginning = true;
+					        isEnd = false;
+
+					    }
+					    else {
+					        isBeginning = true;
+					        isEnd = true;
+
+					    }
 						this.renderAgendaDivElement(
 							agi,
 							displayMessage,
-							this.getCalendarDayObjByDate(firstDayNextWeekDate),
-							this.getCalendarDayObjByDate(lastRenderDate),
-							isBegining,
-							isEnd
+							this.getCalendarDayObjByDate(Day),
+							this.getCalendarDayObjByDate(Day),
+							true,
+							true
 						);						
 					}
 				}
 			}else{
-			
-				// the <div/> to render for the agend item is all in the same week.
+			   	// the <div/> to render for the agend item is all in the same week.
 				var startDayObj = this.getCalendarDayObjByDate(firstRenderDate);
 				var endDayObj   = this.getCalendarDayObjByDate(lastRenderDate);
 				if(agi.isAllDay()){
@@ -1520,11 +1556,23 @@
 					startDayObj,
 					endDayObj,
 					isBegining,
-					isEnd
+					isEnd,
+                    true
 				);
 				
 			}
-			
+			agendaEndDate = DateUtil.getNextDay(agendaEndDate);
+			while (DateUtil.daysDifferenceDirection(agendaEndDate, lastVisDt) != 0) {
+			    this.renderAgendaDivElement(
+                        agi,
+                        '',
+                        this.getCalendarDayObjByDate(agendaEndDate),
+                        this.getCalendarDayObjByDate(agendaEndDate),
+                        true,
+                        false
+                );
+			    agendaEndDate = DateUtil.getNextDay(agendaEndDate);
+			}
 			var then = new Date();
 			LogUtil.log("Calendar.renderSingleAgendaItem() end. Elapsed time in ms = " + Math.abs(then - now));
 			
@@ -1550,7 +1598,7 @@
 		 * True - If the endDayObject is the actual end day of the agenda item. Round the corners of the right end of the div element.
 		 * False - If the endDayObject is not the actual end day of the agenda item. Do not round the right and of the div. Draw our jquery triangle icon.		 
 		 */
-		this.renderAgendaDivElement = function(agi,displayMessage,startDayObject,endDayObject,leftEnd,rightEnd){
+		this.renderAgendaDivElement = function(agi,displayMessage,startDayObject,endDayObject,leftEnd,rightEnd,kk){
 			
 			//alert("Calendar.renderAgendaDivElement() called.");
 			
@@ -1572,170 +1620,172 @@
 			
 			if(nextY > 0){
 			
-				var d = $("<div/>");
+			    var d = $("<div/>");
+                d.append(' ')
 				// store agenda ID in agenda div so we can get it later in the drag-drop event
 				d.data("agendaId",agi.getAgendaId());
-				// item is draggble and will revert to it's original position if not dropped into a valid droppable (another day cell)
-				if(this.dragAndDropEnabled){
-					d.bind(
-						"drag",
-						function(event, ui) {
-							// do something when dragging
-						}
-					);
-					d.bind(
-						"dragstart",
-						{
-							agendaDivElement: d,
-							agendaId: agi.getAgendaId(),
-							agendaItem: Calendar.buildUserAgendaObject(agi),
-							callBack: this.dragStart_agendaCell
-						},						
-						function(event, ui) {
-							var callBack = event.data.callBack;
-							if(callBack != null){
-								callBack(
-									event,
-									event.data.agendaDivElement,
-									event.data.agendaItem
-								);
-							}
-						}
-					);
-					d.bind(
-						"dragstop",
-						{
-							agendaDivElement: d,
-							agendaId: agi.getAgendaId(),
-							agendaItem: Calendar.buildUserAgendaObject(agi),
-							callBack: this.dragStop_agendaCell
-						},						
-						function(event, ui) {
-							var callBack = event.data.callBack;
-							if(callBack != null){
-								callBack(
-									event,
-									event.data.agendaDivElement,
-									event.data.agendaItem
-								);
-							}
-						}
-					);						
-					d.draggable("enable");
-					d.data("agendaDivElement",d);
-					d.data("agendaId",agi.getAgendaId());
-					d.data("agendaItem", Calendar.buildUserAgendaObject(agi));
-					d.data("revertCallBack",this.callBack_agendaTooltip);
-					d.draggable({ 
-						revert: function(event,ui){
-							var callBack = $(this).data("revertCallBack");
-							var agendaDiv = $(this).data("agendaDivElement");
-							var agendaItem = $(this).data("agendaItem");
-							if(callBack != null){
-								callBack(
-									agendaDiv,
-									agendaItem
-								);
-							}
-							return true;
-						},						
-						scroll: true
-					});
-				}
-				d.addClass("JFrontierCal-Agenda-Item");
-				
-				//수정 - class부여하는부분
-				//console.log(agi.opt1+" 도나안도나/ ");
-				if( agi.opt1 == "public")
-				{
-					d.addClass("public");
+			    // item is draggble and will revert to it's original position if not dropped into a valid droppable (another day cell)
+				if (kk == true) {
+				    if (this.dragAndDropEnabled) {
+				        d.bind(
+                            "drag",
+                            function (event, ui) {
+                                // do something when dragging
+                            }
+                        );
+				        d.bind(
+                            "dragstart",
+                            {
+                                agendaDivElement: d,
+                                agendaId: agi.getAgendaId(),
+                                agendaItem: Calendar.buildUserAgendaObject(agi),
+                                callBack: this.dragStart_agendaCell
+                            },
+                            function (event, ui) {
+                                var callBack = event.data.callBack;
+                                if (callBack != null) {
+                                    callBack(
+                                        event,
+                                        event.data.agendaDivElement,
+                                        event.data.agendaItem
+                                    );
+                                }
+                            }
+                        );
+				        d.bind(
+                            "dragstop",
+                            {
+                                agendaDivElement: d,
+                                agendaId: agi.getAgendaId(),
+                                agendaItem: Calendar.buildUserAgendaObject(agi),
+                                callBack: this.dragStop_agendaCell
+                            },
+                            function (event, ui) {
+                                var callBack = event.data.callBack;
+                                if (callBack != null) {
+                                    callBack(
+                                        event,
+                                        event.data.agendaDivElement,
+                                        event.data.agendaItem
+                                    );
+                                }
+                            }
+                        );
+				        d.draggable("enable");
+				        d.data("agendaDivElement", d);
+				        d.data("agendaId", agi.getAgendaId());
+				        d.data("agendaItem", Calendar.buildUserAgendaObject(agi));
+				        d.data("revertCallBack", this.callBack_agendaTooltip);
+				        d.draggable({
+				            revert: function (event, ui) {
+				                var callBack = $(this).data("revertCallBack");
+				                var agendaDiv = $(this).data("agendaDivElement");
+				                var agendaItem = $(this).data("agendaItem");
+				                if (callBack != null) {
+				                    callBack(
+                                        agendaDiv,
+                                        agendaItem
+                                    );
+				                }
+				                return true;
+				            },
+				            scroll: true
+				        });
+				    }
+				    d.addClass("JFrontierCal-Agenda-Item");
+
+				    //수정 - class부여하는부분
+				    //console.log(agi.opt1+" 도나안도나/ ");
+				    if (agi.opt1 == "public") {
+				        d.addClass("public");
+				    }
+				    else {
+				        d.addClass("private");
+				    }
+
+				    if (agi.getBackgroundColor() != null) {
+				        d.css("background-color", agi.getBackgroundColor());
+				    }
+				    if (agi.getForegroundColor() != null) {
+				        d.css("color", agi.getForegroundColor());
+				    }
+				    d.css("position", "absolute");
+				    d.css("left", startX + "px");
+				    d.css("top", nextY + "px");
+				    d.css("width", width + 2 + "px");
+				    d.css("white-space", "nowrap");
+				    // round corners for webkit & safari (poor IE :( )
+				    if (leftEnd) {
+
+				    } else {
+				        // left end is not the start day of the agenda item. Show our jquery trianle icon
+				        var triangle = $("<span/>");
+				        triangle.css("float", "left");
+				        triangle.addClass("ui-icon ui-icon-circle-triangle-w");
+				        d.append(triangle);
+				    }
+				    var mesg = $("<span/>");
+				    mesg.css("float", "left");
+				    mesg.html(displayMessage);
+				    d.append(mesg);
+				    if (rightEnd) {
+
+				    } else {
+				        // right end is not the end day of the agenda item. Show our jquery trianle icon
+				        var triangle = $("<span/>");
+				        triangle.css("float", "right");
+				        triangle.addClass("ui-icon ui-icon-circle-triangle-e");
+				        d.append(triangle);
+				    }
+				    // add click even lister for agenda item
+				    if (this.clickEvent_agendaCell != null) {
+				        d.bind(
+                            'click',
+                            {
+                                // pass agenda ID so user will have access to it in their custom click callback function
+                                agendaId: agi.getAgendaId(),
+                                // pass click event callback function so we can call it in clickAgendaFromCalendarHandler() function
+                                callBack: this.clickEvent_agendaCell
+                            },
+                            this.clickAgendaFromCalendarHandler
+                        );
+				    }
+				    // add mouse over event listener
+				    if (this.mouseOverEvent_agendaCell != null) {
+				        d.bind(
+                            'mouseover',
+                            {
+                                // pass agenda ID so user will have access to it in their custom click callback function
+                                agendaId: agi.getAgendaId(),
+                                // pass mouseover event callback function so we can call it in mouseOverAgendaFromCalendarHandler() function
+                                callBack: this.mouseOverEvent_agendaCell
+                            },
+                            this.clickAgendaFromCalendarHandler
+                        );
+				    }
+				    // change mouse cusor to pointer when hovering over agenda divs.
+				    d.hover(
+                        function () {
+                            $(this).css('cursor', 'pointer');
+                        },
+                        function () {
+                            $(this).css('cursor', 'auto');
+                        }
+                    );
+				    // call the users custom tooltip function if they provided one. pass the agenda item div element so they have access to it,
+				    // add pass the user a agenda item object so they have access to the data.
+				    if (this.callBack_agendaTooltip) {
+				        this.callBack_agendaTooltip(d, Calendar.buildUserAgendaObject(agi));
+				    }
 				}
 				else
 				{
-					d.addClass("private");
+				    d.css("position", "absolute");
+				    d.css("left", startX + "px");
+				    d.css("top", nextY + "px");
+				    d.css("opacity", 0);
+				    d.addClass("JFrontierCal-Agenda-Item");
 				}
-				
-				if(agi.getBackgroundColor() != null){
-					d.css("background-color",agi.getBackgroundColor());
-				}
-				if(agi.getForegroundColor() != null){
-					d.css("color",agi.getForegroundColor());
-				}
-				d.css("position","absolute");
-				d.css("left",startX+"px");
-				d.css("top",nextY+"px");					
-				d.css("width",width+"px");
-				d.css("white-space","nowrap");
-				// round corners for webkit & safari (poor IE :( )
-				if(leftEnd){
-					d.css("-moz-border-radius-bottomleft","3px");
-					d.css("-moz-border-radius-topleft","3px");
-					d.css("-webkit-border-bottom-left-radius","3px");
-					d.css("-webkit-border-top-left-radius","3px");
-				}else{
-					// left end is not the start day of the agenda item. Show our jquery trianle icon
-					var triangle = $("<span/>");
-					triangle.css("float","left");
-					triangle.addClass("ui-icon ui-icon-circle-triangle-w");
-					d.append(triangle);					
-				}
-				var mesg = $("<span/>");
-				mesg.css("float","left");
-				mesg.html(displayMessage);
-				d.append(mesg);				
-				if(rightEnd){
-					d.css("-moz-border-radius-topright","3px");
-					d.css("-moz-border-radius-bottomright","3px");
-					d.css("-webkit-border-top-right-radius","3px");
-					d.css("-webkit-border-bottom-right-radius","3px");
-				}else{
-					// right end is not the end day of the agenda item. Show our jquery trianle icon
-					var triangle = $("<span/>");
-					triangle.css("float","right");
-					triangle.addClass("ui-icon ui-icon-circle-triangle-e");
-					d.append(triangle);
-				}
-				// add click even lister for agenda item
-				if(this.clickEvent_agendaCell != null){
-					d.bind(
-						'click',
-						{
-							// pass agenda ID so user will have access to it in their custom click callback function
-							agendaId: agi.getAgendaId(),
-							// pass click event callback function so we can call it in clickAgendaFromCalendarHandler() function
-							callBack: this.clickEvent_agendaCell
-						},						
-						this.clickAgendaFromCalendarHandler
-					);
-				}
-				// add mouse over event listener
-				if(this.mouseOverEvent_agendaCell != null){
-					d.bind(
-						'mouseover',
-						{
-							// pass agenda ID so user will have access to it in their custom click callback function
-							agendaId: agi.getAgendaId(),
-							// pass mouseover event callback function so we can call it in mouseOverAgendaFromCalendarHandler() function
-							callBack: this.mouseOverEvent_agendaCell
-						},						
-						this.clickAgendaFromCalendarHandler
-					);				
-				}
-				// change mouse cusor to pointer when hovering over agenda divs.
-				d.hover(
-					function() {
-						$(this).css('cursor','pointer');
-					},
-					function() {
-						$(this).css('cursor','auto');
-					}
-				);
-				// call the users custom tooltip function if they provided one. pass the agenda item div element so they have access to it,
-				// add pass the user a agenda item object so they have access to the data.
-				if(this.callBack_agendaTooltip){
-					this.callBack_agendaTooltip(d,Calendar.buildUserAgendaObject(agi));
-				}
-	
 				// add agenda <div> to all day cells.
 				this.addAgendaDivToDays(startDayObject,endDayObject,d,agi.getAgendaId());
 
@@ -3024,10 +3074,7 @@
 			isBegining = ((DateUtil.daysDifferenceDirection(agendaStartDt,date) == 0) ? true : false);
 			isEnd = ((DateUtil.daysDifferenceDirection(agendaEndDt,date) == 0) ? true : false);
 			if(isBegining){
-				agendaDiv.css("-moz-border-radius-bottomleft","3px");
-				agendaDiv.css("-moz-border-radius-topleft","3px");
-				agendaDiv.css("-webkit-border-bottom-left-radius","3px");
-				agendaDiv.css("-webkit-border-top-left-radius","3px");
+				
 			}else{
 				var triangle = $("<span/>");
 				triangle.css("float","left");
@@ -3035,10 +3082,7 @@
 				agendaDiv.append(triangle);			
 			}
 			if(isEnd){
-				agendaDiv.css("-moz-border-radius-topright","3px");
-				agendaDiv.css("-moz-border-radius-bottomright","3px");
-				agendaDiv.css("-webkit-border-top-right-radius","3px");
-				agendaDiv.css("-webkit-border-bottom-right-radius","3px");
+				
 			}else{
 				var triangle = $("<span/>");
 				triangle.css("float","right");
@@ -3449,6 +3493,46 @@
 			return new Date(yearNum,monthNum,dayNum+daysTillEndWeek,0,0,0,0);
 		}
 		
+	};
+	DateUtil.getnextDay = function (date) {
+
+	    // week index for the set day (from 0-6)
+	    var dayIndex = date.getDay();
+	    // day of the month (from 1-31)
+	    var dayNum = date.getDate();
+	    // month index for the set month (from 0-11)
+	    var monthNum = date.getMonth();
+	    // the 4-digit year
+	    var yearNum = date.getFullYear();
+	    // number of days in month
+	    var daysInMonth = DateUtil.getDaysInMonth(date);
+
+        if (dayIndex == 6) {
+	        // this is the last day of the week!
+            dayIndex = 0;
+        }
+	    else
+        {
+            dayIndex++;
+        }
+        dayNum++;
+        if (dayNum > daysInMonth)
+        {
+            if (yearNum == 11) {
+                // next year
+                return new Date(yearNum + 1, monthNum + 1, 1, 0, 0, 0, 0);
+            } else {
+                // same year
+                return new Date(yearNum, monthNum + 1, 1, 0, 0, 0, 0);
+            }
+        }
+        else
+        {
+            // same month & year
+            return new Date(yearNum, monthNum, dayNum, 0, 0, 0, 0);
+        }
+            
+
 	};
 	/**
 	 * Given a Date object with the year, month, and day set, this function will
