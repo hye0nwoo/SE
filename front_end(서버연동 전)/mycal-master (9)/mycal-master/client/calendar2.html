@@ -219,7 +219,56 @@ $(document).ready(function(){
 	 * @param divElm - jquery object for agenda div element
 	 * @param agendaItem - javascript object containing agenda data.
 	 */
+<<<<<<< HEAD
 	
+=======
+	function myApplyTooltip(divElm,agendaItem){
+
+		// Destroy currrent tooltip if present
+		if(divElm.data("qtip")){
+			divElm.qtip("destroy");
+		}
+		
+		var displayData = "";
+		var calcal =agendaItem.calcal;
+		var title = agendaItem.title;
+		var startDate = agendaItem.startDate;
+		var endDate = agendaItem.endDate;
+		var allDay = agendaItem.allDay;
+		var data = agendaItem.data;
+		displayData += "<br><b>" + title+ "</b><br><br>";
+		if(allDay){
+			displayData += "(All day event)<br><br>";
+		}else{
+			displayData += "<b>Starts:</b> " + startDate + "<br>" + "<b>Ends:</b> " + endDate + "<br><br>";
+		}
+		for (var propertyName in data) {
+			displayData += "<b>" + propertyName + ":</b> " + data[propertyName] + "<br>"
+		}
+		// use the user specified colors from the agenda item.
+		var backgroundColor = agendaItem.displayProp.backgroundColor;
+		var foregroundColor = agendaItem.displayProp.foregroundColor;
+		var myStyle = {
+			border: {
+				width: 5,
+				radius: 10
+			},
+			padding: 10, 
+			textAlign: "left",
+			tip: true,
+			name: "dark" // other style properties are inherited from dark theme		
+		};
+		if(backgroundColor != null && backgroundColor != ""){
+			myStyle["backgroundColor"] = backgroundColor;
+		}
+		if(foregroundColor != null && foregroundColor != ""){
+			myStyle["color"] = foregroundColor;
+		}
+		// apply tooltip
+
+
+	};
+>>>>>>> 3c7935812d914a362eec4de2d28e13b8c4012c7a
 
 	/**
 	 * Make the day cells roughly 3/4th as tall as they are wide. this makes our calendar wider than it is tall. 
