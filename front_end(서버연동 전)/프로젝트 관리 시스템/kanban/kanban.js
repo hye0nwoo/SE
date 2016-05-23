@@ -31,7 +31,7 @@ $(document).ready(function() {
 		$(".task_pool_header:last").addClass("dotted_separator");
 		$(".task_pool:last").addClass("dotted_separator");
 
-		$("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click">'+id+'</div><div wip="0" class="WIP">WIP: Ilimitado</div></th>');
+		$("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">'+id+'</span></div></th>');
 		$("#task_pool_container").append('<td class="task_pool"><div /></td>');
 		intialize_sortables();
 	});
@@ -48,18 +48,11 @@ $(document).ready(function() {
 
 	$('.header_name').live('click',function(){
 		var cur_name=$(this).children("span").html();
-		var wip = $(this).parent().children("div:eq(1)").attr("wip");
-		wip = check_number(wip);
 		var header_new_html=' \
 		<div class="header_input"> \
-			Nombre<br/><input onkeypress="javascript:save_edit_h(event)" class="input header_input_name" value="'+cur_name+'" /> \
+			<input onkeypress="javascript:save_edit_h(event)" class="input header_input_name" value="'+cur_name+'" /> \
+			<div class="option save_header"><button class="btn close btn-xs"><span class="glyphicon glyphicon-ok"></span></button></div> \
 		</div>  \
-		<div class="header_input"> \
-			WIP<br/><input onkeypress="javascript:save_edit_h(event)" class="input header_input_name" value="'+wip+'" /> \
-		</div>  \
-		<div class="small"> \
-			<div class="option save_header"><button class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
-		</div> \
 		<div class="clear"></div> \
 		';
 		$(this).parent().html(header_new_html);
@@ -67,16 +60,34 @@ $(document).ready(function() {
 	$('.save_header').live('click',function(){
     	var index=$(this).parent().parent().index();
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-		var wip=$(this).parent().parent().children("div:eq(1)").first().children(".input").first().val();
-		wip = check_number(wip);
-		if(index==0){
-		    wip=0; // Primera columna debe tener el wip ilimitado
-		}
-		if(wip>0){
-    		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: '+wip+'</div>');
-		}else{
-        	$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div><div wip="'+wip+'" class="WIP">WIP: Unlimited</div>');
-    	}
+
+		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
+	});
+
+	$('.save_header').live('click',function(){
+    	var index=$(this).parent().parent().index();
+		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
+
+		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
+	});
+
+	$('.header_check_name').live('click',function(){
+		var cur_name=$(this).children("span").html();
+		var header_new_html=' \
+		<div class="header_input"> \
+			<input onkeypress="javascript:save_edit_h(event)" class="input header_input_name" value="'+cur_name+'" /> \
+			<div class="option deletecheck"><button class="btn btn-xs"><span class="glyphicon glyphicon-remove"></span></button></div> \
+			<div class="option save_header_check"><button class="btn btn-xs"><span class="glyphicon glyphicon-ok"></span></button></div> \
+		</div>  \
+		<div class="clear"></div> \
+		';
+		$(this).parent().html(header_new_html);
+	});
+	$('.save_header_check').live('click',function(){
+    	var index=$(this).parent().parent().index();
+		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
+
+		$(this).parent().parent().html('<div class="header_check_name click"><span class="title_text">'+new_name+'</span></div>');
 	});
 
 	/* Manipulación de tareas */
@@ -85,22 +96,23 @@ $(document).ready(function() {
 		$(".task_pool").first().append(' \
 		  <div class="big_container"> \
 			  <div id="box_itm'+id+'"class="box_itm rounded"> \
-				  <div id="name'+id+'" class="name">Item '+id+'</div> \
-				  <div class="dotted_hr"></div> \
-				  <div id="resp'+id+'" class="name">Resp '+id+'</div> \
+			  	  <div id="name'+id+'" class="name"><div class="header_name click"><span>Item '+id+'</span></div></div>\
+			  	  <div class="clear"></div> \
+			  	  <div id="resp'+id+'" class="name"><div class="header_name click"><span>resp '+id+'</span></div></div>\
+			  	  <div class="clear"></div> \
 				  <div n="0" id="checkbox'+id+'"></div> \
-				  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
 				  <div class="small"> \
-					  <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="#f7941d"></div> \
-					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
-					  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
+					  <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="rgb(180,255,200)"></div> \
+					  <div n="'+id+'" class="option close_remove itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
+					  <div n="'+id+'" class="option addcheck itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button></div>\
 				  </div> \
 				  <div class="clear"></div> \
 			  </div> \
 			  <div id="box_itm'+id+'_shadow" class="shadow" /> \
 			<div> \
 		');
-
+//		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
+//		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
 		$( "#box_itm"+id+" .itm_box_option input" ).mColorPicker();
 		$('.itm_box_option').hide();
 	});
@@ -120,9 +132,16 @@ $(document).ready(function() {
 	changeBackground($(this).val());
 	$('.container-fluid').css('background',$(this).val());
 	});
+	$('.sel-box-color').click(function (){
+		var sel_color = $(this).css('background');
+		$('.box-itm').css('background', sel_color);
+	});
+	$('.sel-background-color').click(function (){
+		var sel_color = $(this).css('background');
+		$('.container-fluid').css('background', sel_color);
+	});
 
-
-	$(".save").live('click', function(){
+/**	$(".save").live('click', function(){
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name_input'+id).val();
 		var box_itm_resp=$('#resp_input'+id).val();
@@ -134,10 +153,10 @@ $(document).ready(function() {
 				  <div id="name'+id+'" class="name">'+box_itm_name+'</div> \
 				  <div class="dotted_hr"></div> \
 				  <div id="resp'+id+'" class="name">'+box_itm_resp+'</div> \
+				  <progress max="100" id="progress_bar'+id+'" class="pbar" value="'+pbar_value+'"></progress> \
 		';
 		var checklist_html='<div n='+$("#checkbox"+id).attr("n")+' id="checkbox'+id+'">'+box_itm_checklist+'</div>';
 		var box_itm_new_html_last=' \
-				  <progress max="100" id="progress_bar'+id+'" class="pbar" value="'+pbar_value+'"></progress> \
 				  <div class="small"> \
 				    <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="#f7941d"></div> \
 					  <div n="'+id+'" class="option close itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
@@ -163,30 +182,29 @@ $(document).ready(function() {
 
 	  var boxH = $('#box_itm'+id).height();
 	  $('#box_itm'+id).css('height',boxH-50+"px");
-	});
+	});**/
 
 	$(".addcheck").live('click', function(){
 		var id = $(this).attr("n");
 		$("#checkbox"+id).attr("n",Number($("#checkbox"+id).attr("n"))+1);
 		$("#checkbox"+id).append(' \
-			<div class="checkbox-list"><div n="'+id+'" class="deletecheck "><button type="button" class="close" aria-label="Close" style="height:20px;margin:5px;"><span aria-hidden="true">&times;</span></button></div>\
-			<span class="small_left">\
-      			<input onkeypress="javascript:save_edit(event)" id="name_input'+id+'check" class="inputcheck"/>\
-    		</span></div><!-- /input-group -->\
+			<input class="check_left checked-list" type="checkbox" aria-label="Check"><div id="checkbox'+id+'" class="checkbox-list"><div class="header_check_name click"><span>checklist</span></div></div>\
+			<div class="clear"></div> \
 		');
-		var boxH = $('#box_itm'+id).height();
-		$('#box_itm'+id).css('height',boxH+43+"px");
 	});
-
+	$(".checked-list").live('click', function(){
+	    var chk = $(this).is(":checked");//.attr('checked');
+	    if(chk) $(this).next().children().children().css("text-decoration","line-through");
+	    else  $(this).next().children().children().css("text-decoration","none");
+	});
 	$(".deletecheck").live('click',function(){
-		var id = $(this).attr("n");
-		$("#checkbox"+id).attr("n",Number($("#checkbox"+id).attr("n"))-1);
-		$(this).parent().remove();
-		var boxH = $('#box_itm'+id).height();
-		$('#box_itm'+id).css('height',boxH-18+"px");
+		var id = $(this).parent().parent().parent().attr("id");
+		$("#"+id).attr("n",Number($("#"+id).attr("n"))-1);
+		$(this).parent().parent().prev().remove();
+		$(this).parent().parent().remove();
 	});
 
-	$('.edit').live('click', function() {
+/**	$('.edit').live('click', function() {
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name'+id).html();
 		var box_itm_resp=$('#resp'+id).html();
@@ -196,12 +214,10 @@ $(document).ready(function() {
 		var box_itm_new_html_start=' \
 				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="name_input'+id+'" class="input" value="'+box_itm_name+'" /></span><span class="small_right">title</span></div>  \
 				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="resp_input'+id+'" class="input" value="'+box_itm_resp+'" /></span><span class="small_right">content</span></div>  \
+				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="progress_input'+id+'" class="input" value="'+pbar_value+'" /></span><span class="small_right">percent</span></div>  \
 		';
 		var checklist_html='<div n="'+$("#checkbox"+id).attr("n")+'" id="checkbox'+id+'">'+box_itm_checklist+'</div>';
 		var box_itm_new_html_last=' \
-				<div class="small"> \
-					<div n="'+id+'" class="option addcheck"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button><div>\
-				<div><span class="small_left"><input onkeypress="javascript:save_edit(event)" id="progress_input'+id+'" class="input" value="'+pbar_value+'" /></span><span class="small_right">percent</span></div>  \
 				<div class="small"> \
 					<div n="'+id+'" class="option save"><button class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 				</div> \
@@ -211,9 +227,9 @@ $(document).ready(function() {
 		$('#box_itm'+id).html(box_itm_new_html);
 		var boxH = $('#box_itm'+id).height();
 		$('#box_itm'+id).css('height',boxH+50+"px");
-	});
+	});**/
 
-	$('.close').live('click', function() {
+	$('.close_remove').live('click', function() {
 		var id = $(this).attr("n");
 		$('#box_itm'+id).remove();
 		$('#box_itm'+id+'_shadow').remove();

@@ -297,27 +297,7 @@ $(document).ready(function(){
 			myStyle["color"] = foregroundColor;
 		}
 		// apply tooltip
-		divElm.qtip({
-			content: displayData,
-			position: {
-				corner: {
-					tooltip: "bottomMiddle",
-					target: "topMiddle"			
-				},
-				adjust: { 
-					mouse: true,
-					x: 0,
-					y: -15
-				},
-				target: "mouse"
-			},
-			show: { 
-				when: { 
-					event: 'mouseover'
-				}
-			},
-			style: myStyle
-		});
+
 
 	};
 
