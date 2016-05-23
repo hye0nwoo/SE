@@ -108,30 +108,6 @@ Include JQuery Core (Required for calendar plugin)
 </style>
 <script type="text/javascript">
 
-/*
-$('#test33').click(function () {
-       html2canvas($("#mycal"), {
-           allowTaint : true,
-           useCORS: true,
-           proxy : 'image/proxy.png',
-           onrendered: function (canvas) {
-           
-           
-                            
-              }
-       });
-   });
-   
-   
-$('#test33').click(function () {
-html2canvas($('#mycal'), {
-   onrendered: function(canvas) {
-     var img = canvas.toDataURL()
-     window.open(img);
-  }
-});
-*/
-
 $(function() { 
     $("#test33").click(function() { 
         html2canvas($("#mycal"), {
@@ -223,28 +199,18 @@ $(document).ready(function(){
 		agendaClickCallback: myAgendaClickHandler,
 		agendaDropCallback: myAgendaDropHandler,
 		agendaMouseoverCallback: myAgendaMouseoverHandler,
-		applyAgendaTooltipCallback: myApplyTooltip,
-		agendaDragStartCallback : myAgendaDragStart,
-		agendaDragStopCallback : myAgendaDragStop,
 		dragAndDropEnabled: true
 	}).data("plugin");
 	
 	/**
 	 * Do something when dragging starts on agenda div
 	 */
-	function myAgendaDragStart(eventObj,divElm,agendaItem){
-		// destroy our qtip tooltip
-		if(divElm.data("qtip")){
-			divElm.qtip("destroy");
-		}	
-	};
+	
 	
 	/**
 	 * Do something when dragging stops on agenda div
 	 */
-	function myAgendaDragStop(eventObj,divElm,agendaItem){
-		//alert("drag stop");
-	};
+
 	
 	/**
 	 * Custom tooltip - use any tooltip library you want to display the agenda data.
@@ -253,72 +219,7 @@ $(document).ready(function(){
 	 * @param divElm - jquery object for agenda div element
 	 * @param agendaItem - javascript object containing agenda data.
 	 */
-	function myApplyTooltip(divElm,agendaItem){
-
-		// Destroy currrent tooltip if present
-		if(divElm.data("qtip")){
-			divElm.qtip("destroy");
-		}
-		
-		var displayData = "";
-		var calcal =agendaItem.calcal;
-		var title = agendaItem.title;
-		var startDate = agendaItem.startDate;
-		var endDate = agendaItem.endDate;
-		var allDay = agendaItem.allDay;
-		var data = agendaItem.data;
-		displayData += "<br><b>" + title+ "</b><br><br>";
-		if(allDay){
-			displayData += "(All day event)<br><br>";
-		}else{
-			displayData += "<b>Starts:</b> " + startDate + "<br>" + "<b>Ends:</b> " + endDate + "<br><br>";
-		}
-		for (var propertyName in data) {
-			displayData += "<b>" + propertyName + ":</b> " + data[propertyName] + "<br>"
-		}
-		// use the user specified colors from the agenda item.
-		var backgroundColor = agendaItem.displayProp.backgroundColor;
-		var foregroundColor = agendaItem.displayProp.foregroundColor;
-		var myStyle = {
-			border: {
-				width: 5,
-				radius: 10
-			},
-			padding: 10, 
-			textAlign: "left",
-			tip: true,
-			name: "dark" // other style properties are inherited from dark theme		
-		};
-		if(backgroundColor != null && backgroundColor != ""){
-			myStyle["backgroundColor"] = backgroundColor;
-		}
-		if(foregroundColor != null && foregroundColor != ""){
-			myStyle["color"] = foregroundColor;
-		}
-		// apply tooltip
-		divElm.qtip({
-			content: displayData,
-			position: {
-				corner: {
-					tooltip: "bottomMiddle",
-					target: "topMiddle"			
-				},
-				adjust: { 
-					mouse: true,
-					x: 0,
-					y: -15
-				},
-				target: "mouse"
-			},
-			show: { 
-				when: { 
-					event: 'mouseover'
-				}
-			},
-			style: myStyle
-		});
-
-	};
+	
 
 	/**
 	 * Make the day cells roughly 3/4th as tall as they are wide. this makes our calendar wider than it is tall. 
@@ -447,11 +348,7 @@ $(document).ready(function(){
 	/**
 	 * Initialize delete all agenda items button
 	 */
-	$("#BtnDeleteAll").button();
-	$("#BtnDeleteAll").click(function() {	
-		jfcalplugin.deleteAllAgendaItems("#mycal");	
-		return false;
-	});		
+	
 	
 	/**
 	 * Initialize iCal test button
@@ -474,14 +371,18 @@ $(document).ready(function(){
 		width: 500,
 		modal: true,
 		buttons: {
-			'Add Event': function() {
-
+		    'Add Event': function () {
+		        if (($("#tok").val()) == "true")
+			    {
+			        alert($("#tok2").val());
+			        jfcalplugin.deleteAgendaItemById("#mycal", $("#tok2").val());
+			    }
 				var what = jQuery.trim($("#what").val());
 			
 				if(what == ""){
 					alert("일정내용을 입력하세요.");
 				}else{
-				
+				    
 					var startDate = $("#startDate").val();
 					var startDtArray = startDate.split("-");
 					var startYear = startDtArray[0];
@@ -608,6 +509,8 @@ $(document).ready(function(){
 			$("#endMin option:eq(0)").attr("selected", "selected");
 			$("#endMeridiem option:eq(0)").attr("selected", "selected");			
 			$("#what").val("");
+			$("#tok").val("");
+			$("#tok2").val("");
 			//$("#colorBackground").val("#1040b0");
 			//$("#colorForeground").val("#ffffff");
 		}
@@ -629,13 +532,24 @@ $(document).ready(function(){
 				$('#add-event-form').dialog('open');
 				/*$(this).add-event-form('open');수정기능 */
 				{
-						jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
-						//jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
-					}
+				        var agendaItem = jfcalplugin.getAgendaItemById("#mycal", clickAgendaItem.agendaId);
+				        $("#what").val(agendaItem.title);
+				        $("#startDate").val(agendaItem.startDate.getFullYear() + "-" + (agendaItem.startDate.getMonth()+1) + "-" + agendaItem.startDate.getDate());
+				        $("#startHour").val(agendaItem.startDate.getHours());
+				        $("#startMin").val(agendaItem.startDate.getMinutes());
+				        $("#endDate").val(agendaItem.endDate.getFullYear() + "-" + (agendaItem.endDate.getMonth() + 1) + "-" + agendaItem.endDate.getDate());
+				        $("#endHour").val(agendaItem.endDate.getHours());
+				        $("#endMin").val(agendaItem.endDate.getMinutes());
+				        $("#contents").val(agendaItem.contents);
+				        $("#calcal").val(agendaItem.calcal);
+				        $("#tok").val(true);
+				        $("#tok2").val(clickAgendaItem.agendaId);
+                        				       
+                 }
 					$(this).dialog('close');
 			},
 			'Delete': function() {
-				if(confirm("일정을 삭제하시겠습니다?")){
+				if(confirm("일정을 삭제하시겠습니까?")){
 					if(clickAgendaItem != null){
 						jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
 						//jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
@@ -680,29 +594,13 @@ $(document).ready(function(){
 	/**
 	 * Initialize our tabs
 	 */
-	$("#tabs").tabs({
-		/*
-		 * Our calendar is initialized in a closed tab so we need to resize it when the example tab opens.
-		 */
-		show: function(event, ui){
-			if(ui.index == 1){
-				jfcalplugin.doResize("#mycal");
-			}
-		}	
-	});
+	
 	
 });
 </script>
 
 <h1 style="font-size: 30px; font-weight: bold; font-family:세프리체">일정 관리</h1>
 
-<div id="tabs">
-
-	<div id="tabs-2">
-
-		<div id="example" style="margin: auto; width:80%;">
-		
-		<br>
 	
 		<div id="toolbar" class="ui-widget-header ui-corner-all" style="backgroundColor: black; font-color: white; padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
 			<button id="BtnPreviousMonth">이전 달</button>
@@ -711,9 +609,9 @@ $(document).ready(function(){
 			&nbsp;&nbsp;&nbsp;
 			Date: <input type="text" id="dateSelect" size="20"/>
 			&nbsp;&nbsp;&nbsp;
-			<button id="private_click" class="btn btn-danger">공식일정보기</button>
-			<button id="public_click" class="btn btn-warning">개인일정보기</button>
-  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','500','300')">팝업으로보기</a></button>
+			<button id="public_click" class="btn btn-danger">공식일정보기</button>
+			<button id="private_click" class="btn btn-warning">개인일정보기</button>
+  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','800','600')">팝업으로보기</a></button>
 			<button id="test33" class="btn btn-primary">달력저장</button>
 			
 			
@@ -728,11 +626,10 @@ $(document).ready(function(){
 		-->
 		<div id="mycal"></div>
 
-		</div>
+		
 
 		<!-- debugging-->
-		<div id="calDebug"></div>
-
+		
 		<!-- Add event modal form -->
 		<style type="text/css">
 			//label, input.text, select { display:block; }
@@ -889,7 +786,11 @@ $(document).ready(function(){
 				<textarea name="contents" id="contents" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="9" >일정에 관한 내용을 입력해주세요</textarea>
 			</fieldset>
 			</form>
+            <input type="hidden" id="tok" />
+            <input type="hidden" id="tok2" />
 		</div>
+
+
 		
 		<div id="display-event-form" title="일정">
 			
