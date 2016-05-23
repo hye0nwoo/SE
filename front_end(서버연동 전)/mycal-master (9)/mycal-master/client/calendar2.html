@@ -360,9 +360,16 @@ $(document).ready(function(){
 		// date agenda item was dropped onto
 		var date = eventObj.data.calDayDate;
 		// Pull agenda item from calendar
-		var agendaItem = jfcalplugin.getAgendaItemById("#mycal",agendaId);		
-		alert("You dropped agenda item " + agendaItem.title + 
-			" onto " + date.toString() + ". Here is where you can make an AJAX call to update your database.");
+		var sOe = eventObj.data.sOe;
+		var agendaItem = jfcalplugin.getAgendaItemById("#mycal", agendaId);
+		if (sOe == "start") {
+		    alert(agendaItem.title + "의 시작지점을"
+			+ date.toString() + "으로 옮겼습니다.");
+		}
+		else if (sOe = "end") {
+		    alert(agendaItem.title + "의 종료지점을"
+			+ date.toString() + "으로 옮겼습니다.");
+		}
 	};
 	
 	/**
