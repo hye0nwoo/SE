@@ -460,10 +460,11 @@ $(document).ready(function(){
 	/**
 	 * Initialize add event modal form
 	 */
+
 	$("#add-event-form").dialog({
 		autoOpen: false,
-		height: 400,
-		width: 400,
+		height: 700,
+		width: 500,
 		modal: true,
 		buttons: {
 			'Add Event': function() {
@@ -546,8 +547,8 @@ $(document).ready(function(){
 							myNum: 42*/
 						},
 						{
-							backgroundColor: $("#colorBackground").val(),
-							foregroundColor: $("#colorForeground").val()
+							backgroundColor: $("input[type=radio][name=colorSelectorBackground]:checked").val(),
+							foregroundColor: $("input[type=radio][name=colorSelectorForeground]:checked").val()
 						}
 					);
 
@@ -582,40 +583,7 @@ $(document).ready(function(){
 			// initialize with the date that was clicked
 			$("#startDate").val(clickDate);
 			$("#endDate").val(clickDate);
-			// initialize color pickers
-			$("#colorSelectorBackground").ColorPicker({
-				color: "#333333",
-				onShow: function (colpkr) {
-					$(colpkr).css("z-index","10000");
-					$(colpkr).fadeIn(500);
-					return false;
-				},
-				onHide: function (colpkr) {
-					$(colpkr).fadeOut(500);
-					return false;
-				},
-				onChange: function (hsb, hex, rgb) {
-					$("#colorSelectorBackground div").css("backgroundColor", "#" + hex);
-					$("#colorBackground").val("#" + hex);
-				}
-			});
-			//$("#colorBackground").val("#1040b0");		
-			$("#colorSelectorForeground").ColorPicker({
-				color: "#ffffff",
-				onShow: function (colpkr) {
-					$(colpkr).css("z-index","10000");
-					$(colpkr).fadeIn(500);
-					return false;
-				},
-				onHide: function (colpkr) {
-					$(colpkr).fadeOut(500);
-					return false;
-				},
-				onChange: function (hsb, hex, rgb) {
-					$("#colorSelectorForeground div").css("backgroundColor", "#" + hex);
-					$("#colorForeground").val("#" + hex);
-				}
-			});
+			
 			//$("#colorForeground").val("#ffffff");				
 			// put focus on first form input element
 			$("#what").focus();
@@ -735,12 +703,13 @@ $(document).ready(function(){
 			
 			&nbsp;&nbsp;&nbsp;
 			Date: <input type="text" id="dateSelect" size="20"/>
+			&nbsp;&nbsp;&nbsp;
 			<button id="private_click" class="btn btn-danger">공식일정보기</button>
 			<button id="public_click" class="btn btn-warning">개인일정보기</button>
-  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','500','300')">달력보기</a></button>
+  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','500','300')">팝업으로보기</a></button>
 			<button id="test33" class="btn btn-primary">달력저장</button>
 			
-			&nbsp;&nbsp;&nbsp;
+			
 		</div>
 
 		<br>
@@ -764,16 +733,17 @@ $(document).ready(function(){
 			.ui-dialog .ui-state-error { padding: .3em; }
 			.validateTips { border: 1px solid transparent; padding: 0.3em; }
 		</style>
-		<div id="add-event-form" title="일정등록">
-			<p class="validateTips">일정을 입력하세요.</p>
+
+		<div id="add-event-form" title="일정추가">
 			<form>
 			<fieldset>
 				<label for="calcal">개인/공식 일정</label>
-				<select id="calcal" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+				<select id="calcal" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;">
 								<option value="private" SELECTED>개인일정</option>
-								<option value="public">공식일정</option>
-				<label for="name">일정내용</label>
-				<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;"/>
+								<option value="public">공식일정</option>	
+								</select>				
+				<label for="name">일정제목</label>
+				<input type="text" name="what" id="what" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;"/>
 				<table style="width:100%; padding:5px;">
 					<tr>
 						<td>
@@ -785,15 +755,15 @@ $(document).ready(function(){
 							<label>시</label>
 							<select id="startHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 								<option value="12" SELECTED>12</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
 								<option value="10">10</option>
 								<option value="11">11</option>
 							</select>				
@@ -811,7 +781,7 @@ $(document).ready(function(){
 						<td>
 						<td>
 							<label>AM/PM</label>
-							<select id="startMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<select id="startMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;">
 								<option value="AM" SELECTED>AM</option>
 								<option value="PM">PM</option>
 							</select>				
@@ -827,15 +797,15 @@ $(document).ready(function(){
 							<label>시</label>
 							<select id="endHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
 								<option value="12" SELECTED>12</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
 								<option value="10">10</option>
 								<option value="11">11</option>
 							</select>				
@@ -850,10 +820,10 @@ $(document).ready(function(){
 								<option value="40">40</option>
 								<option value="50">50</option>
 							</select>				
-						<td>
+						<td>						
 						<td>
 							<label>AM/PM</label>
-							<select id="endMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
+							<select id="endMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;">
 								<option value="AM" SELECTED>AM</option>
 								<option value="PM">PM</option>
 							</select>				
@@ -865,20 +835,51 @@ $(document).ready(function(){
 						<td>
 							<label>배경색 선택</label>
 						</td>
+						</tr>
+						<tr>						
 						<td>
-							<div id="colorSelectorBackground"><div style="background-color: #333333; width:30px; height:30px; border: 2px solid #000000;"></div></div>
-							<input type="hidden" id="colorBackground" value="#333333">
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;</td>
+							<input type="radio" name="colorSelectorBackground" id="bc1" value="#000000" checked="checked" />
+							<label for="bc1">black</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorBackground" id="bc2" value="#ffffff" />
+							<label for="bc2">white</label>
+							&nbsp;							
+							<input type="radio" name="colorSelectorBackground" id="bc3" value="#ff0000"  />
+							<label for="bc3">red</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorBackground" id="bc4" value="#00ff00" />
+							<label for="bc4">green</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorBackground" id="bc5" value="#0000ff" />
+							<label for="bc5">blue</label>							
+						</td>						
+						<tr>
 						<td>
 							<label>글자색 선택</label>
 						</td>
+						</tr>
+						<tr>
 						<td>
-							<div id="colorSelectorForeground"><div style="background-color: #ffffff; width:30px; height:30px; border: 2px solid #000000;"></div></div>
-							<input type="hidden" id="colorForeground" value="#ffffff">
-						</td>						
+							<input type="radio" name="colorSelectorForeground" id="fc1" value="#000000"  />
+							<label for="fc1">black</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorForeground" id="fc2" value="#ffffff" checked="checked"/>
+							<label for="fc2">white</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorForeground" id="fc3" value="#ff0000"  />
+							<label for="fc3">red</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorForeground" id="fc4" value="#00ff00"  />
+							<label for="fc4">green</label>
+							&nbsp;
+							<input type="radio" name="colorSelectorForeground" id="fc5" value="#0000ff" style="margin-bottom:12px;" />
+							<label for="fc5">blue</label>							
+						</td>	
+						<tr>					
 					</tr>				
 				</table>
+				<label>일정내용</label><br>
+				<textarea name="contents" id="contents" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="9" >일정에 관한 내용을 입력해주세요</textarea>
 			</fieldset>
 			</form>
 		</div>
