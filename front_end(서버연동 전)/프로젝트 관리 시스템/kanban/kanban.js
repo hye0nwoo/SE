@@ -134,7 +134,8 @@ $(document).ready(function() {
 	});
 	$('.sel-box-color').click(function (){
 		var sel_color = $(this).css('background');
-		$('.box-itm').css('background', sel_color);
+		$('.box_itm').css('background', sel_color);
+		$('.task_pool_header').css('background', sel_color);
 	});
 	$('.sel-background-color').click(function (){
 		var sel_color = $(this).css('background');
@@ -246,7 +247,7 @@ $(document).ready(function() {
 	// Menu Functions
 	$(document).ready(function(){
   	$('#menuToggle').click(function(e){
-    	var $parent = $(this).parent('nav');
+    	var $parent = $(this).parent('.nav');
       $parent.toggleClass("open");
       var navState = $parent.hasClass('open') ? "hide" : "show";
       $(this).attr("title", navState + " navigation");

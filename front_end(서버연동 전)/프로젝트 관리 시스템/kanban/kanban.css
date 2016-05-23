@@ -2,14 +2,20 @@ html, body { height: 100%;  margin: 0; padding: 0;}
 .background{background-color: white; cursor: auto;font-family: 'Karla', sans-serif;height:100%;}
 .main_div{margin:0;align:left;max-width:100%;}
 .container-fluid{width:100%;height:100%;overflow-y:scroll;overflow-x:scroll;padding-bottom: 0px;}
-.table{min-width:600px;border: 0;width: auto !important;}
-.table th{min-width:300px;max-width:300px;text-align:left;border: 0;margin:2px;color:#555555;}
-.header_input{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
+.table{min-width:600px;border:rgba(0,0,0,1);width: auto !important;}
+.table th{min-width:310px;max-width:300px;text-align:left;border:rgba(0,0,0,1);margin:2px;color:#555555;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   -o-border-radius: 5px;
+ }
+.header_input{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}7
 .header_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
 .header_check_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
-.table td{min-width:310px;max-width:300px;max-height:100%;min-height:600px;text-align:center;padding:0px 5px 0px 5px;border: none;overflow-y:auto;}
-.dotted_separator{min-height:600px;border-right: 1px solid #DDDDDD !important;}
-.box_itm{margin:5 5 0 5px;padding:5px;color:#150517;background:rgb(180,255,200); url('../img/mookup/card_background.png') repeat-x;width: 290px;font-size: 1em;}
+.table td{min-width:310px;max-width:310px;max-height:100%;min-height:600px;text-align:center;padding:0px 5px 0px 5px;border:rgba(0,0,0,1);overflow-y:auto;}
+.dotted_separator{}
+.box_itm{margin:5 5 0 5px;padding:5px;color:#150517;background:rgb(180,255,200); url('../img/mookup/card_background.png') repeat-x;width: 290px;font-size: 1em; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);}
 .dotted_hr{background:transparent url('../img/mookup/horizontal_dots.png');height:1px;margin:0 20px}
 .name{margin:5px;text-align:left;word-break:break-all;}
 .pbar{height:10px !important; margin:5px 5px 5px 20px; width:170px; display:block}
@@ -27,6 +33,14 @@ footer{height:0px;}
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
    -o-border-radius: 5px;}
+.rec{border-radius: 0px;
+   -moz-border-radius: 0px;
+   -webkit-border-radius: 0px;
+   -o-border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255,255,255);
+  border: 0px;
+ }
 .colorete{width:24px;height:24px;float:left;margin-left:15px;}
 .colorete_background{width:30px;height:30px;margin-left:-4px;margin-right:-4px;margin-top:0px;margin-bottom:0px;}
 .colorete_theme{width:30px;height:30px;margin-left:-4px;margin-right:-4px;margin-top:0px;margin-bottom:0px;}
@@ -53,7 +67,7 @@ footer{height:0px;}
   color: transparent;
 }
 
-nav {
+.nav {
 	max-height: 100%;
     top: 0;
 	-moz-transition: right 0.2s linear;
@@ -71,7 +85,7 @@ nav {
 	align: center;
 	width: 80%;
 }
-nav #menuToggle {
+.nav #menuToggle {
   background: rgba(0, 0, 0, 0.6);
   display: block;
   position: relative;
@@ -80,7 +94,7 @@ nav #menuToggle {
   top: 75px;
   width: 30px;
 }
-nav #menuToggle span {
+.nav #menuToggle span {
   background: white;
   display: block;
   height: 10%;
@@ -89,7 +103,7 @@ nav #menuToggle span {
   top: 45%;
   width: 80%;
 }
-nav #menuToggle span:before, nav #menuToggle span:after {
+.nav #menuToggle span:before, .nav #menuToggle span:after {
   background: white;
   content: '';
   display: block;
@@ -102,21 +116,29 @@ nav #menuToggle span:before, nav #menuToggle span:after {
   transform: rotate(0deg);
   width: 100%;
 }
-nav #menuToggle span:after {
+.nav #menuToggle span:after {
   top: 250%;
 }
 .collapse-activity{
-	max-height: 50%;
-    overflow: hidden;
-    overflow-y: auto;
+  padding: 0 0 0 0px;
+	height: 500px;
+  width: 195px;
+  overflow-y: scroll;
+
 }
-nav div .side-nav-list:nth-child(n) {
+.activity-list{
+  list-style:none;
+}
+.activity-list div div{
+  word-break:break-all;
+}
+.nav div .side-nav-list:nth-child(n) {
   color: white;
   display: block;
   font-size: 1.2em;
   margin: 24px 0 24px 24px;
 }
-nav div .side-nav-list:nth-child(n):after {
+.nav div .side-nav-list:nth-child(n):after {
   background: #ffffff;
   content: '';
   display: block;
@@ -127,7 +149,7 @@ nav div .side-nav-list:nth-child(n):after {
   transition: width 0.2s;
   width: 0;
 }
-nav div .side-nav-list:nth-child(n):hover:after {
+.nav div .side-nav-list:nth-child(n):hover:after {
   width: 100%;
 }
 hr{

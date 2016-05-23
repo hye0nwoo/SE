@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
     </head>
     <body class="background">
-    <nav id="side-nav" role="navigation">
+    <div class="nav" id="side-nav" role="navigation">
             <a class="side-nav-list" href="" id="menuToggle" title="show menu">
                 <span class="navClosed"><i>show menu</i></span>
             </a>
@@ -38,7 +38,7 @@
             <a class="side-nav-list" data-toggle="collapse" href="#collapse-background" title="Item 1">
                 Change color
             </a>
-            <div class="collapse well" id="collapse-background" style="padding:0 0 0 0px;height:auto;">
+            <div class="collapse well rec" id="collapse-background" style="padding:0 0 0 0px;height:auto;">
             <div class="board-color-list">
             <span style="margin-left:5px;font-size:1.2em;">Background</span>
                 <div class="board-background" style="display:inline-flex;">
@@ -48,20 +48,20 @@
                 </div>
                 <span style="margin-left:5px;font-size:1.2em;">Lists</span>
                 <div class="box-background" style="display:inline-flex;">
-                    <div class="sel-box-color color-box rounded" style="background:#0079BF"></div>
-                    <div class="sel-box-color color-box rounded" style="background:#D29034"></div>
-                    <div class="sel-box-color color-box rounded" style="background:#519839"></div>
+                    <div class="sel-box-color color-box rounded" style="background:#d0d9dF"></div>
+                    <div class="sel-box-color color-box rounded" style="background:#e2e0e4"></div>
+                    <div class="sel-box-color color-box rounded" style="background:#f1f8f9"></div>
                 </div>
             </div>
             </div>
             <a class="side-nav-list" href="#" title="Item 2">Item 2</a>
             <a class="side-nav-list" href="#" title="Item 3">Item 3</a>
             <hr>
-            <a class="side-nav-list" data-toggle="collapse" href="#collapse-activity" title="Item 3">Activity</a>
-                <div class="collapse well side-collapse-well" id="collapse-activity" style="max-height:auto;overflow-y:scroll;">
-                    <li class="message-preview" style="list-style:none;">
+            <a class="side-nav-list" data-toggle="collapse" href=".collapse-activity" title="Item 3">Activity</a>
+                <div class="collapse well side-collapse-well rec collapse-activity" id="content-m">
+                    <li class="message-preview">
                         <div class="media">
-                            <div style="white-space:normal; white-break:normal; display:inline;">
+                            <div class="activity-list">
                                 <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
                                 <br />Lorem ipsum dolor sit amet, consectetur
                                 <span class="small text-muted">Yesterday at 4:32 PM</span>
@@ -69,9 +69,9 @@
                             </div>
                         </div>
                     </li>
-                    <li class="message-preview" style="list-style:none;">
+                    <li class="message-preview activity-list">
                         <div class="media">
-                            <div style="white-space:normal; white-break:normal; display:inline;">
+                            <div class="activity-list">
                                 <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
                                 <br />Lorem ipsum dolor sit amet, consectetur
                                 <span class="small text-muted">Yesterday at 4:32 PM</span>
@@ -79,9 +79,9 @@
                             </div>
                         </div>
                     </li>
-                    <li class="message-preview" style="list-style:none;">
+                    <li class="message-preview activity-list">
                         <div class="media">
-                            <div style="white-space:normal; white-break:normal; display:inline;">
+                            <div class="activity-list">
                                 <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
                                 <br />Lorem ipsum dolor sit amet, consectetur
                                 <span class="small text-muted">Yesterday at 4:32 PM</span>
@@ -89,162 +89,123 @@
                             </div>
                         </div>
                     </li>
-                    <li class="message-footer" style="list-style:none;">
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                                        <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-preview activity-list">
+                        <div class="media">
+                            <div class="activity-list">
+                                <p><a href="#"><strong style="float:left;"><br />John Smith &nbsp;</strong></a>
+                                <br />Lorem ipsum dolor sit amet, consectetur
+                                <span class="small text-muted">Yesterday at 4:32 PM</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="message-footer activity-list">
                         <a href="#">Read All New Messages</a>
                     </li>
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a sa s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    a s e f a s t e x
-                    t a
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
-                    f e w
-                    f a - d e s k t o p
-                    a s e f a s
-                    a s e f a s
+
             </div>
             </div>
-        </nav>
+        </div>
             <div class="container-fluid" id="content-md">
                 <!-- /.row -->
                 <div class="main_div">
@@ -253,7 +214,7 @@
                         <button id="remove_col" type="button" value="DELETE COLUMN" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span></button>
                         <button id="add_col" type="button" value="NEW COLUMN" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span></button>
                     </div>
-                    <table class="table rounded" border="1" style="align:left;">
+                    <table class="table rounded" style="align:left;">
                         <tbody><tr id="task_pool_header_container">
                         <th class="task_pool_header dotted_separator"><div class="header_name click"><span class="title_text">Backlog</span></div></th>
                         <th class="task_pool_header dotted_separator"><div class="header_name click"><span class="title_text">In Process</span></div></th>
