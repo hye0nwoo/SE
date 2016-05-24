@@ -1467,12 +1467,8 @@
 				// we need to create multiple <div> elements because the agenda item spans more than one week
 			
 				// create first <div> from firstRenderDate to the last day in the same week
-				if(agi.isAllDay()){
-					// don't show start time
-					displayMessage = agi.getTitle();
-				}else{
-					displayMessage = DateUtil.getAgendaDisplayTime(agi.getStartDate())+" " + agi.getTitle();
-				}
+				displayMessage = agi.getTitle();
+				
 				
 				this.renderAgendaDivElement(
 					agi,
@@ -1535,7 +1531,7 @@
 			}else{
 			   	// the <div/> to render for the agend item is all in the same week.
 				var startDayObj = this.getCalendarDayObjByDate(firstRenderDate);
-				displayMessage = DateUtil.getAgendaDisplayTime(agi.getStartDate())+" " + agi.getTitle();
+				displayMessage = agi.getTitle();
 				this.renderAgendaDivElement(
 					agi,
 					displayMessage,

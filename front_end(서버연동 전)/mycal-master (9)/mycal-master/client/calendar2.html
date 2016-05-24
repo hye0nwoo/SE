@@ -108,6 +108,7 @@ Include JQuery Core (Required for calendar plugin)
 .public {
    background-color: grey;
 }
+
 </style>
 <script type="text/javascript">
 
@@ -432,18 +433,14 @@ $(document).ready(function(){
 				        startDay = startDay.replace(/^[0]+/g, "");
 				        var startHour = jQuery.trim($("#startHour").val());
 				        var startMin = jQuery.trim($("#startMin").val());
-				        var startMeridiem = jQuery.trim($("#startMeridiem").val());
-				        startHour = parseInt(startHour.replace(/^[0]+/g, ""));
 				        if (startMin == "0" || startMin == "00") {
 				            startMin = 0;
 				        } else {
 				            startMin = parseInt(startMin.replace(/^[0]+/g, ""));
 				        }
-				        if (startMeridiem == "AM" && startHour == 12) {
-				            startHour = 0;
-				        } else if (startMeridiem == "PM" && startHour < 12) {
-				            startHour = parseInt(startHour) + 12;
-				        }
+				        
+				        startHour = Number(startHour);
+				       
 
 				        var endDate = $("#endDate").val();
 				        var endDtArray = endDate.split("-");
@@ -457,18 +454,14 @@ $(document).ready(function(){
 				        endDay = endDay.replace(/^[0]+/g, "");
 				        var endHour = jQuery.trim($("#endHour").val());
 				        var endMin = jQuery.trim($("#endMin").val());
-				        var endMeridiem = jQuery.trim($("#endMeridiem").val());
-				        endHour = parseInt(endHour.replace(/^[0]+/g, ""));
 				        if (endMin == "0" || endMin == "00") {
 				            endMin = 0;
 				        } else {
 				            endMin = parseInt(endMin.replace(/^[0]+/g, ""));
 				        }
-				        if (endMeridiem == "AM" && endHour == 12) {
-				            endHour = 0;
-				        } else if (endMeridiem == "PM" && endHour < 12) {
-				            endHour = parseInt(endHour) + 12;
-				        }
+				       
+				        endHour = Number(endHour);
+				    
 
 				        //alert("Start time: " + startHour + ":" + startMin + " " + startMeridiem + ", End time: " + endHour + ":" + endMin + " " + endMeridiem);
 
@@ -536,6 +529,7 @@ $(document).ready(function(){
 			$("#endDate").datepicker("destroy");
 			$("#startDate").val("");
 			$("#endDate").val("");
+			$("#calcal").val("");
 			$("#startHour option:eq(0)").attr("selected", "selected");
 			$("#startMin option:eq(0)").attr("selected", "selected");
 			$("#startMeridiem option:eq(0)").attr("selected", "selected");
@@ -546,7 +540,8 @@ $(document).ready(function(){
 			$("#tok").val("");
 			$("#tok2").val("");
 			$("#contents").val("");
-			//$("#colorBackground").val("#1040b0");
+			$("input[type=radio][name=colorSelectorForeground][value=#f5f5f5]").attr("checked", "checked");
+			$("input[type=radio][name=colorSelectorBackground][value=#000000]").attr("checked", "checked");
 			//$("#colorForeground").val("#ffffff");
 		}
 	});
@@ -567,9 +562,10 @@ $(document).ready(function(){
 				$('#add-event-form').dialog('open');
 				/*$(this).add-event-form('open');수정기능 */
 				{
-				        var agendaItem = jfcalplugin.getAgendaItemById("#mycal", clickAgendaItem.agendaId);
+				    var agendaItem = jfcalplugin.getAgendaItemById("#mycal", clickAgendaItem.agendaId);
+				    $("#calcal").val(agendaItem.data.opt);
 				        $("#what").val(agendaItem.title);
-				        $("#startDate").val(agendaItem.startDate.getFullYear() + "-" + (agendaItem.startDate.getMonth()+1) + "-" + agendaItem.startDate.getDate());
+				        $("#startDate").val(agendaItem.startDate.getFullYear() + "-" + (agendaItem.startDate.getMonth() + 1) + "-" + agendaItem.startDate.getDate());
 				        $("#startHour").val(agendaItem.startDate.getHours());
 				        $("#startMin").val(agendaItem.startDate.getMinutes());
 				        $("#endDate").val(agendaItem.endDate.getFullYear() + "-" + (agendaItem.endDate.getMonth() + 1) + "-" + agendaItem.endDate.getDate());
@@ -580,6 +576,28 @@ $(document).ready(function(){
 				        $("#tok").val(true);
 				        $("#tok2").val(agendaItem.title);
 				        $("#contents").val(agendaItem.data.contents);
+				        var bc = agendaItem.displayProp.backgroundColor
+				        var fc = agendaItem.displayProp.foregroundColor
+				        if (fc == "#000000") $("input[type=radio][name=colorSelectorForeground][value=#000000]").attr("checked", "checked");
+				        else if (fc == "#f1d04d") $("input[type=radio][name=colorSelectorForeground][value=#f1d04d]").attr("checked", "checked");
+				        else if (fc == "#caaf40") $("input[type=radio][name=colorSelectorForeground][value=#caaf40]").attr("checked", "checked");
+				        else if (fc == "#92d04f") $("input[type=radio][name=colorSelectorForeground][value=#92d04f]").attr("checked", "checked");
+				        else if (fc == "#7aaf42") $("input[type=radio][name=colorSelectorForeground][value=#7aaf42]").attr("checked", "checked");
+				        else if (fc == "#ed5850") $("input[type=radio][name=colorSelectorForeground][value=#ed5850]").attr("checked", "checked");
+				        else if (fc == "#b70218") $("input[type=radio][name=colorSelectorForeground][value=#b70218]").attr("checked", "checked");
+				        else if (fc == "#00bfff") $("input[type=radio][name=colorSelectorForeground][value=#00bfff]").attr("checked", "checked");
+				        else if (fc == "#dcdcdc") $("input[type=radio][name=colorSelectorForeground][value=#dcdcdc]").attr("checked", "checked");
+				        else if (fc == "#f5f5f5") $("input[type=radio][name=colorSelectorForeground][value=#f5f5f5]").attr("checked", "checked");
+				        if (bc == "#000000") $("input[type=radio][name=colorSelectorBackground][value=#000000]").attr("checked", "checked");
+				        else if (bc == "#f1d04d") $("input[type=radio][name=colorSelectorBackground][value=#f1d04d]").attr("checked", "checked");
+				        else if (bc == "#caaf40") $("input[type=radio][name=colorSelectorBackground][value=#caaf40]").attr("checked", "checked");
+				        else if (bc == "#92d04f") $("input[type=radio][name=colorSelectorBackground][value=#92d04f]").attr("checked", "checked");
+				        else if (bc == "#7aaf42") $("input[type=radio][name=colorSelectorBackground][value=#7aaf42]").attr("checked", "checked");
+				        else if (bc == "#ed5850") $("input[type=radio][name=colorSelectorBackground][value=#ed5850]").attr("checked", "checked");
+				        else if (bc == "#b70218") $("input[type=radio][name=colorSelectorBackground][value=#b70218]").attr("checked", "checked");
+				        else if (bc == "#00bfff") $("input[type=radio][name=colorSelectorBackground][value=#00bfff]").attr("checked", "checked");
+				        else if (bc == "#dcdcdc") $("input[type=radio][name=colorSelectorBackground][value=#dcdcdc]").attr("checked", "checked");
+				        else if (bc == "#f5f5f5") $("input[type=radio][name=colorSelectorBackground][value=#f5f5f5]").attr("checked", "checked");
                         				       
                  }
 					$(this).dialog('close');
@@ -596,7 +614,9 @@ $(document).ready(function(){
 		},
 		open: function(event, ui){
 			if(clickAgendaItem != null){
-				var calcal = clickAgendaItem.calcal;
+			    var calcal = clickAgendaItem.data.opt;
+			    if (calcal == "private") calcal = "개인일정";
+			    else calcal = "공식일정";
 				var title = clickAgendaItem.title;
 				var startDate = clickAgendaItem.startDate;
 				var endDate = clickAgendaItem.endDate;
@@ -604,14 +624,15 @@ $(document).ready(function(){
 				var data = clickAgendaItem.data;
 				// in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
 				$("#display-event-form").append(
+                   "<br><b>" + calcal + "</b><br>" +
 					"<br><b>" + title+ "</b><br><br>"		
 				);				
 				
 					$("#display-event-form").append(
-						"<b>시작일:</b> " + startDate + "<br>" +
-						"<b>종료일:</b> " + endDate + "<br><br>"				
+						"<b>시작일:</b> " + startDate.getFullYear() + "년 " + (startDate.getMonth()+1) + "월 " + startDate.getDate() + "일 " + startDate.getHours() + "시 " + startDate.getMinutes()+ "분 <br>" +
+						"<b>종료일:</b> " + endDate.getFullYear() + "년 " + (endDate.getMonth() + 1) + "월 " + endDate.getDate() + "일 " + endDate.getHours() + "시 " + endDate.getMinutes() + "분 <br>"
 					);				
-					$("#display-event-form").append("<b>" + "일정 내용" + ":</b> " + data["contents"] + "<br>");
+					$("#display-event-form").append("<br><b>" + "일정 내용" + "</b> " +"<br>"+ data["contents"] + "<br>");
 					
 			}		
 		},
@@ -641,7 +662,7 @@ $(document).ready(function(){
 			&nbsp;&nbsp;&nbsp;
 			<button id="public_click" class="btn btn-danger">공식일정보기</button>
 			<button id="private_click" class="btn btn-warning">개인일정보기</button>
-  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','800','600')" style="color:white">팝업으로보기</a></button>
+  			<button class="btn btn-success" ><a href="javascript:openWin('popup2.html','1350','800')" style="color:white">팝업으로보기</a></button>
 			<button id="test33" class="btn btn-primary">달력저장</button>
 			
 			
@@ -688,8 +709,8 @@ $(document).ready(function(){
 						<td>
 							<label>시</label>
 							<select id="startHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
-								<option value="12" SELECTED>12</option>
-								<option value="1">01</option>
+                                <option value="0" selected>00</option>
+								<option value="1" >01</option>
 								<option value="2">02</option>
 								<option value="3">03</option>
 								<option value="4">04</option>
@@ -700,6 +721,19 @@ $(document).ready(function(){
 								<option value="9">09</option>
 								<option value="10">10</option>
 								<option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                
 							</select>				
 						<td>
 						<td>
@@ -713,13 +747,7 @@ $(document).ready(function(){
 								<option value="50">50</option>
 							</select>				
 						<td>
-						<td>
-							<label>AM/PM</label>
-							<select id="startMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;">
-								<option value="AM" SELECTED>AM</option>
-								<option value="PM">PM</option>
-							</select>				
-						</td>
+						
 					</tr>
 					<tr>
 						<td>
@@ -730,18 +758,30 @@ $(document).ready(function(){
 						<td>
 							<label>시</label>
 							<select id="endHour" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:95%; padding: .4em;">
-								<option value="12" SELECTED>12</option>
-								<option value="1">01</option>
-								<option value="2">02</option>
-								<option value="3">03</option>
-								<option value="4">04</option>
-								<option value="5">05</option>
-								<option value="6">06</option>
-								<option value="7">07</option>
-								<option value="8">08</option>
-								<option value="9">09</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
+                                <option value="0" selected>00</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
 							</select>				
 						<td>
 						<td>
@@ -755,13 +795,7 @@ $(document).ready(function(){
 								<option value="50">50</option>
 							</select>				
 						<td>						
-						<td>
-							<label>AM/PM</label>
-							<select id="endMeridiem" class="text ui-widget-content ui-corner-all" style="margin-bottom:12px; width:100%; padding: .4em;">
-								<option value="AM" SELECTED>AM</option>
-								<option value="PM">PM</option>
-							</select>				
-						</td>				
+								
 					</tr>			
 				</table>
 				<table>
@@ -772,9 +806,9 @@ $(document).ready(function(){
 						</tr>
 						<tr>						
 						<td>
-							<ul>
+							<ul id="back">
 								<li><input value="#000000" name="colorSelectorBackground" type="radio" checked="checked" /></li>
-								<li><input value="#f1d04d" name="colorSelectorBackground" type="radio" /></li>
+								<li><input value="#f1d04d" name="colorSelectorBackground" type="radio"  /></li>
 								<li><input value="#caaf40" name="colorSelectorBackground" type="radio" /></li>
 								<li><input value="#92d04f" name="colorSelectorBackground" type="radio" /></li>
 								<li><input value="#7aaf42" name="colorSelectorBackground" type="radio" /></li>
@@ -792,11 +826,11 @@ $(document).ready(function(){
 						</tr>
 						<tr>
 						<td>
-							<ul>
+							<ul id="fore">
 								<li><input value="#000000" name="colorSelectorForeground" type="radio" /></li>
 								<li><input value="#f1d04d" name="colorSelectorForeground" type="radio" /></li>
-								<li><input value="#caaf40" name="colorSelectorForeground" type="radio" /></li>
-								<li><input value="#92d04f" name="colorSelectorForeground" type="radio" /></li>
+								<li><input value="#caaf40" name="colorSelectorForeground" type="radio"/></li>
+								<li><input value="#92d04f" name="colorSelectorForeground" type="radio"/></li>
 								<li><input value="#7aaf42" name="colorSelectorForeground" type="radio" /></li>
 								<li><input value="#ed5850" name="colorSelectorForeground" type="radio" /></li>
 								<li><input value="#b70218" name="colorSelectorForeground" type="radio" /></li>
