@@ -392,24 +392,8 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	/**
-	 * Initialize delete all agenda items button
-	 */
 	
-	
-	/**
-	 * Initialize iCal test button
-	 */
-	$("#BtnICalTest").button();
-	$("#BtnICalTest").click(function() {
-		// Please note that in Google Chrome this will not work with a local file. Chrome prevents AJAX calls
-		// from reading local files on disk.		
-		jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");	
-		return false;
-	});	
-	
-	/**
-	 * Initialize add event modal form
+	 /* Initialize add event modal form
 	 */
 
 	$("#add-event-form").dialog({
@@ -419,94 +403,94 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 		    'Add Event': function () {
-		        if (($("#tok").val()) == "true")
-			    {
-			        alert($("#tok2").val());
-			        jfcalplugin.deleteAgendaItemById("#mycal", $("#tok2").val());
-			    }
+		       
 				var what = jQuery.trim($("#what").val());
-			
+				                
 				if(what == ""){
 					alert("일정내용을 입력하세요.");
-				}else{
-				    
-					var startDate = $("#startDate").val();
-					var startDtArray = startDate.split("-");
-					var startYear = startDtArray[0];
-					// jquery datepicker months start at 1 (1=January)		
-					var startMonth = startDtArray[1];		
-					var startDay = startDtArray[2];
-					// strip any preceeding 0's		
-					startMonth = startMonth.replace(/^[0]+/g,"");
-					startDay = startDay.replace(/^[0]+/g,"");
-					var startHour = jQuery.trim($("#startHour").val());
-					var startMin = jQuery.trim($("#startMin").val());
-					var startMeridiem = jQuery.trim($("#startMeridiem").val());
-					startHour = parseInt(startHour.replace(/^[0]+/g,""));
-					if(startMin == "0" || startMin == "00"){
-						startMin = 0;
-					}else{
-						startMin = parseInt(startMin.replace(/^[0]+/g,""));
-					}
-					if(startMeridiem == "AM" && startHour == 12){
-						startHour = 0;
-					}else if(startMeridiem == "PM" && startHour < 12){
-						startHour = parseInt(startHour) + 12;
-					}
+				} else {
+				    if (jfcalplugin.getAgendaItemByDataAttr("#mycal", "key", what) != null && ($("#tok").val()) != "true") {
+				        alert("같은 제목을 가진 일정이 이미 존재합니다.");
+				    }
+				    else {
 
-					var endDate = $("#endDate").val();
-					var endDtArray = endDate.split("-");
-					var endYear = endDtArray[0];
-					// jquery datepicker months start at 1 (1=January)		
-					var endMonth = endDtArray[1];		
-					var endDay = endDtArray[2];
-					// strip any preceeding 0's		
-					endMonth = endMonth.replace(/^[0]+/g,"");
+				        if (($("#tok").val()) == "true") {
+				            jfcalplugin.deleteAgendaItemByDataAttr("#mycal", "key", $("#tok2").val());
+				        }
 
-					endDay = endDay.replace(/^[0]+/g,"");
-					var endHour = jQuery.trim($("#endHour").val());
-					var endMin = jQuery.trim($("#endMin").val());
-					var endMeridiem = jQuery.trim($("#endMeridiem").val());
-					endHour = parseInt(endHour.replace(/^[0]+/g,""));
-					if(endMin == "0" || endMin == "00"){
-						endMin = 0;
-					}else{
-						endMin = parseInt(endMin.replace(/^[0]+/g,""));
-					}
-					if(endMeridiem == "AM" && endHour == 12){
-						endHour = 0;
-					}else if(endMeridiem == "PM" && endHour < 12){
-						endHour = parseInt(endHour) + 12;
-					}
-					
-					//alert("Start time: " + startHour + ":" + startMin + " " + startMeridiem + ", End time: " + endHour + ":" + endMin + " " + endMeridiem);
+				        var startDate = $("#startDate").val();
+				        var startDtArray = startDate.split("-");
+				        var startYear = startDtArray[0];
+				        // jquery datepicker months start at 1 (1=January)		
+				        var startMonth = startDtArray[1];
+				        var startDay = startDtArray[2];
+				        // strip any preceeding 0's		
+				        startMonth = startMonth.replace(/^[0]+/g, "");
+				        startDay = startDay.replace(/^[0]+/g, "");
+				        var startHour = jQuery.trim($("#startHour").val());
+				        var startMin = jQuery.trim($("#startMin").val());
+				        var startMeridiem = jQuery.trim($("#startMeridiem").val());
+				        startHour = parseInt(startHour.replace(/^[0]+/g, ""));
+				        if (startMin == "0" || startMin == "00") {
+				            startMin = 0;
+				        } else {
+				            startMin = parseInt(startMin.replace(/^[0]+/g, ""));
+				        }
+				        if (startMeridiem == "AM" && startHour == 12) {
+				            startHour = 0;
+				        } else if (startMeridiem == "PM" && startHour < 12) {
+				            startHour = parseInt(startHour) + 12;
+				        }
 
-					// Dates use integers
-					var startDateObj = new Date(parseInt(startYear),parseInt(startMonth)-1,parseInt(startDay),startHour,startMin,0,0);
-					var endDateObj = new Date(parseInt(endYear),parseInt(endMonth)-1,parseInt(endDay),endHour,endMin,0,0);
+				        var endDate = $("#endDate").val();
+				        var endDtArray = endDate.split("-");
+				        var endYear = endDtArray[0];
+				        // jquery datepicker months start at 1 (1=January)		
+				        var endMonth = endDtArray[1];
+				        var endDay = endDtArray[2];
+				        // strip any preceeding 0's		
+				        endMonth = endMonth.replace(/^[0]+/g, "");
 
-					// add new event to the calendar
-					jfcalplugin.addAgendaItem(
-						"#mycal",
-						what,
-						startDateObj,
-						endDateObj,
-						false,
-						{
-							opt: $('#calcal option:selected').val()
-							
-							/*fname: "Santa",
-							lname: "Caus",
-							leadReindeer: "Rudolph",
-							myDate: new Date(),
-							myNum: 42*/
-						},
-						{
-							backgroundColor: $("input[type=radio][name=colorSelectorBackground]:checked").val(),
-							foregroundColor: $("input[type=radio][name=colorSelectorForeground]:checked").val()
-						}
-					);
+				        endDay = endDay.replace(/^[0]+/g, "");
+				        var endHour = jQuery.trim($("#endHour").val());
+				        var endMin = jQuery.trim($("#endMin").val());
+				        var endMeridiem = jQuery.trim($("#endMeridiem").val());
+				        endHour = parseInt(endHour.replace(/^[0]+/g, ""));
+				        if (endMin == "0" || endMin == "00") {
+				            endMin = 0;
+				        } else {
+				            endMin = parseInt(endMin.replace(/^[0]+/g, ""));
+				        }
+				        if (endMeridiem == "AM" && endHour == 12) {
+				            endHour = 0;
+				        } else if (endMeridiem == "PM" && endHour < 12) {
+				            endHour = parseInt(endHour) + 12;
+				        }
 
+				        //alert("Start time: " + startHour + ":" + startMin + " " + startMeridiem + ", End time: " + endHour + ":" + endMin + " " + endMeridiem);
+
+				        // Dates use integers
+				        var startDateObj = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), startHour, startMin, 0, 0);
+				        var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
+
+				        // add new event to the calendar
+				        jfcalplugin.addAgendaItem(
+                            "#mycal",
+                            what,
+                            startDateObj,
+                            endDateObj,
+                            false,
+                            {
+                                opt: $('#calcal option:selected').val(),
+                                key: what,
+                                contents : $("#contents").val()
+                            },
+                            {
+                                backgroundColor: $("input[type=radio][name=colorSelectorBackground]:checked").val(),
+                                foregroundColor: $("input[type=radio][name=colorSelectorForeground]:checked").val()
+                            }
+                        );
+				    }
 					$(this).dialog('close');
 
 				}
@@ -590,15 +574,16 @@ $(document).ready(function(){
 				        $("#contents").val(agendaItem.contents);
 				        $("#calcal").val(agendaItem.calcal);
 				        $("#tok").val(true);
-				        $("#tok2").val(clickAgendaItem.agendaId);
+				        $("#tok2").val(agendaItem.title);
+				        $("#contents").val(agendaItem.data.contents);
                         				       
                  }
 					$(this).dialog('close');
 			},
 			'Delete': function() {
 				if(confirm("일정을 삭제하시겠습니까?")){
-					if(clickAgendaItem != null){
-						jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
+				    if (clickAgendaItem != null) {
+				       	jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
 						//jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
 					}
 					$(this).dialog('close');
@@ -617,19 +602,13 @@ $(document).ready(function(){
 				$("#display-event-form").append(
 					"<br><b>" + title+ "</b><br><br>"		
 				);				
-				if(allDay){
+				
 					$("#display-event-form").append(
-						"(All day event)<br><br>"				
+						"<b>시작일:</b> " + startDate + "<br>" +
+						"<b>종료일:</b> " + endDate + "<br><br>"				
 					);				
-				}else{
-					$("#display-event-form").append(
-						"<b>Starts:</b> " + startDate + "<br>" +
-						"<b>Ends:</b> " + endDate + "<br><br>"				
-					);				
-				}
-				for (var propertyName in data) {
-					$("#display-event-form").append("<b>" + propertyName + ":</b> " + data[propertyName] + "<br>");
-				}			
+					$("#display-event-form").append("<b>" + "일정 내용" + ":</b> " + data["contents"] + "<br>");
+					
 			}		
 		},
 		close: function() {
@@ -830,7 +809,7 @@ $(document).ready(function(){
 					</tr>				
 				</table>
 				<label>일정내용</label><br>
-				<textarea name="contents" id="contents" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="9" >일정에 관한 내용을 입력해주세요</textarea>
+				<textarea name="contents" id="contents" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="9"></textarea>
 			</fieldset>
 			</form>
             <input type="hidden" id="tok" />

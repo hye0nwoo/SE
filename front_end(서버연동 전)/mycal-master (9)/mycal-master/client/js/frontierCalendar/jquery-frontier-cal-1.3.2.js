@@ -4065,7 +4065,8 @@
 						itemsToReturn.push(agendObj);
 					}					
 				}
-				return itemsToReturn;
+				if (itemsToReturn.length == 0) return null;
+                else return itemsToReturn;
 			}
 			return null;
 		};
