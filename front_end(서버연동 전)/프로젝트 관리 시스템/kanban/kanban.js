@@ -109,7 +109,7 @@ $(document).ready(function() {
 				  <div class="clear"></div> \
 			  </div> \
 			  <div id="box_itm'+id+'_shadow" class="shadow" /> \
-			<div> \
+			</div> \
 		');
 //		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 //		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
@@ -141,6 +141,7 @@ $(document).ready(function() {
 		var sel_color = $(this).css('background');
 		$('.container-fluid').css('background', sel_color);
 	});
+
 
 /**	$(".save").live('click', function(){
 		var id = $(this).attr("n");
@@ -263,6 +264,17 @@ $(document).ready(function() {
 
 
 /* Funciones auxiliares */
+function logging_history(mem, mem_page_id, title, currentTime, work){
+	$(".collapse-activity").append('\
+		<li class="message-preview">\
+		    <div class="media">\
+                <div class="activity-list">\
+                    <p><a href="#'+mem_page_id+'"><strong style="float:left;"><br />'+mem+' &nbsp;</strong></a>\
+                	<br />'+title+'을/를 '+work+'>\
+                	<span class="small text-muted">'+currentTime+'</span></p>\
+        </div></div></li>\
+		');
+}
 function intialize_sortables(){
 	$( ".task_pool" ).sortable({
 			connectWith: ".task_pool",

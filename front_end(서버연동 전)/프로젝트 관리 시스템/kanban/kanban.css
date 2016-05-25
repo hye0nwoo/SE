@@ -3,7 +3,7 @@ html, body { height: 100%;  margin: 0; padding: 0;}
 .main_div{margin:0;align:left;max-width:100%;}
 .container-fluid{width:100%;height:100%;overflow-y:scroll;overflow-x:scroll;padding-bottom: 0px;}
 .table{min-width:600px;border:rgba(0,0,0,1);width: auto !important;}
-.table th{min-width:310px;max-width:300px;text-align:left;border:rgba(0,0,0,1);margin:2px;color:#555555;
+.table th{min-width:305px;max-width:305px;text-align:left;border:rgba(0,0,0,1);margin:2px;color:#555555;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.9);
   border-radius: 5px;
    -moz-border-radius: 5px;
@@ -121,10 +121,9 @@ footer{height:0px;}
 }
 .collapse-activity{
   padding: 0 0 0 0px;
-	height: 500px;
+	height: 300px;
   width: 195px;
   overflow-y: scroll;
-
 }
 .activity-list{
   list-style:none;
