@@ -10,17 +10,17 @@
         <title>Project Manager</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="../public/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="css/sb-admin.css" rel="stylesheet">
+		<!-- Custom CSS -->
+		<link href="../public/css/sb-admin.css" rel="stylesheet">
 
-        <!-- Morris Charts CSS -->
-        <link href="css/plugins/morris.css" rel="stylesheet">
+		<!-- Morris Charts CSS -->
+		<link href="../public/css/plugins/morris.css" rel="stylesheet">
 
-        <!-- Custom Fonts -->
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+		<!-- Custom Fonts -->
+		<link href="../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
         {# 전체 페이지 해더 부분 #}
         {% block site_header %}{% endblock %}
 
@@ -31,14 +31,15 @@
         {# 전체 페이지 바디 부분 #}
         {% block site_body %}{% endblock %}
 
+		<!-- jQuery -->
+        <script src="../public/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../public/js/bootstrap.min.js"></script>
         {# 전체 페이지 푸터 부분 #}
         {% block site_footer %}{% endblock %}
 
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        
 
     </body>
     

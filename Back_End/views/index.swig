@@ -1,8 +1,10 @@
 ﻿{% extends "layout.swig" %}
-<body>
-	<script type="text/javascript" src="/controller/chatting/chatting.js"></script>
-	<style type ="text/css" src="/controller/chatting/chatting.css"></style>
 
+	{% block  site_header %}
+	<link href="../public/css/chatting.css" rel="stylesheet" type="text/css">
+	{% endblock %}
+
+	{% block site_body %}
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -248,15 +250,9 @@
 
 
     </div>
-   
-    
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-</body>
-</html>
-<!-- jQuery -->
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+    {% endblock %}
+    {% block site_footer %}
+	<script type="text/javascript" src="../public/js/chatting.js"></script>
+	{% endblock %}
 
-</body>
 
-</html>
