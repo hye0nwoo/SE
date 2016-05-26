@@ -2,11 +2,11 @@
     "default": {
         "port": 8089,
         "db": {
-            "host": "",
+            "host": "localhost",
 			"port": "3306",
-            "username": "",
-            "password": "",
-            "database": "",
+            "username": "se",
+            "password": "seteam2",
+            "database": "se",
             "dialect": "mysql",
             "logging": true,
             "timezone": "+09:00"
