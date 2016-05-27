@@ -1,56 +1,75 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
 var config = require('../config/config.json');
+var mysql = require("mysql");
+var connection = mysql.createConnection(config.default.db);
 
-
+connection.connect();
+router.use(bodyParser.urlencoded({ extended: false }));
 router.get('/', function (req, res) {
-    res.render('index.swig');
+    res.render('login_signup/login.swig');
     });
 
 router.post('/login', function (req, res) {
     var id = req.body.id;
     var pass = req.body.pass;
-    connection.query('Select ID from user where id = ?', [id], function (error, result)
+    connection.query('Select password from member_info where member_id = ?', [id], function (error, result)
     {
-        if (result.ID == id) {
-            connection.query('Select Pass from user where id = ?', [id], function (error, result) {
-                if (result.Pass == pass) {
-                    req.session.id = id;
-                    //메인 화면으로 넘어감
-                     
-                }
-                else {
-                    //비밀번호가 다릅니다 신호
-                }
-            });
+        if(result.length == 0)
+        {
+            res.send("실패");
         }
-        else {
-            //ID가 없습니다 신호
+        else
+        {
+            
+            if(result[0].password == pass)
+            {
+               
+                res.send("성공");
+            }
+            else
+            {
+                res.send("실패");
+            }
         }
     });
 
 
 });
+router.get('/signup', function (req, res) {
+    res.render('login_signup/signup.swig');
+});
+
 router.post('/signup', function (req, res) {
     var id = req.body.id;
     var pass = req.body.pass;
-    var pN = req.body.pN;
-    connection.query('Select ID from user where id = ?', [id], function (error, result) {
-        if (result.id == id) {
-            //ID가 이미 존재합니다 신호
-       }
-        else {
-            connection.query('insert into user values(?,?,?)', [id,pass,pN], function (error, result) {
-                if (error) {
+    var name = req.body.name;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    connection.query('Select member_id from member_info where member_id = ?', [id], function (error, result) {
+        if (error)
+        {
+            res.send("서버");
+        }
+        if (result.length != 0) {
 
-                }
-                else {
-                    //회원가입 완료 신호
-                }
+            res.send("중복");
+        }
+        else
+        {
+            connection.query('Select * from member_info', function (error, result) {
+                var seq = result.length + 1;
+                var cdate = new Date();
+                connection.query('insert into member_info values (?,?,?,?,?,?,?)', [seq, id, pass, email,name , phone, cdate], function (error, result) {
+                    res.send("성공");
+                });
             });
+           
         }
     });
 });
+
 
 
 

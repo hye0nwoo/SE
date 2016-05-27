@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "../layout.swig" %}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block site_header %}
+<link href="/public/css/form_signup.css" rel="stylesheet">
+{% endblock %}
 
-<link href="css/form_signup.css" rel="stylesheet">
 
-    <title>Sign Up</title>
-
-<script src="js/signup.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script>
-    $(document).ready(function(){
-        $('#signup').on('click',function(){
-            if(totalcheck()){
-                alert("성공적으로 회원가입 되었습니다");
-            }           
-        });
-    });
-</script>
-</head>
-
-<body>
+  
+{% block site_body %}
 <div>
     <div>
         <div>         
@@ -40,10 +21,14 @@
                 E-mail : <input type="text" id="email" placeholder="이메일을 입력하세요"/><p>
                 전화번호 :<input type="text" id="phone" placeholder="'-' 빼고 숫자만 입력하세요"/><p>
                 <input type="button" id="signup" value="가입하기" />
+				<input type="button" id="back" value="뒤로가기" />
                 </form>
+				
             </div>
         </div>
     </div>
-   
-</body>
-</html>
+{% endblock %}
+
+{% block site_footer %}
+<script src="/public/js/signup.js"></script>
+{% endblock %}

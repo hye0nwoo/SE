@@ -3,10 +3,10 @@
         "port": 8089,
         "db": {
             "host": "localhost",
-			"port": "3306",
-            "username": "se",
+			      "port": "3306",
+            "user": "se",
             "password": "seteam2",
-            "database": "se",
+            "database": "sw",
             "dialect": "mysql",
             "logging": true,
             "timezone": "+09:00"
