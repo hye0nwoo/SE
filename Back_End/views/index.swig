@@ -2,6 +2,7 @@
 
 	{% block  site_header %}
 	<link href="../public/css/chatting.css" rel="stylesheet" type="text/css">
+		{% block page_header %}{% endblock %}
 	{% endblock %}
 
 	{% block site_body %}
@@ -17,13 +18,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Main.html">프로젝트 매니저</a><!--화면 왼쪽 위 메뉴-->
+                <a class="navbar-brand" href="Main.html">CYO</a><!--화면 왼쪽 위 메뉴-->
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
                             <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
@@ -50,7 +51,7 @@
                     </ul><!--알림-->
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 박현우 <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 박현우 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> 사용자 정보</a>
@@ -98,32 +99,7 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            메인 제목 <small>소제목 임시 테스트</small>
-                        </h1>
-
-                    </div>
-
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    여기부터 탭에 해당하는 내용 들어옴
-
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
+            {% block page_body %}{% endblock %}
 
 
         </div>
@@ -253,6 +229,8 @@
     {% endblock %}
     {% block site_footer %}
 	<script type="text/javascript" src="../public/js/chatting.js"></script>
+	<script src="../public/js/bootstrap.min.js"></script>	{% block page_footer %}{% endblock %}
+	{% block ne}
 	{% endblock %}
 
 

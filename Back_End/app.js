@@ -8,7 +8,7 @@ var mysql = require("mysql");
 var http = require('http');
 var swig = require('swig');
 var path = require('path');
-var io = require("socket.io").listen(httpServer);
+
 var app = express();
 
 
@@ -22,6 +22,7 @@ app.set('view cache',({cache:false}));
 var httpServer = http.createServer(app).listen(3000, function (req, res) {
     console.log("Server on!");
 });
+var io = require("socket.io").listen(httpServer);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
