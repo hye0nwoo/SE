@@ -1,31 +1,9 @@
-/* ***
-*
-*
 
-Copyright (C) 2010  Leandro Vázquez Cervantes (leandro[-at-]leandro[-dot-]org)
-Copyright (C) 2010  Octavio Benedí Sánchez (octaviobenedi[-at-]gmail[-dot-]com)
-Copyright (C) 2010  Verónica Pazos (verocorella[-at-]gmail-dot-]com)
-
-GNU LESSER GENERAL PUBLIC LICENSE
-
-Version 3, 29 June 2007
-
-Copyright © 2007 Free Software Foundation, Inc. <http://fs.org/>
-
-Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
-
-This version of the GNU Lesser General Public License incorporates the terms and conditions of version 3 of the GNU General Public License, supplemented by the additional permissions listed below.
-
-version 0.3g Leandro  18 NOV 2012
-AGPL to LGPL v3 change
-*
-*
-*** */
 
 $(document).ready(function() {
 
-	/* Manipulación de columnas */
 
+	// 칼럼 추가하는 함수
 	$('#add_col').click(function(){
 		var id=$(".task_pool").size();
 		$(".task_pool_header:last").addClass("dotted_separator");
@@ -34,7 +12,9 @@ $(document).ready(function() {
 		$("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">'+id+'</span></div></th>');
 		$("#task_pool_container").append('<td class="task_pool"><div /></td>');
 		intialize_sortables();
+		// 칼럼 추가 후 정보 정송
 	});
+	// 칼럼 삭제하는 함수
 	$('#remove_col').click(function(){
 	   if($(".task_pool_header").size()>1){
 	    	$(".task_pool_header").last().remove();
@@ -43,9 +23,10 @@ $(document).ready(function() {
     		$(".task_pool_header:last").removeClass("dotted_separator");
 			$(".task_pool:last").removeClass("dotted_separator");
 		    intialize_sortables();
+		    // 칼럼 삭제 후 정보 정송, 칼럼은 무조건 1개는 있어야 함
 		}
-	});	
-
+	});
+	// 내용 입력 받는 함수(column의 header, work list의 title, content 3가지가 이것을 이용)
 	$('.header_name').live('click',function(){
 		var cur_name=$(this).children("span").html();
 		var header_new_html=' \
@@ -55,22 +36,20 @@ $(document).ready(function() {
 		</div>  \
 		<div class="clear"></div> \
 		';
+		// 내용 input 안에 넣는 함수 html 그대로 넣음
+
 		$(this).parent().html(header_new_html);
 	});
+	// 내용 html에 적용하는 함수
 	$('.save_header').live('click',function(){
     	var index=$(this).parent().parent().index();
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-
+		// 여기 내용 없으면 다시 반복 하는 것 검색 중
+//		if(new_name)
+//		변경 내용 html로 저장
 		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
 	});
-
-	$('.save_header').live('click',function(){
-    	var index=$(this).parent().parent().index();
-		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-
-		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
-	});
-
+	//checklist 함수 위에 함수랑 기능 똑같은데 차이점은 체크 버튼
 	$('.header_check_name').live('click',function(){
 		var cur_name=$(this).children("span").html();
 		var header_new_html=' \
@@ -83,6 +62,7 @@ $(document).ready(function() {
 		';
 		$(this).parent().html(header_new_html);
 	});
+	//checklist 함수 위에 함수랑 기능 똑같은데 차이점은 체크 버튼
 	$('.save_header_check').live('click',function(){
     	var index=$(this).parent().parent().index();
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
@@ -90,7 +70,7 @@ $(document).ready(function() {
 		$(this).parent().parent().html('<div class="header_check_name click"><span class="title_text">'+new_name+'</span></div>');
 	});
 
-	/* Manipulación de tareas */
+	//work list 새롭게 생성									검색용 태그 #task list #work list #list
 	$('#add_task').click(function(){
 		var id=find_next_box_itm_free(1);
 		$(".task_pool").first().append(' \
@@ -111,38 +91,41 @@ $(document).ready(function() {
 			  <div id="box_itm'+id+'_shadow" class="shadow" /> \
 			</div> \
 		');
-//		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
-//		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
+//WIP		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
+//WIP		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
 		$( "#box_itm"+id+" .itm_box_option input" ).mColorPicker();
 		$('.itm_box_option').hide();
 	});
-
+	// 버튼 hidden에서 show로
 	$('.box_itm').live('mouseover',function(){
 		$(this).children().children('.itm_box_option').show();
 	});
+	// 버튼 show에서 hidden으로
 	$('.box_itm').live('mouseout',function(){
 		$('.itm_box_option').hide();
 	});
-
+	// work list background 색깔 변경
 	$('.colorete').live('colorpicked', function () {
-    $('#box_itm'+$(this).attr('n')).css('background',$(this).val());
+    	$('#box_itm'+$(this).attr('n')).css('background',$(this).val());
 	});
-
+	// 배경 화면 색깔 변경
 	$('.colorete_background').live('colorpicked', function () {
-	changeBackground($(this).val());
-	$('.container-fluid').css('background',$(this).val());
+		changeBackground($(this).val());
+		$('.container-fluid').css('background',$(this).val());
 	});
+	// sidebar에서 선택한 색깔로 모든 work list와 columns 헤더 색깔 변경
 	$('.sel-box-color').click(function (){
 		var sel_color = $(this).css('background');
 		$('.box_itm').css('background', sel_color);
 		$('.task_pool_header').css('background', sel_color);
 	});
+	// sidebar에서 선택한 색깔로 배경 색깔 변경
 	$('.sel-background-color').click(function (){
 		var sel_color = $(this).css('background');
 		$('.container-fluid').css('background', sel_color);
 	});
 
-
+// edit 없어져서 일단 안씀
 /**	$(".save").live('click', function(){
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name_input'+id).val();
@@ -185,7 +168,7 @@ $(document).ready(function() {
 	  var boxH = $('#box_itm'+id).height();
 	  $('#box_itm'+id).css('height',boxH-50+"px");
 	});**/
-
+	// 체크리스트 추가 함수
 	$(".addcheck").live('click', function(){
 		var id = $(this).attr("n");
 		$("#checkbox"+id).attr("n",Number($("#checkbox"+id).attr("n"))+1);
@@ -193,19 +176,26 @@ $(document).ready(function() {
 			<input class="check_left checked-list" type="checkbox" aria-label="Check"><div id="checkbox'+id+'" class="checkbox-list"><div class="header_check_name click"><span>checklist</span></div></div>\
 			<div class="clear"></div> \
 		');
+		// 체크리스트 추가 되었습니다.
 	});
+	// 체크리스트 체크 버튼
 	$(".checked-list").live('click', function(){
 	    var chk = $(this).is(":checked");//.attr('checked');
+	    // 체크리스트 체크
 	    if(chk) $(this).next().children().children().css("text-decoration","line-through");
+	    // 체크리스트 체크 해제
 	    else  $(this).next().children().children().css("text-decoration","none");
 	});
+	// 체크리스트 삭제
 	$(".deletecheck").live('click',function(){
 		var id = $(this).parent().parent().parent().attr("id");
 		$("#"+id).attr("n",Number($("#"+id).attr("n"))-1);
 		$(this).parent().parent().prev().remove();
 		$(this).parent().parent().remove();
+		// 체크리스트 삭제 되었습니다.
 	});
 
+// edit 안씀
 /**	$('.edit').live('click', function() {
 		var id = $(this).attr("n");
 		var box_itm_name=$('#name'+id).html();
@@ -231,11 +221,14 @@ $(document).ready(function() {
 		$('#box_itm'+id).css('height',boxH+50+"px");
 	});**/
 
+	// work list 삭제
 	$('.close_remove').live('click', function() {
 		var id = $(this).attr("n");
 		$('#box_itm'+id).remove();
 		$('#box_itm'+id+'_shadow').remove();
+		// 삭제되었습니다.
 	});
+
 
 	$('#txt_btn').click(function(){
 			$('#texto').toggle('slow');
@@ -243,7 +236,7 @@ $(document).ready(function() {
 
         intialize_sortables();
 });
-
+// 메뉴 작동 시키는 함수 sidebar open, close 등
 (function($){
 	// Menu Functions
 	$(document).ready(function(){
@@ -263,8 +256,8 @@ $(document).ready(function() {
 })(jQuery);
 
 
-/* Funciones auxiliares */
-function logging_history(mem, mem_page_id, title, currentTime, work){
+// activity 추가 함수 
+function logging_activity(mem, mem_page_id, title, currentTime, work){
 	$(".collapse-activity").append('\
 		<li class="message-preview">\
 		    <div class="media">\
@@ -320,7 +313,7 @@ function check_number(number){
 	}
 	return number;
 }
-
+// 정보 저장하는 함수
 function save_edit(e){
 	var code;
 	if (!e) var e = window.event;
@@ -329,7 +322,7 @@ function save_edit(e){
 
 	if(code==13) { $(".save").click(); }
 }
-
+// 헤더 정보 저장하는 함수
 function save_edit_h(e){
 	var code;
 	if (!e) var e = window.event;
@@ -338,6 +331,7 @@ function save_edit_h(e){
 
 	if(code==13) { $(".save_header").click(); }
 }
+// 배경 색깔 변경 함수
 function changeBackground(color) {
    document.body.style.background = color;
 }
