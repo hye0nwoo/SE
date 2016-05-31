@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/public/css/jquery-ui-1.8.1.custom.css" />
 	<link rel="stylesheet" type="text/css" href="/public/css/colorselector.css" />
 	<link rel="stylesheet" type="text/css" href="/public/css/calendar.css" />
+	
 	{% block page_header %}{% endblock %}
 
 {% endblock %}
@@ -16,9 +17,11 @@
 
 
 {% block site_body %}
+
 	{% block page_body_nav %}{% endblock %}
     {% block page_body %}{% endblock %}
     {% block page_body_footer %}{% endblock %}
+
 {% endblock %}
 
 
@@ -47,6 +50,7 @@
     <!-- Include JQuery Frontier Calendar plugin -->
     <script type="text/javascript" src="/public/js/jquery-frontier-cal-1.3.2.js"></script>
     <script type="text/javascript" src="/public/js/calendar.js"></script>
+    
     {% block page_footer %}{% endblock %}
 
 {% endblock %}

@@ -50,7 +50,7 @@
 			  <div class="media">
 			    <div class="activity-list">
 			      <p style="float:left;">
-			         <a href="#a'+{{ activity.member.link }}+'">
+			         <a href="#a{{ activity.member.link }}">
 			            <strong>{{ activity.member }} &nbsp;</strong>
 			         </a>
 			         {{ activity.action }} &nbsp;  {{ activity.name }}
@@ -77,34 +77,34 @@
             <table class="table rounded" style="align:left;">
                 <tbody>
             <tr id="task_pool_header_container">
-            	{% for column in columns %}
+            	{% for column in columns_nav %}
                 <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ column.title }}</span></div></th>
               	{% endfor %}
             </tr>
             <tr id="task_pool_container">
-            	{% for column in columns %}
+            	{% for column in columns_body %}
             	<td {% if loop.last %} class="task_pool ui-sortable" {% else %} class="task_pool dotted_separator ui-sortable" {% endif %}>
             		{% for list in column.lists %}
             		<div class="big_container">
-                        <div id="box_itm'+{{ list.id }}+'" class="box_itm rounded">
-                            <div id="name'+{{ list.id }}+'" class="name"><div class="header_name click"><span>{{ list.title }}</span></div></div>
+                        <div id="box_itm{{ list.id }}" class="box_itm rounded">
+                            <div id="name{{ list.id }}" class="name"><div class="header_name click"><span>{{ list.title }}</span></div></div>
                             <div class="clear"></div>
-                            <div id="resp'+{{ list.id }}+'" class="name"><div class="header_name click"><span>{{ list.content }}</span></div></div>
+                            <div id="resp{{ list.id }}" class="name"><div class="header_name click"><span>{{ list.content }}</span></div></div>
                             <div class="clear"></div>
-                            <div n="'+{{ list.checklist.count }}+'" id="checkbox'+{{ list.id }}+'">
+                            <div n="{{ list.checklist.count }}" id="checkbox{{ list.id }}">
                             	{% for checklist in list.checklists %}
-                            	<input class="check_left checked-list" type="checkbox" aria-label="Check"><div id="checkbox'+{{ checklist.id }}+'" class="checkbox-list"><div class="header_check_name click"><span>{{ checklist.content }}</span></div></div>\
+                            	<input class="check_left checked-list" type="checkbox" aria-label="Check"><div id="checkbox{{ checklist.id }}" class="checkbox-list"><div class="header_check_name click"><span>{{ checklist.content }}</span></div></div>\
 								<div class="clear"></div>
 								{% endfor %}
                             </div>
                             <div class="small">
-                                <div n="'+{{ list.id }}+'" class="itm_box_option"><input n="'+{{ list.id }}+'" class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+{{ list.id }}+'" value="rgb(180,0,200)"></div>
-                                <div n="'+{{ list.id }}+'" class="option close_remove itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div>
-                                <div n="'+{{ list.id }}+'" class="option addcheck itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button></div>
+                                <div n="{{ list.id }}" class="itm_box_option"><input n="{{ list.id }}" class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm{{ list.id }}" value="rgb(180,0,200)"></div>
+                                <div n="{{ list.id }}" class="option close_remove itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div>
+                                <div n="{{ list.id }}" class="option addcheck itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button></div>
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <div id="box_itm'+{{ list.id }}+'_shadow" class="shadow" />
+                        <div id="box_itm{{ list.id }}_shadow" class="shadow" />
                     </div>
                     {% endfor %}
             	</td>
