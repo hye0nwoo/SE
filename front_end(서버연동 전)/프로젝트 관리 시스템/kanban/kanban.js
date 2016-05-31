@@ -1,4 +1,26 @@
+/* ***
+*
+*
 
+Copyright (C) 2010  Leandro Vázquez Cervantes (leandro[-at-]leandro[-dot-]org)
+Copyright (C) 2010  Octavio Benedí Sánchez (octaviobenedi[-at-]gmail[-dot-]com)
+Copyright (C) 2010  Verónica Pazos (verocorella[-at-]gmail-dot-]com)
+
+GNU LESSER GENERAL PUBLIC LICENSE
+
+Version 3, 29 June 2007
+
+Copyright © 2007 Free Software Foundation, Inc. <http://fs.org/>
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+This version of the GNU Lesser General Public License incorporates the terms and conditions of version 3 of the GNU General Public License, supplemented by the additional permissions listed below.
+
+version 0.3g Leandro  18 NOV 2012
+AGPL to LGPL v3 change
+*
+*
+*** */
 
 $(document).ready(function() {
 
