@@ -22,10 +22,10 @@ router.post('/login', function (req, res) {
         }
         else
         {
-            
+
             if(result[0].password == pass)
             {
-               
+
                 res.send("성공");
             }
             else
@@ -65,7 +65,7 @@ router.post('/signup', function (req, res) {
                     res.send("성공");
                 });
             });
-           
+
         }
     });
 });

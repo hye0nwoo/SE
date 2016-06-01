@@ -15,7 +15,7 @@
                  CYO</p>
                 <form class="login">
                 아이디 : <input type="text" id="id" placeholder="아이디를 입력하세요" /><p>
-                비밀번호 : <input type="password" id="pass" placeholder="비밀번호를 입력하세요" /><p>                
+                비밀번호 : <input type="password" id="pass" placeholder="비밀번호를 입력하세요" /><p>
                 <input type="button" id="login" value="로그인" />
                 <div id="DateIp">
                 <input type="button" id="signup" value="회원가입" />
