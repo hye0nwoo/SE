@@ -73,4 +73,23 @@
      </div>
   </div>
 </div>
+<div class="modal fade" id="infoModal" tabindex="-2" role="dialog" aria-labelledby="infoModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form>
+		 <div class="modal-header">          
+            </div>
+             <div class="modal-body" text-align="center">
+			 <br>
+                <h3>이 프로젝트를 활성화 시키시겠습니까?</h2>
+			<br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="project_activation()" data-dismiss="modal" >확인</button>
+                <button type="button" class="btn btn-default" onclick="" data-dismiss="modal">취소</button>
+       </div>
+       </form>
+     </div>
+  </div>
+</div>
 {% endblock %}

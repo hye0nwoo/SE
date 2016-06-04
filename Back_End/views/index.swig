@@ -15,7 +15,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Main.html">CYO</a>
+                <a class="navbar-brand" href="/main">CYO</a>
             </div>
             <ul class="nav navbar-right top-nav">
 			   <li class="dropdown">
@@ -63,14 +63,14 @@
             </ul>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="Main.html"><i class="fa fa-fw fa-dashboard"></i> 메인</a>
+                    <li id="main" {% if flag=="main" %} class="active"{%endif%}>
+                        <a href="/main"><i class="fa fa-fw fa-dashboard"></i> 메인</a>
                     </li>
-                    <li>
-                        <a href="Main.html"><i class="fa fa-fw fa-bar-chart-o"></i> 프로젝트관리</a>
+                    <li id="project"{% if flag=="project" %} class="active"{%endif%}>
+                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> 프로젝트관리</a>
                     </li>
-                    <li>
-                        <a href="Main.html"><i class="fa fa-fw fa-table"></i> 일정관리</a>
+                    <li id="calendar"{% if flag=="cal" %} class="active"{%endif%}>
+                        <a href="/calendar"><i class="fa fa-fw fa-table"></i> 일정관리</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> P-helper <i class="fa fa-fw fa-caret-down"></i></a>
@@ -130,7 +130,8 @@
                 </div>
             </div>
         </div>
-		<input type="hidden" value = {{sid}} id='session' />
+		<input type="hidden" value = "{{sid}}" id='session' />
+		<input type="hidden" value = "{{pro}}" id='project' />
 
     </div>
     {% endblock %}

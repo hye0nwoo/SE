@@ -10,16 +10,14 @@ router.get('/', function (req, res, next) {
     var name = req.flash('name');
     req.flash('sid', sid);
     req.flash('name', name);
-    res.render('calendar/index.swig', { sid: sid, name: name });
+    res.render('calendar/index.swig', { sid: sid, name: name,flag:"cal" });
    
 });
 router.post('/add', function (req, res) {
     var seq;
-    console.log("신호받음");
     connection.query('Select * from schedule', function (error, result) {
         seq = result.length + 1;
         connection.query('insert into schedule values (?,?,?,?,?,?,?,?,?,?)', [seq, req.body.member_id,req.body.flag,req.body.startDate,req.body.endDate,"",req.body.title,req.body.content,req.body.color_background,req.body.color_foreground], function (error, result) {
-            console.log(error);
         });
     });
 });

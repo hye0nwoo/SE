@@ -34,7 +34,7 @@
 	 * @param divElm - jquery object for agenda div element
 	 * @param agendaItem - javascript object containing agenda data.
 	 */
-
+   
     $.ajax({
         type: 'post',
         url: 'calendar/down',

@@ -86,9 +86,16 @@ router.get('/main', function (req, res) {
    
     var sid = req.flash('sid');
     var name = req.flash('name');
+    var pro = req.flash('pro')
+    if (pro[0] == null)
+    {
+        
+        pro = "";
+    }
     req.flash('sid', sid);
     req.flash('name', name);
-    res.render('project/index.swig',{ sid: sid, name: name });
+    req.flash('pro', pro);
+    res.render('project/index.swig',{ sid: sid, name: name,flag:"main",pro:pro });
 })
 router.post('/main1', function (req, res) {
     var id = req.body.id;
@@ -131,7 +138,6 @@ router.post('/main1', function (req, res) {
                                 j++
                             }
                         }
-                        console.log(tResult[0].pName);
                         res.send(tResult);
                     });
                 });
@@ -142,11 +148,8 @@ router.post('/main1', function (req, res) {
 router.post('/main2', function (req, res) {
     var seq;
     var mem1=req.body.member1, mem2="", mem3="", mem4="", mem5="";
-    console.log(req.body.member1);
     connection.query('Select * from project_info', function (error, result) {
         seq = result.length + 1;
-   
-    console.log(seq);
     if (req.body.member2 != null)
     {
         mem2 = req.body.member2;
@@ -166,6 +169,12 @@ router.post('/main2', function (req, res) {
 
     });
     });
+})
+
+router.post('/main3', function (req, res) {
+    req.flash('pro');
+    req.flash('pro', req.body.pro);
+    res.send('성공');
 })
 
 

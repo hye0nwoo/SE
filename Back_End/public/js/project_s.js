@@ -1,6 +1,8 @@
 ﻿
     var i = 1;
     var member_num = 0;
+    var project_num = 0;
+    var last;
     jQuery.ready();
     function memDel() {
         app = document.getElementById("member_list");
@@ -26,7 +28,6 @@
     };
 
     function createOk() {
-        alert($('#project_name').val());
         if ($('#member_id1').val() == null)
         {
             alert("최소 1명의 사용자는 입력을 해야 합니다.");
@@ -45,6 +46,7 @@
             createNo();
             return;
         }
+        project_num++;
         $.ajax({
             type: "POST",
             url: '/main2',
@@ -55,7 +57,7 @@
                 ED: $('#endDate').val(),
                 PE: $('#project_explain').val(),
                 MN: member_num,
-                PID: $('#member_id1').val()+member_num.toString(),
+                PID: $('#member_id1').val()+project_num.toString(),
                 member1: $('#member_id1').val(),
                 member2: $('#member_id2').val(),
                 member3: $('#member_id3').val(),
@@ -88,9 +90,23 @@
 
 
     };
-    
+    function project_activation()
+    {
+        $.ajax({
+            type: "POST",
+            url: "/main3",
+            data:
+            {
+                pro: last
+            },
+            success: function (data) {
+                alert("정상적으로 활성화 되었습니다.");
+            }
+        });
+    }
     function updateData()
     {
+       
         $.ajax({
             type: "POST",
             url: "/main1",
@@ -100,18 +116,20 @@
             },
             success:function(data)
             {
+                project_num = data.length;
                 $('#container1').children().remove();
                 for(var k =0;k<data.length;k++)
                 {
                     var Pname = data[k].pName;
                     var PID = data[k].pID;
                     var container = $("#container1"), UL = container.find("#listView2");
-                    var project_id = "proj" + k.toString();
                     var div = document.createElement("div");
-                    div.innerHTML = "<div class ='btext'>" + Pname + "</div>"
+                    div.setAttribute("value", PID);
+                    div.innerHTML = "<div class ='btext' id ='" + PID + "'value ='" + PID + "'>" + Pname + "</div>"
                     div.className = "p_Selector2"
-                    div.onclick = function () {
-                        //입력한내용이 만들어진 div 클릭하면 실행됨
+                    div.onclick = function (e) {
+                        last = e.target.getAttribute('value');
+                        $('#infoModal').modal();
                     };
 
                     document.getElementById("container1").appendChild(div);
@@ -142,4 +160,10 @@
             dateFormat: "yy-mm-dd"
         });
         updateData();
+
+        $("#makeProject").on('click', function () {
+            $("#basicModal").modal();
+        })
+       
     });
+
