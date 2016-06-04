@@ -2,19 +2,20 @@ html, body { height: 100%;  margin: 0; padding: 0;}
 .background{background-color: white; cursor: auto;font-family: 'Karla', sans-serif;height:100%;}
 .main_div{margin:0;align:left;max-width:100%;}
 .container-fluid{width:100%;height:100%;overflow-y:scroll;overflow-x:scroll;padding-bottom: 0px;}
-.table{min-width:600px;border:rgba(0,0,0,1);width: auto !important;}
-.table th{min-width:305px;max-width:305px;text-align:left;border:rgba(0,0,0,1);margin:2px;color:#555555;
+.table{min-width:600px;width: auto !important;}
+.table th{min-width:305px;max-width:305px;text-align:left;margin:2px;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.9);
+  border-color: "black";
   border-radius: 5px;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
    -o-border-radius: 5px;
  }
+
 .header_input{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}7
 .header_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
 .header_check_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
 .table td{min-width:310px;max-width:310px;max-height:100%;min-height:600px;text-align:center;padding:0px 5px 0px 5px;border:rgba(0,0,0,1);overflow-y:auto;}
-.dotted_separator{}
 .box_itm{margin:5 5 0 5px;padding:5px;color:#150517;background:rgb(180,255,200); url('../img/mookup/card_background.png') repeat-x;width: 290px;font-size: 1em; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);}
 .dotted_hr{background:transparent url('../img/mookup/horizontal_dots.png');height:1px;margin:0 20px}
 .name{margin:5px;text-align:left;word-break:break-all;}
@@ -52,6 +53,7 @@ footer{height:0px;}
 .WIP{font-size:0em;text-align:right;margin:5px;color:#888888;padding-right:10px}
 .color-box{width:55px;height:40px;margin:5px;}
 .board-color-list{width:195px;align:center;}
+.board-list{width:195px;align:center;}
 .board-background{height:50px;align:center;}
 .box-background{height:50px;align:center;}
 
@@ -127,6 +129,12 @@ footer{height:0px;}
 }
 .activity-list{
   list-style:none;
+}
+.activity-list p{
+    margin-left: 10px;
+}
+.activity-list a{
+    margin-left: 10px;
 }
 .activity-list div div{
   word-break:break-all;

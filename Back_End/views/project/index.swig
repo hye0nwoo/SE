@@ -1,15 +1,18 @@
-{% extends '../index.swig' %}
-    {% block page_header %}
+{% extends 'layout.swig' %}
+
+{% block page_header %}{% endblock %}
+
+{% block page_header %}
 
 <style id="css_disabled_color_picker" type="text/css">.mColorPicker[disabled] + span, .mColorPicker[disabled="disabled"] + span, .mColorPicker[disabled="true"] + span {filter:alpha(opacity=50);-moz-opacity:0.5;-webkit-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;cursor:default;}</style>
 
-    <link rel="stylesheet" href="./public/css/jquery-ui-1.8.6.css" type="text/css" media="all">
-    <link rel="stylesheet" href="./public/css/kanban.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./kanban/jquery-ui.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./kanban/kanban.css" type="text/css" media="all">
     <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="/public/css/jquery.mCustomScrollbar.css">
-    {% endblock %}
+    <link rel="stylesheet" href="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+{% endblock %}
 
-    {% block page_body %}
+{% block page_body %}
     <div class="background">
         <div class="nav" id="side-nav" role="navigation">
             <a class="side-nav-list" href="" id="menuToggle" title="show menu">
@@ -43,21 +46,20 @@
                 <a class="side-nav-list" data-toggle="collapse" href=".collapse-activity" title="Item 3">Activity</a>
                 <div class="collapse well side-collapse-well rec collapse-activity" id="content-m">
                     {% for activity in activitys %}
-                    <li class="message-preview">
+                    <li class="board-list">
                       <div class="media">
                         <div class="activity-list">
-                          <p style="float:left;">
+                          <p>
                              <a href="#a'+{{ activity.member.link }}+'">
-                                <strong>{{ activity.member }} &nbsp;</strong>
-                             </a>
-                             {{ activity.action }} &nbsp;  {{ activity.name }}
+                                <strong style="float:left;">{{ activity.member }} &nbsp;</strong>
+                             </a><br />{{ activity.action }} &nbsp;  {{ activity.name }}
                              <span class="small text-muted">{{ activity.time }}</span>
                           </p>
                         </div>
                       </div>
                     </li>
                     {% endfor %}
-                    <li class="message-footer activity-list">
+                    <li class="board-list activity-list">
                         <a href="#">Read All New Messages</a>
                     </li>
                 </div>
@@ -93,71 +95,7 @@
         </div>
 {% endblock %}
 
-{% block page_footer %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!--Include all compiled plugins (below), or include individual files as needed-->
-    <script src="/public/js/bootstrap.min.js"></script>
+{% block page_body_footer %}{% endblock %}
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script type="text/javascript" async="" src="./public/js/ga.js"></script><script src="./public/js/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="./public/js/kanban.js"></script>
-    <script src="./public/js/jquery-ui-1.8.6.js" type="text/javascript"></script>
-    <script src="./public/css/kanban.css" type="text/css"></script>
-    <script type="text/javascript" src="./public/js/mColorPicker_min.js" charset="UTF-8"></script>
-    <!-- custom scrollbar plugin -->
-    <script src="/public/js/jquery.mCustomScrollbar.concat.min.js"></script>
-
-    <script>
-    (function($){
-      $(window).load(function(){
-
-        $.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
-        $.mCustomScrollbar.defaults.axis="yx"; //enable 2 axis scrollbars by default
-        $("#content-l").mCustomScrollbar();
-        $("#content-d").mCustomScrollbar({theme:"dark"});
-        $("#content-l2").mCustomScrollbar({theme:"light-2"});
-        $("#content-d2").mCustomScrollbar({theme:"dark-2"});
-        $("#content-l3").mCustomScrollbar({theme:"light-3"});
-        $("#content-d3").mCustomScrollbar({theme:"dark-3"});
-        $("#content-ltk").mCustomScrollbar({theme:"light-thick"});
-        $("#content-dtk").mCustomScrollbar({theme:"dark-thick"});
-        $("#content-ltn").mCustomScrollbar({theme:"light-thin"});
-        $("#content-dtn").mCustomScrollbar({theme:"dark-thin"});
-        $("#content-m").mCustomScrollbar({theme:"minimal"});
-        $("#content-md").mCustomScrollbar({theme:"minimal-dark"});
-        $("#content-i").mCustomScrollbar({theme:"inset"});
-        $("#content-id").mCustomScrollbar({theme:"inset-dark"});
-        $("#content-i2").mCustomScrollbar({theme:"inset-2"});
-        $("#content-i2d").mCustomScrollbar({theme:"inset-2-dark"});
-        $("#content-i3").mCustomScrollbar({theme:"inset-3"});
-        $("#content-i3d").mCustomScrollbar({theme:"inset-3-dark"});
-        $("#content-r").mCustomScrollbar({theme:"rounded"});
-        $("#content-rd").mCustomScrollbar({theme:"rounded-dark"});
-        $("#content-rds").mCustomScrollbar({theme:"rounded-dots"});
-        $("#content-rdsd").mCustomScrollbar({theme:"rounded-dots-dark"});
-        $("#content-3d").mCustomScrollbar({theme:"3d"});
-        $("#content-3dd").mCustomScrollbar({theme:"3d-dark"});
-        $("#content-3dt").mCustomScrollbar({theme:"3d-thick"});
-        $("#content-3dtd").mCustomScrollbar({theme:"3d-thick-dark"});
-        $(".all-themes-switch a").click(function(e){
-          e.preventDefault();
-          var $this=$(this),
-            rel=$this.attr("rel"),
-            el=$(".content");
-          switch(rel){
-            case "toggle-content":
-              el.toggleClass("expanded-content");
-              break;
-          }
-        });
-      });
-    })(jQuery);
-    </script>
-{% endblock %}
+{% block page_footer %}{% endblock %}

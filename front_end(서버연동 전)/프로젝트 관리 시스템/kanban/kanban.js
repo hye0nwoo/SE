@@ -28,10 +28,12 @@ $(document).ready(function() {
 	// 칼럼 추가하는 함수
 	$('#add_col').click(function(){
 		var id=$(".task_pool").size();
+		var current_col = $(".task_pool_header:last").css('background');
 		$(".task_pool_header:last").addClass("dotted_separator");
 		$(".task_pool:last").addClass("dotted_separator");
 
 		$("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">'+id+'</span></div></th>');
+		$(".task_pool_header:last").css('background', current_col);
 		$("#task_pool_container").append('<td class="task_pool"><div /></td>');
 		intialize_sortables();
 		// 칼럼 추가 후 정보 정송
@@ -66,10 +68,12 @@ $(document).ready(function() {
 	$('.save_header').live('click',function(){
     	var index=$(this).parent().parent().index();
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-		// 여기 내용 없으면 다시 반복 하는 것 검색 중
-//		if(new_name)
-//		변경 내용 html로 저장
-		$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
+		if(new_name == ""){
+			alert("내용을 입력하세요.");
+		}
+		else{
+			$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
+		}
 	});
 	//checklist 함수 위에 함수랑 기능 똑같은데 차이점은 체크 버튼
 	$('.header_check_name').live('click',function(){
@@ -88,8 +92,17 @@ $(document).ready(function() {
 	$('.save_header_check').live('click',function(){
     	var index=$(this).parent().parent().index();
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-
-		$(this).parent().parent().html('<div class="header_check_name click"><span class="title_text">'+new_name+'</span></div>');
+		if(new_name == ""){
+			alert("내용을 입력하세요.");
+		}
+		else{
+			$(this).parent().parent().html('<div class="header_check_name click"><span class="title_text">'+new_name+'</span></div>');
+		    var chk = $(this).is(":checked");//.attr('checked');
+	    	// 체크리스트 체크
+	    	if(chk) $(this).next().children().children().css("text-decoration","line-through");
+	    	// 체크리스트 체크 해제
+	    	else  $(this).next().children().children().css("text-decoration","none");
+		}
 	});
 
 	//work list 새롭게 생성									검색용 태그 #task list #work list #list
