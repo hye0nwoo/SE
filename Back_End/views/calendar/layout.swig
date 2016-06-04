@@ -2,7 +2,7 @@
 
 
 
-{% block site_header %}
+{% block p_layout_header %}
 
 	<link rel="stylesheet" type="text/css" href="/public/css/jquery-frontier-cal-1.3.2.css" />
 	<link rel="stylesheet" type="text/css" href="/public/css/colorpicker.css" />
@@ -16,7 +16,7 @@
 
 
 
-{% block site_body %}
+{% block p_layout_body %}
 
 	{% block page_body_nav %}{% endblock %}
     {% block page_body %}{% endblock %}
@@ -26,7 +26,7 @@
 
 
 
-{% block site_footer %}
+{% block p_layout_footer %}
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	

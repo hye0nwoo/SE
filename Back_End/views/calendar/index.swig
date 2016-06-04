@@ -18,7 +18,7 @@
 	}
 	</style>
 
-	<h1 style="font-size: 30px; font-weight: bold; font-family:세프리체">일정 관리</h1>aㅁㄴㅇ
+	<h1 style="font-size: 30px; font-weight: bold; font-family:세프리체">일정 관리</h1>
 	
 	<div id="toolbar" class="ui-widget-header ui-corner-all" style="backgroundColor: black; font-color: white; padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
 		<button id="BtnPreviousMonth">이전 달</button>

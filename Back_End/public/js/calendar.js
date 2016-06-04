@@ -35,6 +35,28 @@
 	 * @param agendaItem - javascript object containing agenda data.
 	 */
 
+    $.ajax({
+        type: 'post',
+        url: 'calendar/down',
+        data:
+        {
+            pid:$('#session').val()
+        },
+        success:function(data)
+        {
+            for (var i = 0; i < data.length;i++)
+            {
+                var startDateObj = new Date(parseInt(data[i].start_date[0] + data[i].start_date[1] + data[i].start_date[2] + data[i].start_date[3]), parseInt(data[i].start_date[5] + data[i].start_date[6]) - 1, parseInt(data[i].start_date[8] + data[i].start_date[9]), data[i].start_date[11] + data[i].start_date[12], data[i].start_date[14] + data[i].start_date[15], 0, 0);
+                var endDateObj = new Date(parseInt(data[i].end_date[0] + data[i].end_date[1] + data[i].end_date[2] + data[i].end_date[3]), parseInt(data[i].end_date[5] + data[i].end_date[6]) - 1, parseInt(data[i].end_date[8] + data[i].end_date[9]), data[i].end_date[11] + data[i].end_date[12], data[i].end_date[14] + data[i].end_date[15], 0, 0);
+                var flag;
+                if (data[i].flag == 0) flag = 'private';
+                else flag = 'public';
+                addAgendaItem(jfcalplugin, data[i].title, startDateObj, endDateObj, flag,what, data[i].content, data[i].color_background, data[i].color_lang, false,true);
+               
+            }
+        }
+    })
+
     function myApplyTooltip(divElm,agendaItem){
 
         // Destroy currrent tooltip if present
@@ -126,12 +148,14 @@
         var sOe = eventObj.data.sOe;
         var agendaItem = jfcalplugin.getAgendaItemById("#mycal", agendaId);
         if (sOe == "start") {
-            alert(agendaItem.title + "의 시작지점을"
-			+ date.toString() + "으로 옮겼습니다.");
+            deleteAgendaItem(agendaItem.title);
+            addAgendaItem(jfcalplugin, agendaItem.title, date, agendaItem.endDate, agendaItem.title, agendaItem.data.opt, agendaItem.data.contents, agendaItem.displayProp.backgroundColor, agendaItem.displayProp.foregroundColor, true,false);
+            
         }
         else if (sOe = "end") {
-            alert(agendaItem.title + "의 종료지점을"
-			+ date.toString() + "으로 옮겼습니다.");
+            deleteAgendaItem(agendaItem.title);
+            addAgendaItem(jfcalplugin, agendaItem.title, agendaItem.startDate, date, agendaItem.title, agendaItem.data.opt, agendaItem.data.contents, agendaItem.displayProp.backgroundColor, agendaItem.displayProp.foregroundColor, true, false);
+
         }
     };
 	
@@ -231,6 +255,8 @@
 
                         if (($("#tok").val()) == "true") {
                             jfcalplugin.deleteAgendaItemByDataAttr("#mycal", "key", $("#tok2").val());
+                            deleteAgendaItem($("#tok2").val());
+                           
                         }
 
                         var startDate = $("#startDate").val();
@@ -281,22 +307,7 @@
                         var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
 
                         // add new event to the calendar
-                        jfcalplugin.addAgendaItem(
-                            "#mycal",
-                            what,
-                            startDateObj,
-                            endDateObj,
-                            false,
-                            {
-                                opt: $('#calcal option:selected').val(),
-                                key: what,
-                                contents : $("#contents").val()
-                            },
-                            {
-                                backgroundColor: $("input[type=radio][name=colorSelectorBackground]:checked").val(),
-                                foregroundColor: $("input[type=radio][name=colorSelectorForeground]:checked").val()
-                            }
-                        );
+                        addAgendaItem(jfcalplugin, what, startDateObj, endDateObj,what, $('#calcal option:selected').val(), $("#contents").val(), $("input[type=radio][name=colorSelectorBackground]:checked").val(), $("input[type=radio][name=colorSelectorForeground]:checked").val(), true,true);
                     }
                     $(this).dialog('close');
 
@@ -414,8 +425,9 @@
             'Delete': function() {
                 if(confirm("일정을 삭제하시겠습니까?")){
                     if (clickAgendaItem != null) {
-                        jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
-                        //jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
+                        deleteAgendaItem(clickAgendaItem.title);
+                        jfcalplugin.deleteAgendaItemById("#mycal", clickAgendaItem.agendaId);
+
                     }
                     $(this).dialog('close');
                 }
@@ -497,17 +509,62 @@ $(document).ready(function () {
 });
 function openWin(_url, _width, _height) { 
 		 window.open(_url, "popup", "width="+_width+", height="+_height+", resizable=no, scrollbars=no") ; 
-} 
-	/*
-	옵션 설명
-	menubar yes/no : 윈도우 menubar 표시여부 
-	toolbar yes/no : 윈도우 toolbar 표시여부 
-	location yes/no : 윈도우 location box 표시여부 
-	directories yes/no : 윈도우 directory button들의 표시여부 
-	status yes/no : 윈도우 상태표시바 표시여부 
-	scrollbars yes/no : 윈도우 scrollbar 표시여부 
-	resizable yes/no : 윈도우 크기가 조정될 수 있는 지 여부
-	width : 윈도우 너비 
-	height : 윈도우 높이
-	*/
+}
+
+function addAgendaItem(jfcalplugin,what,startDateObj,endDateObj,opt,key,contents,backgroundColor,foregroundColor,flag2,flag3)
+{
+    if (flag3) {
+        jfcalplugin.addAgendaItem(
+                       "#mycal",
+                       what,
+                       startDateObj,
+                       endDateObj,
+                       false,
+                       {
+                           opt: opt,
+                           key: what,
+                           contents: contents
+                       },
+                       {
+                           backgroundColor: backgroundColor,
+                           foregroundColor: foregroundColor
+                       }
+                   );
+    }
+    if (flag2 == true) {
+        var sd = startDateObj.getFullYear().toString() + "-" + (startDateObj.getMonth() + 1).toString() + "-" + (startDateObj.getDate()).toString() + " " + startDateObj.getHours().toString() + ":" + startDateObj.getMinutes().toString() + ":" + startDateObj.getSeconds().toString();
+        var ed = endDateObj.getFullYear().toString() + "-" + (endDateObj.getMonth() + 1).toString() + "-" + (endDateObj.getDate()).toString() + " " + endDateObj.getHours().toString() + ":" + endDateObj.getMinutes().toString() + ":" + endDateObj.getSeconds().toString();
+
+        var flag;
+        if (opt == 'private') flag = 0;
+        else flag = 1;
+        $.ajax({
+            type: "POST",
+            url: "/calendar/add",
+            data:
+            {
+                member_id: $("#session").val(),
+                flag: flag,
+                startDate: sd,
+                endDate: ed,
+                title: what,
+                content: contents,
+                color_background: backgroundColor,
+                color_foreground: foregroundColor
+            }
+        })
+    }
+}
+
+function deleteAgendaItem(title)
+{
+    $.ajax({
+        type: "POST",
+        url: '/calendar/delete',
+        data:
+            {
+                title:title
+            }
+    })
+}
 

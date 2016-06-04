@@ -54,8 +54,6 @@ function getdate(){
 $(document).ready(function () {
   
     var now = getdate();
-    $('#DateIp').append("현재시각 : ");
-    $('#DateIp').append(now);
         $('#login').on('click',function(){
         if(totalcheck()){
             $.ajax({
@@ -67,7 +65,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (data == "성공") {
-                        window.location.href = "/main";
+                        window.location.href = "/calendar";
                     }
                     else {
                         alert("아이디가 존재하지 않거나, 패스워드가 틀립니다.")

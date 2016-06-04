@@ -2,28 +2,23 @@
 
 	{% block  site_header %}
 	<link href="../public/css/chatting.css" rel="stylesheet" type="text/css">
-		{% block page_header %}{% endblock %}
+	{% block p_layout_header %}{% endblock %}
 	{% endblock %}
 
 	{% block site_body %}
     <div id="wrapper">
-
-        <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Main.html">CYO</a><!--화면 왼쪽 위 메뉴-->
+                <a class="navbar-brand" href="Main.html">CYO</a>
             </div>
-            <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-
-                <li class="dropdown">
+			   <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -48,10 +43,10 @@
                         <li>
                             <a href="#">View All</a>
                         </li>
-                    </ul><!--알림-->
+                    </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 박현우 <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> 사용자 정보</a>
@@ -66,7 +61,6 @@
                     </ul>
                 </li>
             </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
@@ -94,20 +88,17 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
 
         <div id="page-wrapper">
-
-            {% block page_body %}{% endblock %}
-
+		<div id="container-fluid">
+            {% block p_layout_body %}{% endblock %}
+		</div>
 
         </div>
-        <!-- /#page-wrapper -->
-
+       
     </div>
-    <!-- /#wrapper -->
-
+   
     <div class="container" id="num1">
         <div class="row chat-window col-xs-5 col-md-3" id="num1">
             <div class="col-xs-12 col-md-12">
@@ -118,95 +109,11 @@
                         </div>
                         <div class="col-md-4 col-xs-4" style="text-align: right;">
                             <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim"></span></a>
-                            <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
                         </div>
                     </div>
                     <div class="col" style="display : none">
                         <div class="panel-body msg_container_base">
-                            <div class="row msg_container base_sent">
-                                <div class="col-md-10 col-xs-10">
-                                    <div class="messages msg_sent">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                            </div>
-                            <div class="row msg_container base_receive">
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                                <div class="col-md-10 col-xs-10">
-                                    <div class="messages msg_receive">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row msg_container base_receive">
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                                <div class="col-xs-10 col-md-10">
-                                    <div class="messages msg_receive">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row msg_container base_sent">
-                                <div class="col-xs-10 col-md-10">
-                                    <div class="messages msg_sent">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                            </div>
-                            <div class="row msg_container base_receive">
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                                <div class="col-xs-10 col-md-10">
-                                    <div class="messages msg_receive">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row msg_container base_sent">
-                                <div class="col-md-10 col-xs-10 ">
-                                    <div class="messages msg_sent">
-                                        <p>
-                                            that mongodb thing looks good, huh?
-                                            tiny master db, and huge document store
-                                        </p>
-                                        <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                                </div>
-                            </div>
+                            
 
                         </div>
                         <div class="panel-footer">
@@ -223,14 +130,14 @@
                 </div>
             </div>
         </div>
-
+		<input type="hidden" value = {{sid}} id='session' />
 
     </div>
     {% endblock %}
     {% block site_footer %}
+	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="../public/js/chatting.js"></script>
-	<script src="../public/js/bootstrap.min.js"></script>	{% block page_footer %}{% endblock %}
-	{% block ne}
+	{% block p_layout_footer %}{% endblock %}
 	{% endblock %}
 
 

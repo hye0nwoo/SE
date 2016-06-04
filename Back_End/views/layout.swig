@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 
     <head>
 
@@ -7,19 +7,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Project Manager</title>
+        <title>CYO</title>
 
         <!-- Bootstrap Core CSS -->
 		<link href="../public/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Custom CSS -->
-		<link href="../public/css/sb-admin.css" rel="stylesheet">
-
-		<!-- Morris Charts CSS -->
-		<link href="../public/css/plugins/morris.css" rel="stylesheet">
+		
 
 		<!-- Custom Fonts -->
 		<link href="../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom CSS -->
+		<link href="../public/css/sb-admin.css" rel="stylesheet">
 		
         {# 전체 페이지 해더 부분 #}
         {% block site_header %}{% endblock %}

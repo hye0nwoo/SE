@@ -4,15 +4,24 @@ var http = require('http');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var mysql = require("mysql");
 var http = require('http');
 var swig = require('swig');
 var path = require('path');
-
+var flash = require('connect-flash')
+var MemoryStore = session.MemoryStore;
+var sessionStore = new MemoryStore();
+var SessionSockets = require('session.socket.io-express4');
 var app = express();
-
-
-
+app.use(session({
+    secret: 'PMS',
+    resave: true,
+    saveUninitialized: true,
+    store: sessionStore
+}));
+app.use(flash());
+app.use(bodyParser.urlencoded({ extended: false }));
 // view engine setup
 app.engine('swig', swig.renderFile);
 app.set('views', path.join(__dirname, 'views'));
@@ -23,20 +32,14 @@ var httpServer = http.createServer(app).listen(3000, function (req, res) {
     console.log("Server on!");
 });
 var io = require("socket.io").listen(httpServer);
-app.use(bodyParser.urlencoded({ extended: false }));
+
 
 
 //express 환경 setup
-app.use(session({
-    secret: 'PMS',
-    proxy: true,
-    resave: true,
-    saveUninitialized: true
-}));
+
+
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
-
 
 //컨트롤러 라우팅 셋업
 app.use('/', require('./routes/index'));
@@ -63,31 +66,14 @@ app.use(function(err, req, res, next) {
     });
 });
 
-io.sockets.on('connection', function (socket) {
+var sessionSockets = new SessionSockets(io, sessionStore, cookieParser("PMS"));
+
+
+sessionSockets.on('connection', function (err,socket,session) {
     // 사용자 채팅 메시지 broadcast
-    socket.on('user message', function (msg) {
-        socket.broadcast.emit('user message', socket.nickname, msg);
+    socket.on('user message', function (data) {
+        socket.emit('user message', { uid: session.flash.uid[0], msg: data.msg,date : data.date });
+        socket.broadcast.emit('user message', { uid: session.flash.uid[0], msg: data.msg, date: data.date });
     });
-
-    // 사용자 접속시 Nickname 처리 public 
-    socket.on('nickname', function (nick, fn) {
-        if (nicknames[nick]) {
-            fn(true);
-        } else {
-            fn(false);
-            nicknames[nick] = socket.nickname = nick;
-            // 사용자 대화창에 알림 broadcast
-            socket.broadcast.emit('announcement', nick + '님 들어오셨습니다.');
-            // 전체 접속사용자 리스트 broadcast
-            socket.broadcast.emit('nicknames', nicknames);
-            socket.emit('nicknames', nicknames);
-        }
-    });
-
-    socket.on('disconnect', function () {
-        if (!socket.nickname) return;
-        delete nicknames[socket.nickname];
-        socket.broadcast.emit('announcement', socket.nickname + '님 나가셨습니다.');
-        socket.broadcast.emit('nicknames', nicknames);
-    });
+       
 });

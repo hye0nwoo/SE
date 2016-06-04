@@ -1,0 +1,52 @@
+.total
+{	
+	margin:5%;
+}
+
+#create
+{    
+    margin-left:50px;
+    
+}
+.p_Selector
+{
+        width : 230px;
+        height : 100px;
+        background-color : #4C4C4C;
+        margin : 20px;
+        padding : 10px;
+        float : left;
+        text-overflow : ellipsis;
+        color : white;
+        border-radius : 5px;
+        text-align : center;
+        vertical-align:middle;
+        line-height:20px;
+        display:table;
+}
+.btext
+{
+    display:table-cell;
+    vertical-align:middle;
+}
+#page-wrapper
+{
+    height : 1200px;
+}
+.p_Selector2
+{
+    width : 230px;
+        height : 100px;
+        
+        margin : 20px;
+        padding : 10px;
+        float : left;
+        text-overflow : ellipsis;
+        color : white;
+        border-radius : 5px;
+        text-align : center;
+        vertical-align:middle;
+        line-height:20px;
+        display:table;
+    background-color :cornflowerblue;
+}

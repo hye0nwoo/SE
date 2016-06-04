@@ -1,101 +1,76 @@
-{% extends 'layout.swig' %}
-
-{% block page_header %}{% endblock %}
-
-{% block page_header %}
-
-<style id="css_disabled_color_picker" type="text/css">.mColorPicker[disabled] + span, .mColorPicker[disabled="disabled"] + span, .mColorPicker[disabled="true"] + span {filter:alpha(opacity=50);-moz-opacity:0.5;-webkit-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;cursor:default;}</style>
-
-    <link rel="stylesheet" href="./kanban/jquery-ui.css" type="text/css" media="all">
-    <link rel="stylesheet" href="./kanban/kanban.css" type="text/css" media="all">
-    <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
-{% endblock %}
+﻿{% extends 'layout.swig' %}
 
 {% block page_body %}
-    <div class="background">
-        <div class="nav" id="side-nav" role="navigation">
-            <a class="side-nav-list" href="" id="menuToggle" title="show menu">
-                <span class="navClosed"><i>show menu</i></span>
-            </a>
-            <div>
-                <a class="side-nav-list" title="header"></a>
-                <hr>
-                <a class="side-nav-list" data-toggle="collapse" href="#collapse-background" title="Item 1">
-                Change color
-                </a>
-                <div class="collapse well rec" id="collapse-background" style="padding:0 0 0 0px;height:auto;">
-                    <div class="board-color-list">
-                        <span style="margin-left:5px;font-size:1.2em;">Background</span>
-                        <div class="board-background" style="display:inline-flex;">
-                            <div class="sel-background-color color-box rounded" style="background:#0079BF"></div>
-                            <div class="sel-background-color color-box rounded" style="background:#D29034"></div>
-                            <div class="sel-background-color color-box rounded" style="background:#519839"></div>
-                        </div>
-                        <span style="margin-left:5px;font-size:1.2em;">Lists</span>
-                        <div class="box-background" style="display:inline-flex;">
-                            <div class="sel-box-color color-box rounded" style="background:#d0d9dF"></div>
-                            <div class="sel-box-color color-box rounded" style="background:#e2e0e4"></div>
-                            <div class="sel-box-color color-box rounded" style="background:#f1f8f9"></div>
-                        </div>
+<div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            프로젝트 목록
+                        </h1>
+                      
                     </div>
                 </div>
-                <a class="side-nav-list" href="#" title="Item 2">Item 2</a>
-                <a class="side-nav-list" href="#" title="Item 3">Item 3</a>
-                <hr>
-                <a class="side-nav-list" data-toggle="collapse" href=".collapse-activity" title="Item 3">Activity</a>
-                <div class="collapse well side-collapse-well rec collapse-activity" id="content-m">
-                    {% for activity in activitys %}
-                    <li class="board-list">
-                      <div class="media">
-                        <div class="activity-list">
-                          <p>
-                             <a href="#a'+{{ activity.member.link }}+'">
-                                <strong style="float:left;">{{ activity.member }} &nbsp;</strong>
-                             </a><br />{{ activity.action }} &nbsp;  {{ activity.name }}
-                             <span class="small text-muted">{{ activity.time }}</span>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    {% endfor %}
-                    <li class="board-list activity-list">
-                        <a href="#">Read All New Messages</a>
-                    </li>
-                </div>
+<div class="row">
+	
+	
+		<div id="container1">
+			</div>
+			<div class="p_Selector" data-toggle="modal" data-target="#basicModal">
+			<div class="btext">
+			프로젝트 생성
+			</div>
+			</div>
+		
+	
+</div>	
+
+<!-- Modal창 정보-->
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form>
+            <div class="modal-header">          
+            <h4 class="modal-title" id="myModalLabel">프로젝트 생성</h4>
             </div>
-        </div>
-        <div class="container-fluid" id="content-md">
-            <!-- /.row -->
-            <div class="main_div">
-                <div class="btn-group" role="group" aria-label="controller" style="align:left;">
-                        <button id="add_task" type="button" value="NEW TASK" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                        <button id="remove_col" type="button" value="DELETE COLUMN" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span></button>
-                        <button id="add_col" type="button" value="NEW COLUMN" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span></button>
+            <div class="modal-body">
+                <div class="form-group">
+                <label>프로젝트 이름</label>
+                <input type="text" id="project_name" placeholder="프로젝트 이름을 입력하세요" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <div class="control-group">
+                  <label class="control-label" for="datepicker0">시작일</label>
+                    <div class="controls">
+                    <input id="startDate" type="text">
                     </div>
-                    <table class="table rounded" style="align:left;">
-                        <tbody><tr id="task_pool_header_container">
-                        {% for column in columns %}
-                        <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ column.title }}</span></div></th>
-                        {% endfor %}
-                    </tr>
-                    <tr id="task_pool_container">
-                        {% for column in columns %}
-                        <td {% if loop.last %} class="task_pool ui-sortable" {% else %} class="task_pool dotted_separator ui-sortable" {% endif %}>
-                            {% for list in column.lists %}
-                            <div class="big_container">
-                                {{ list }}
-                            </div>
-                            {% endfor %}
-                        </td>
-                        {% endfor %}
-                    </tbody></table>
+                  </div>                  
                 </div>
+
+                <div class="form-group">
+                  <div class="control-group">
+                  <label class="control-label" for="datepicker0">종료일</label>
+                    <div class="controls">
+                    <input id="endDate" type="text">
+                    </div>
+                  </div>                  
+                </div>
+
+                <label>프로젝트 내용</label>
+                <textarea id="project_explain" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="4"></textarea>
+
+                <button type="button" class="btn btn-default" onclick="memAdd()" >멤버추가</button>
+                 <button type="button" class="btn btn-default" onclick="memDel()" >멤버제거</button>
+                 <br><br>
+                <div id="member_list">
+                </div>
+
             </div>
-        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="createNo()" data-dismiss="modal" >창닫기</button>
+                <button type="button" class="btn btn-default" onclick="createOk()" data-dismiss="modal">프로젝트 생성</button>
+       </div>
+       </form>
+     </div>
+  </div>
+</div>
 {% endblock %}
-
-{% block page_body_footer %}{% endblock %}
-
-
-{% block page_footer %}{% endblock %}
