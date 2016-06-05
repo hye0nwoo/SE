@@ -6,6 +6,11 @@ var flash = require('connect-flash')
 var connection = mysql.createConnection(config.default.db);
 
 router.get('/', function (req, res, next) {
+    
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var sid = req.flash('sid');
     var name = req.flash('name');
     req.flash('sid', sid);
@@ -14,6 +19,10 @@ router.get('/', function (req, res, next) {
    
 });
 router.post('/add', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var seq;
     connection.query('Select * from schedule', function (error, result) {
         seq = result.length + 1;
@@ -22,6 +31,10 @@ router.post('/add', function (req, res) {
     });
 });
 router.post('/down', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     id = req.body.pid;
     connection.query('Select * from schedule where member_id = ?', [id], function (error, result) {
         for(var i=0;i<result.length;i++)
@@ -33,6 +46,10 @@ router.post('/down', function (req, res) {
     });
 });
 router.post('/delete', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     title = req.body.title;
     connection.query('delete from schedule where title = ?', [title], function (error, result) {
         

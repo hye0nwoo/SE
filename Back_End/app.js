@@ -39,8 +39,6 @@ var io = require("socket.io").listen(httpServer);
 
 //express 환경 setup
 
-
-
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 //컨트롤러 라우팅 셋업
@@ -67,6 +65,8 @@ app.use(function(err, req, res, next) {
         title: 'error'
     });
 });
+
+
 
 var sessionSockets = new SessionSockets(io, sessionStore, cookieParser("PMS"));
 

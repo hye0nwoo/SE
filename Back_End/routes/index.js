@@ -83,7 +83,10 @@ function result(pname,pid)
     this.pID = pid;
 }
 router.get('/main', function (req, res) {
-   
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var sid = req.flash('sid');
     var name = req.flash('name');
     var pro = req.flash('pro')
@@ -98,6 +101,10 @@ router.get('/main', function (req, res) {
     res.render('project/index.swig',{ sid: sid, name: name,flag:"main",pro:pro });
 })
 router.post('/main1', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var id = req.body.id;
     connection.query('Select project_name,project_id from project_info where member1_id = ?', [id], function (error, result1) {
         connection.query('Select project_name,project_id from project_info where member2_id = ?', [id], function (error, result2) {
@@ -146,6 +153,10 @@ router.post('/main1', function (req, res) {
     });
 })
 router.post('/main2', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var seq;
     var mem1=req.body.member1, mem2="", mem3="", mem4="", mem5="";
     connection.query('Select * from project_info', function (error, result) {
@@ -172,6 +183,10 @@ router.post('/main2', function (req, res) {
 })
 
 router.post('/main3', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     req.flash('pro');
     req.flash('pro', req.body.pro);
     res.send('성공');
