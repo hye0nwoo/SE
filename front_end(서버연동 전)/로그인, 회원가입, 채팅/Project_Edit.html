@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+<link rel="stylesheet" href="css/ProjectSelect/Select.css" />
+
+<!--날짜 선택을 위해-->
+<link rel="stylesheet" href="css/ProjectSelect/bootstrap-datepicker.min.css" />
+
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  
+<script>
+     var i = 1;
+     var member_num = 0;
+
+     function memDel(){
+      app= document.getElementById("member_list");
+      app.removeChild(app.childNodes[member_num]);
+      member_num--;
+     };
+
+     function memAdd(){
+var div = document.editElement("div");
+  member_num++;
+  var memberid = "member_id" + member_num.toString();  
+
+  div.innerHTML += "멤버" + member_num + "의 아이디 : <input type=text id=memberid><br><br>";
+
+  document.getElementById("member_list").appendChild(div);
+};
+
+  	function editOk() {
+
+  		    var Pname = document.getElementById('project_name').value;  			
+        var project_id = "proj" + i.toString();
+        var div = document.editElement("div");
+        div.innerText = Pname
+        div.style.width="180px";
+        div.style.height="120px";
+        div.style.backgroundColor="#ffffff";
+        div.style.margin="20px";
+        div.style.padding="10px";
+        div.style.float="left";
+        div.style.textoverflow="ellipsis";
+        div.onclick= function(){
+          //입력한내용이 만들어진 div 클릭하면 실행됨
+        };
+
+        document.getElementById("container1").appendChild(div);
+        i++; 					
+
+        //초기화
+        $('#project_name').val("");
+        $('#project_explain').val("");  
+        for(var j=member_num;j>0;j--){
+          app= document.getElementById("member_list");
+      app.removeChild(app.childNodes[j]);
+        }     
+        member_num = 0;
+        
+      $("#startDate").val("");
+      $("#endDate").val("");
+
+  	}; 
+
+    function editNo(){
+      //초기화
+        $('#project_name').val("");
+        $('#project_explain').val("");
+        for(var j=member_num;j>0;j--){
+          app= document.getElementById("member_list");
+      app.removeChild(app.childNodes[j]);
+        }        
+        member_num = 0;
+        
+      $("#startDate").val("");
+      $("#endDate").val("");
+
+
+    };
+</script>
+
+<title></title>
+</head>
+
+<body>
+<div class="total">
+  <a class="btn btn-default" 
+   data-toggle="modal" 
+   data-target="#basicModal">프로젝트 수정</a>
+
+  <div id="container1"> 
+
+  </div>	
+</div>
+<!-- Modal창 정보-->
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form>
+            <div class="modal-header">          
+            <h4 class="modal-title" id="myModalLabel">프로젝트 이름</h4>
+
+            </div>
+            <div class="modal-body">
+            <button type="button" class="btn btn-default" onclick="edit()" style="float:right;">수정</button>
+            <a style="float:right;">&nbsp;&nbsp;&nbsp;</a>
+            <button type="button" class="btn btn-default" onclick="edit()" style="float:right;">삭제</button>
+            <br>
+                <div class="form-group">
+                <label>프로젝트 이름</label>
+                <input type="text" id="project_name" placeholder="프로젝트 이름을 입력하세요" class="form-control" disabled>
+                </div>
+
+                <div class="form-group">
+                  <div class="control-group">
+                  <label class="control-label" for="datepicker0">시작일</label>
+                    <div class="controls">
+                    <input id="startDate" type="text" disabled>
+                    </div>
+                  </div>                  
+                </div>
+
+                <div class="form-group">
+                  <div class="control-group">
+                  <label class="control-label" for="datepicker0">종료일</label>
+                    <div class="controls">
+                    <input id="endDate" type="text" disabled>
+                    </div>
+                  </div>                  
+                </div>
+
+                <label>프로젝트 내용</label>
+                <textarea id="project_explain" style="width:100%; border:1;overflow:visible;text-overflow:ellipsis; resize: none" rows="4" disabled></textarea>
+
+                <button type="button" class="btn btn-default" onclick="memAdd()" disabled>멤버추가</button>
+                 <button type="button" class="btn btn-default" onclick="memDel()" disabled>멤버제거</button>
+                 <br><br>
+                <div id="member_list">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="editNo()" data-dismiss="modal" >창닫기</button>
+                <button type="button" class="btn btn-default" onclick="editOk()" data-dismiss="modal">수정완료</button>
+       </div>
+       </form>
+     </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+<!--날짜 선택을 위한 js-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="js/ProjectSelect/bootstrap-datepicker.min.js"></script>
+<script>
+            $(document).ready(function() {
+                $("#startDate").datepicker(); 
+                $("#endDate").datepicker();            
+            });
+        </script>
+</body>  
+</html>

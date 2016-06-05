@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="css/form_signup.css" rel="stylesheet">
+
+<title></title>
+</head>
+
+<body>
+<div class="total">
+  <a class="btn btn-default" 
+   data-toggle="modal" 
+   data-target="#basicModal">회원정보</a>	
+</div>
+
+<!-- Modal창 정보-->
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form>
+            <div class="modal-header">          
+            <h4 class="modal-title" id="myModalLabel">회원정보</h4>
+
+            </div>
+            <div class="modal-body">
+            <button type="button" class="btn btn-default" onclick="edit()" style="float:right;">수정</button><br>
+
+             <div class="form-group">                
+                    <label>아이디</label>
+                    <input type="text" id="id" placeholder="아이디를 입력하세요" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>비밀번호</label>
+                    <input type="password" id="pass" placeholder="비밀번호를 입력하세요" class="form-control" disabled>                                
+                </div>
+                <div class="form-group">
+                    <label>비밀번호 확인</label>
+                    <input type="password" id="passcheck" placeholder="비밀번호를 확인하세요" class="form-control" disabled>                                
+                </div>
+                <div class="form-group">
+                    <label>이름</label>
+                    <input type="text" id="name" placeholder="이름을 입력하세요" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="text" id="email" placeholder="이메일을 입력하세요" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>전화번호</label>
+                    <input type="text" id="phone" placeholder="'-' 빼고 숫자만 입력하세요" class="form-control" disabled>                                
+                </div>     
+                
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
+       </div>
+       </form>
+     </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+    
+</body>  
+</html>
