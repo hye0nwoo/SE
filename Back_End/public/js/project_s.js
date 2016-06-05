@@ -101,6 +101,7 @@
             },
             success: function (data) {
                 alert("정상적으로 활성화 되었습니다.");
+                window.location.href = "/main"
             }
         });
     }

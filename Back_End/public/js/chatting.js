@@ -6,6 +6,7 @@ $(document).ready(function () {
         if (i == 0)
         {
             $this.parents('.panel').find('.col').slideDown();
+            $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight);
             $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
             i++;
         }
@@ -27,51 +28,22 @@ $(document).ready(function () {
             $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
         }
     });
-    $(document).on('click', '#new_chat', function (e) {
-        var size = $(".chat-window:last-child").css("margin-left");
-        size_total = parseInt(size) + 400;
-        alert(size_total);
-        var clone = $("#chat_window_1").clone().appendTo(".container");
-        clone.css("margin-left", size_total);
-    });
-    $(document).on('click', '.icon_close', function (e) {
-        //$(this).parent().parent().parent().parent().remove();
-        $("#chat_window_1").remove();
-    });
+  
+  
     function getdate() {
         var date = new Date();
         
         return date.getMonth() + 1 + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
     }
-    
+     
     var socket = io.connect();
 
-    // 접속자들 모니터링
-    socket.on('nicknames', function (nicknames) {
-        $('#nicknames').empty().append($('<span>접속한사람 : </span>'));
-        for (var i in nicknames) {
-            $('#nicknames').append($('<b>').text(nicknames[i]));
-        }
-    });
-
-    // 메시지
+    socket.emit('Room');
     socket.on('user message', function (data) {
-       message(data.uid, data.msg,data.date);
+    message(data.uid, data.msg, data.date);
 
     });
-    socket.on('reconnect', function () {
-        $('#lines').empty();
-        message('System', 'Reconnected to the server');
-        // 닉네임 다시 설정 
-        socket.emit('nickname', $('input[name="nickname"]').val(), function (set) {
-        });
-    });
-
-    socket.on('reconnecting', function () {
-        message('System', 'Attempting to re-connect to the server');
-    });
-
-    function message(from, msg, date) {
+     function message(from, msg, date) {
         if (from == $('#session').val()) {
             $('.msg_container_base').append(
                 $('<div class="row msg_container base_sent">')
