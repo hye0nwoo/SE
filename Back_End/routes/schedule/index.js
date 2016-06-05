@@ -14,7 +14,18 @@ router.get('/', function (req, res, next) {
     res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule" });
 });
 
-
+});
+router.post('/load', function (req, res) {
+    project_id = req.body.project_id;
+    connection.query('Select * from project_content where project_id = ?', [project_id], function (error, result) {
+        for(var i = 0; i < result.length; i++ )
+        {
+            result[i].start_date.setTime(result[i].start_date.getTime() + 32400000);
+            result[i].end_date.setTime(result[i].end_date.getTime() + 32400000);
+        }
+        res.send(result);
+    });
+});
 
 
 

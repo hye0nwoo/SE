@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `project_content` (
   `row` int(2) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
+  `flag` int(1) NOT NULL COMMENT '0:content, 1: title',
   `title` text NOT NULL,
   `content` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
