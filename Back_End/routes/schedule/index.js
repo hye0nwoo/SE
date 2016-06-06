@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
     res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule" });
 });
 
-});
+
 router.post('/load', function (req, res) {
     project_id = req.body.project_id;
     connection.query('Select * from project_content where project_id = ?', [project_id], function (error, result) {

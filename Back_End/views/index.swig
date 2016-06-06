@@ -49,14 +49,11 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> 사용자 정보</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> 설정</a>
+                            <a href="javascript:;" id="userinfo"><i class="fa fa-fw fa-user"></i> 사용자 정보</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -134,6 +131,60 @@
 		<input type="hidden" value = "{{pro}}" id='project' />
 
     </div>
+
+	<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form>
+            <div class="modal-header">          
+            <h4 class="modal-title" id="myModalLabel">회원정보</h4>
+
+            </div>
+            <div class="modal-body">
+            <button type="button" class="btn btn-default" id="editInfo" style="float:right;">수정</button>
+			<button type="button" class="btn btn-default" id="editcancel" style="float:right;display:none" >수정취소</button><br>
+
+                <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" id="id" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>이름</label>
+                    <input type="text" id="name" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="text" id="email" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>전화번호</label>
+                    <input type="text" id="phone" class="form-control" disabled>                                
+                </div> 
+				<div class="editpass form-group" style="display:none">
+                    <label>현재 비밀번호</label>
+                    <input type="password" id="pass" class="form-control">                                
+                </div>
+				<div class="editpass form-group" style="display:none">
+                    <label>새 비밀번호</label>
+                    <input type="password" id="npass" class="form-control">                                
+                </div>
+                <div class="editpass form-group" style="display:none">
+                    <label>새 비밀번호 확인</label>
+                    <input type="password" id="npasscheck"  class="form-control">                                
+                </div>    
+                
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-default" id="commit" style="display:none">수정</button>
+				
+       </div>
+       </form>
+     </div>
+  </div>
+</div>
+
     {% endblock %}
     {% block site_footer %}
 	<script src="/socket.io/socket.io.js"></script>

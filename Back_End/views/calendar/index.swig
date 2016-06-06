@@ -175,16 +175,16 @@
 						<tr>						
 						<td>
 							<ul id="back">
-								<li><input value="#000000" id="b#000000" name="colorSelectorBackground" type="radio" checked="true" /></li>
-								<li><input value="#f1d04d" id="b#f1d04d" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#caaf40" id="b#caaf40" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#92d04f" id="b#92d04f" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#7aaf42" id="b#7aaf42" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#ed5850" id="b#ed5850" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#b70218" id="b#b70218" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#00bfff" id="b#00bfff" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#dcdcdc" id="b#dcdcdc" name="colorSelectorBackground" type="radio" checked="false" /></li>
-								<li><input value="#f5f5f5" id="b#f5f5f5" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#000000" id="b#000000" name="colorSelectorBackground" type="radio" checked="true" /></li>
+								<li class = "colors"><input value="#f1d04d" id="b#f1d04d" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#caaf40" id="b#caaf40" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#92d04f" id="b#92d04f" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#7aaf42" id="b#7aaf42" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#ed5850" id="b#ed5850" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#b70218" id="b#b70218" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#00bfff" id="b#00bfff" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#dcdcdc" id="b#dcdcdc" name="colorSelectorBackground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#f5f5f5" id="b#f5f5f5" name="colorSelectorBackground" type="radio" checked="false" /></li>
 								          </ul>							
 						</td>						
 						<tr>
@@ -195,16 +195,16 @@
 						<tr>
 						<td>
 							<ul id="fore">
-								<li><input value="#000000" id="f#000000" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#f1d04d" id="f#f1d04d" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#caaf40" id="f#caaf40" name="colorSelectorForeground" type="radio"checked="false" /></li>
-								<li><input value="#92d04f" id="f#92d04f" name="colorSelectorForeground" type="radio"checked="false" /></li>
-								<li><input value="#7aaf42" id="f#7aaf42" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#ed5850" id="f#ed5850" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#b70218" id="f#b70218" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#00bfff" id="f#00bfff" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#dcdcdc" id="f#dcdcdc" name="colorSelectorForeground" type="radio" checked="false" /></li>
-								<li><input value="#f5f5f5" id="f#f5f5f5" name="colorSelectorForeground" type="radio" checked="true" /></li>
+								<li class = "colors"><input value="#000000" id="f#000000" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#f1d04d" id="f#f1d04d" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#caaf40" id="f#caaf40" name="colorSelectorForeground" type="radio"checked="false" /></li>
+								<li class = "colors"><input value="#92d04f" id="f#92d04f" name="colorSelectorForeground" type="radio"checked="false" /></li>
+								<li class = "colors"><input value="#7aaf42" id="f#7aaf42" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#ed5850" id="f#ed5850" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#b70218" id="f#b70218" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#00bfff" id="f#00bfff" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#dcdcdc" id="f#dcdcdc" name="colorSelectorForeground" type="radio" checked="false" /></li>
+								<li class = "colors"><input value="#f5f5f5" id="f#f5f5f5" name="colorSelectorForeground" type="radio" checked="true" /></li>
 							</ul>							 
 		    
 						</td>	

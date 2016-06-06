@@ -28,9 +28,7 @@
 
 {% block p_layout_footer %}
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	
-    <!-- Include JQuery UI (Required for calendar plugin.) -->
+	<!-- Include JQuery UI (Required for calendar plugin.) -->
     <script type="text/javascript" src="/public/js/jquery-ui-1.8.1.custom.min.js"></script>
 
     <!-- Include color picker plugin (Not required for calendar plugin. Used for example.) -->

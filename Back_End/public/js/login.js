@@ -65,7 +65,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (data == "성공") {
-                        window.location.href = "/calendar";
+                        window.location.href = "/main";
                     }
                     else {
                         alert("아이디가 존재하지 않거나, 패스워드가 틀립니다.")

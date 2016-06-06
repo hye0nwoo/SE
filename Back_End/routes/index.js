@@ -192,6 +192,44 @@ router.post('/main3', function (req, res) {
     res.send('성공');
 })
 
+router.post('/userinfo', function (req, res) {
+    
+    var uid = req.flash('uid');
+    req.flash('uid', uid);
+    connection.query('select * from member_info where member_id = ?',[uid] , function (error, result) {
+        res.send(result[0]);
+    });
+})
+
+router.post('/editinfo', function (req, res) {
+    var id = req.flash('uid');
+    req.flash('uid', id);
+    var opass = req.body.opass;
+    var pass = req.body.pass;
+    var name = req.body.name;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    connection.query('Select password from member_info where member_id = ?', [id], function (error, result) {
+        if(result[0].password!=opass)
+        {
+            res.send("비번오류");
+        }
+        else
+        {
+            connection.query('update member_info set password=?,name=?,email=?,phone=? where member_id = ?', [pass, name, email, phone,id], function (error, result) {
+                console.log(error);
+                res.send("성공");
+            });
+        }
+    });
+})
+
+router.get('/logout', function (req, res) {
+    req.session.destroy(function (err) {
+
+    })
+    res.redirect('/');
+})
 
 
 module.exports = router;
