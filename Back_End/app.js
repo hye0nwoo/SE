@@ -15,6 +15,8 @@ var sessionStore = new MemoryStore();
 var SessionSockets = require('session.socket.io-express4');
 var config = require('./config/config.json');
 var connection = mysql.createConnection(config.default.db);
+
+
 var app = express();
 app.use(session({
     secret: 'PMS',

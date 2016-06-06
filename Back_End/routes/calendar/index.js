@@ -45,6 +45,20 @@ router.post('/down', function (req, res) {
         res.send(result);
     });
 });
+router.post('/calendar/down', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
+    id = req.body.pid;
+    connection.query('Select * from schedule where member_id = ?', [id], function (error, result) {
+        for (var i = 0; i < result.length; i++) {
+            result[i].start_date.setTime(result[i].start_date.getTime() + 32400000);
+            result[i].end_date.setTime(result[i].end_date.getTime() + 32400000);
+        }
+        res.send(result);
+    });
+});
 router.post('/delete', function (req, res) {
     if (req.session.flash == null) {
         res.redirect('/');
@@ -55,4 +69,18 @@ router.post('/delete', function (req, res) {
         
     });
 });
+router.get('/popup', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
+    var sid = req.flash('sid');
+    var name = req.flash('name');
+    req.flash('sid', sid);
+    req.flash('name', name);
+    res.render('calendar/popup.swig', { sid: sid, name: name, flag: "cal" });
+
+  
+});
+
 module.exports = router;

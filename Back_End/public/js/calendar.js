@@ -362,8 +362,8 @@
             $("#tok").val("");
             $("#tok2").val("");
             $("#contents").val("");
-            $("#f#f5f5f5").attr("checked", true);
-            $("#B#000000").attr("checked", true);
+            $("#ff5f5f5").prop("checked", true);
+            $("#b000000").prop("checked", true);
       }
     });
 	
@@ -398,26 +398,27 @@
                     $("#contents").val(agendaItem.data.contents);
                     var bc = agendaItem.displayProp.backgroundColor
                     var fc = agendaItem.displayProp.foregroundColor
-                    if (fc == "#000000") $("#f#000000").attr("checked", true);
-                    else if (fc == "#f1d04d") $("#f#f1d04d").attr("checked", true);
-                    else if (fc == "#caaf40") $("#f#caaf40").attr("checked", true);
-                    else if (fc == "#92d04f") $("#f#92d04f").attr("checked", true);
-                    else if (fc == "#7aaf42") $("#f#7aaf42").attr("checked", true);
-                    else if (fc == "#ed5850") $("#f#ed5850").attr("checked", true);
-                    else if (fc == "#b70218") $("#f#b70218").attr("checked", true);
-                    else if (fc == "#00bfff") $("#f#00bfff").attr("checked", true);
-                    else if (fc == "#dcdcdc") $("#f#dcdcdc").attr("checked", true);
-                    else if (fc == "#f5f5f5") $("#f#f5f5f5").attr("checked", true);
-                    if (bc == "#000000") $("#b#000000").attr("checked", true);
-                    else if (bc == "#f1d04d") $("#b#f1d04d").attr("checked", true);
-                    else if (bc == "#caaf40") $("#b#caaf40").attr("checked", true);
-                    else if (bc == "#92d04f") $("#b#92d04f").attr("checked", true);
-                    else if (bc == "#7aaf42") $("#b#7aaf42").attr("checked", true);
-                    else if (bc == "#ed5850") $("#b#ed5850").attr("checked", true);
-                    else if (bc == "#b70218") $("#b#b70218").attr("checked", true);
-                    else if (bc == "#00bfff") $("#b#00bfff").attr("checked", true);
-                    else if (bc == "#dcdcdc") $("#b#dcdcdc").attr("checked", true);
-                    else if (bc == "#f5f5f5") $("#b#f5f5f5").attr("checked", true);
+                    if (fc == "#000000") $("#f000000").prop("checked", true);
+                    
+                    else if (fc == "#f1d04d") $("#ff1d04d").prop("checked", true);
+                    else if (fc == "#caaf40") $("#fcaaf40").prop("checked", true);
+                    else if (fc == "#92d04f") $("#f92d04f").prop("checked", true);
+                    else if (fc == "#7aaf42") $("#f7aaf42").prop("checked", true);
+                    else if (fc == "#ed5850") $("#fed5850").prop("checked", true);
+                    else if (fc == "#b70218") $("#fb70218").prop("checked", true);
+                    else if (fc == "#00bfff") $("#f00bfff").prop("checked", true);
+                    else if (fc == "#dcdcdc") $("#fdcdcdc").prop("checked", true);
+                    else if (fc == "#f5f5f5") $("#ff5f5f5").prop("checked", true);
+                    if (bc == "#000000") $("#b000000").prop("checked", true);
+                    else if (bc == "#f1d04d") $("#bf1d04d").prop("checked", true);
+                    else if (bc == "#caaf40") $("#bcaaf40").prop("checked", true);
+                    else if (bc == "#92d04f") $("#b92d04f").prop("checked", true);
+                    else if (bc == "#7aaf42") $("#b7aaf42").prop("checked", true);
+                    else if (bc == "#ed5850") $("#bed5850").prop("checked", true);
+                    else if (bc == "#b70218") $("#bb70218").prop("checked", true);
+                    else if (bc == "#00bfff") $("#b00bfff").prop("checked", true);
+                    else if (bc == "#dcdcdc") $("#bdcdcdc").prop("checked", true);
+                    else if (bc == "#f5f5f5") $("#bf5f5f5").prop("checked", true);
                         				       
                 }
                 $(this).dialog('close');

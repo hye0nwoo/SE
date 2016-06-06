@@ -4,17 +4,24 @@ var bodyParser = require('body-parser');
 var config = require('../config/config.json');
 var mysql = require("mysql");
 var connection = mysql.createConnection(config.default.db);
-
+var crypto = require('crypto');
 
 connection.connect();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.get('/', function (req, res) {
+    if (req.session.flash != null) {
+        res.redirect('/main');
+        return;
+    }
     res.render('login_signup/login.swig');
     });
 
 router.post('/login', function (req, res) {
     var id = req.body.id;
     var pass = req.body.pass;
+    var shasum = crypto.createHash('sha1')
+    shasum.update(pass);
+    pass = shasum.digest('hex');
     connection.query('Select password from member_info where member_id = ?', [id], function (error, result)
     {
         if(result.length == 0)
@@ -55,6 +62,10 @@ router.post('/signup', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var phone = req.body.phone;
+    var shasum = crypto.createHash('sha1')
+    shasum.update(pass);
+    pass = shasum.digest('hex');
+   
     connection.query('Select member_id from member_info where member_id = ?', [id], function (error, result) {
         if (error)
         {
@@ -175,7 +186,7 @@ router.post('/main2', function (req, res) {
         mem5 = req.body.member5;
     }
     connection.query('insert into project_info values (?,?,?,?,?,?,?,?,?,?,?,?)', [seq, req.body.name, req.body.PID, req.body.SD, req.body.ED, req.body.PE, req.body.MN, mem1, mem2, mem3, mem4, mem5], function (error, result) {
-        console.log(error);
+        
         res.send("성공");
 
     });
@@ -209,6 +220,12 @@ router.post('/editinfo', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var phone = req.body.phone;
+    var shasum = crypto.createHash('sha1')
+    shasum.update(pass);
+    pass = shasum.digest('hex');
+    var shasum2 = crypto.createHash('sha1')
+    shasum2.update(opass);
+    opass = shasum2.digest('hex');
     connection.query('Select password from member_info where member_id = ?', [id], function (error, result) {
         if(result[0].password!=opass)
         {
@@ -217,7 +234,7 @@ router.post('/editinfo', function (req, res) {
         else
         {
             connection.query('update member_info set password=?,name=?,email=?,phone=? where member_id = ?', [pass, name, email, phone,id], function (error, result) {
-                console.log(error);
+                
                 res.send("성공");
             });
         }
@@ -231,5 +248,56 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 })
 
+router.post('/editp', function (req, res) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
+    connection.query('select * from project_info where project_id = ?', [req.body.pid], function (error, result) {
+        result[0].start_date.setTime(result[0].start_date.getTime() + 32400000);
+        result[0].end_date.setTime(result[0].end_date.getTime() + 32400000);
+        res.send(result[0]);
+    });
+})
+router.post('/check', function (req, res) {
+    connection.query('Select * from member_info where member_id = ?', [req.body.uid], function (error, result) {
+        if (result.length==0) res.send("실패");
+        else res.send("성공");
+    });
+})
+
+router.post('/del', function (req, res) {
+    connection.query('delete from project_content where project_id = ?', [req.body.pid], function (error, result) {
+        connection.query('delete from project_info where project_id = ?', [req.body.pid], function (error, result) {
+            connection.query('delete from project_log where project_id = ?', [req.body.pid], function (error, result) {
+                res.send("성공");
+            });
+        });
+    });
+})
+
+router.post('/editcommit', function (req, res) {
+    var mem2 = "", mem3 = "", mem4 = "", mem5 = "";
+   
+    
+        if (req.body.member2 != null) {
+            mem2 = req.body.member2;
+        }
+        if (req.body.member3 != null) {
+            mem3 = req.body.member3;
+        }
+        if (req.body.member4 != null) {
+            mem4 = req.body.member4;
+        }
+        if (req.body.member5 != null) {
+            mem5 = req.body.member5;
+        }
+        connection.query('update project_info set project_name=?,start_date=?,end_date=?,project_explain=?,member_number=?,member2_id=?,member3_id=?,member4_id=?,member5_id=? where project_id = ?', [req.body.name, req.body.SD, req.body.ED, req.body.PE, req.body.MN, mem2, mem3, mem4, mem5,req.body.PID], function (error, result) {
+           
+            res.send("성공");
+
+        });
+    
+})
 
 module.exports = router;

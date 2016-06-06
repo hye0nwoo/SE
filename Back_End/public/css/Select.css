@@ -10,8 +10,8 @@
 }
 .p_Selector
 {
-        width : 230px;
-        height : 100px;
+        width : 200px;
+        height : 80px;
         background-color : #4C4C4C;
         margin : 20px;
         padding : 10px;
@@ -26,17 +26,27 @@
 }
 .btext
 {
+    
+    vertical-align:middle;
+    clear : both;
+}
+.btext2
+{
     display:table-cell;
     vertical-align:middle;
 }
+.editp
+{
+    float : right;
+ }
 #page-wrapper
 {
     height : 1200px;
 }
 .p_Selector2
 {
-    width : 230px;
-        height : 100px;
+    width : 200px;
+        height : 80px;
         
         margin : 20px;
         padding : 10px;
@@ -49,4 +59,8 @@
         line-height:20px;
         display:table;
     background-color :cornflowerblue;
+}
+
+body{
+    overflow-x:hidden
 }

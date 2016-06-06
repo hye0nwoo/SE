@@ -1,12 +1,16 @@
-{% extends 'layout.swig' %}
+﻿{% extends '../layout.swig' %}
 
+{% block site_header %}
 
-{% block page_header %}{% endblock %}
+<link rel="stylesheet" type="text/css" href="/public/css/jquery-frontier-cal-1.3.2.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/jquery-ui-1.8.1.custom.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/colorselector.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/calendar.css" />
+{%endblock%}
 
-
-
-{% block page_body_nav %}
-	<style type="text/css" media="screen">
+{%block site_body %}
+<style type="text/css" media="screen">
 	.shadow {
 		-moz-box-shadow: 3px 3px 4px #aaaaaa;
 		-webkit-box-shadow: 3px 3px 4px #aaaaaa;
@@ -17,40 +21,7 @@
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#aaaaaa');
 	}
 	</style>
-
-	<h1 style="font-size: 30px; font-weight: bold; font-family:세프리체">일정 관리</h1>
-	
-	<div id="toolbar" class="ui-widget-header ui-corner-all" style="backgroundColor: black; font-color: white; padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-		<button id="BtnPreviousMonth">이전 달</button>
-		<button id="BtnNextMonth">다음 달</button>
-		
-		&nbsp;&nbsp;&nbsp;
-		Date: <input type="text" id="dateSelect" size="20"/>
-		&nbsp;&nbsp;&nbsp;
-		<button id="public_click" class="btn btn-danger">공식일정보기</button>
-		<button id="private_click" class="btn btn-warning">개인일정보기</button>
-		<button class="btn btn-success" ><a href="javascript:openWin('calendar/popup','1350','800')" style="color:white">팝업으로보기</a></button>
-		<button id="test33" class="btn btn-primary">달력저장</button>
-		
-		
-	</div>
-{% endblock %}
-
-{% block page_body %}
-
-	<br>
-
-	<!--
-	You can use pixel widths or percentages. Calendar will auto resize all sub elements.
-	Height will be calculated by aspect ratio. Basically all day cells will be as tall
-	as they are wide.
-	-->
 	<div id="mycal"></div>
-
-
-
-	<!-- debugging-->
-
 	<!-- Add event modal form -->
 
 	<div id="add-event-form" title="일정추가">
@@ -222,7 +193,8 @@
 	</div>
 
 
-
+	<input type="hidden" value = "{{sid}}" id='session' />
+		<input type="hidden" value = "{{pro}}" id='project' />
 	<div id="display-event-form" title="일정">
 		
 	</div>		
@@ -232,10 +204,28 @@
 
 	<p>&nbsp;</p>
 
-{% endblock %}
 
 
-{% block page_body_footer %}{% endblock %}
 
+{%endblock%}
 
-{% block page_footer %}{% endblock %}
+{%block site_footer %}
+<!-- Include JQuery UI (Required for calendar plugin.) -->
+    <script type="text/javascript" src="/public/js/jquery-ui-1.8.1.custom.min.js"></script>
+
+    <!-- Include color picker plugin (Not required for calendar plugin. Used for example.) -->
+    <script type="text/javascript" src="/public/js/colorpicker.js"></script>
+
+    <!-- Include jquery tooltip plugin (Not required for calendar plugin. Used for example.) -->
+    <script type="text/javascript" src="/public/js/jquery.qtip-1.0.js"></script>
+    <script type="text/javascript" src="/public/js/html2canvas.js"></script>
+    <script type="text/javascript" src="/public/js/FileSaver.js"></script>
+    <!--
+        (Required for plugin)
+        Dependancies for JQuery Frontier Calendar plugin.
+        ** THESE MUST BE INCLUDED BEFORE THE FRONTIER CALENDAR PLUGIN. **
+    -->
+    <script type="text/javascript" src="/public/js/jshashtable-2.1.js"></script>
+<script type="text/javascript" src="/public/js/jquery-frontier-cal-1.3.2.js"></script>
+    <script type="text/javascript" src="/public/js/calendar.js"></script>
+{%endblock%}
