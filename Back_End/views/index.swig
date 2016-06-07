@@ -1,6 +1,6 @@
 ﻿{% extends "layout.swig" %}
 
-	{% block  site_header %}
+	{% block site_header %}
 	<link href="../public/css/chatting.css" rel="stylesheet" type="text/css">
 	{% block p_layout_header %}{% endblock %}
 	{% endblock %}

@@ -2,7 +2,7 @@
 
 
 
-{% block site_header %}
+{% block p_layout_header %}
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 
 
 
-{% block site_body %}
+{% block p_layout_body %}
 
     {% block page_body %}{% endblock %}
     {% block page_body_footer %}{% endblock %}
@@ -35,7 +35,7 @@
 
 
 
-{% block site_footer %}
+{% block p_layout_footer %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!--Include all compiled plugins (below), or include individual files as needed-->
