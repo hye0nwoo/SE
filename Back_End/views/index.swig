@@ -64,7 +64,7 @@
                         <a href="/main"><i class="fa fa-fw fa-dashboard"></i> 메인</a>
                     </li>
                     <li id="project"{% if flag=="project" %} class="active"{%endif%}>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> 프로젝트관리</a>
+                        <a href="/schedule"><i class="fa fa-fw fa-bar-chart-o"></i> 프로젝트관리</a>
                     </li>
                     <li id="calendar"{% if flag=="cal" %} class="active"{%endif%}>
                         <a href="/calendar"><i class="fa fa-fw fa-table"></i> 일정관리</a>
