@@ -15,10 +15,10 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
-    <link rel="stylesheet" href="./kanban/jquery-ui-1.8.6.css" type="text/css" media="all">
-    <link rel="stylesheet" href="./kanban/kanban.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/jquery-ui-1.8.6.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/kanban.css" type="text/css" media="all">
     <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="js/jquery.mCustomScrollbar.css">
 
     {% block page_header %}{% endblock %}
 
@@ -49,11 +49,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript" async="" src="./kanban/ga.js"></script><script src="./kanban/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="./kanban/kanban.js"></script>
-    <script src="./kanban/jquery-ui-1.8.6.js" type="text/javascript"></script>
-    <script src="./kanban/kanban.css" type="text/css"></script>
-    <script type="text/javascript" src="./kanban/mColorPicker_min.js" charset="UTF-8"></script>
+    <script type="text/javascript" async="" src="js/ga.js"></script>
+    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/kanban.js"></script>
+    <script src="js/jquery-ui-1.8.6.js" type="text/javascript"></script>
+    <script src="css/kanban.css" type="text/css"></script>
+    <script type="text/javascript" src="js/mColorPicker_min.js" charset="UTF-8"></script>
     <!-- custom scrollbar plugin -->
     <script src="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 

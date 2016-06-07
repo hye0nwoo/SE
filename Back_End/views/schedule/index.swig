@@ -6,10 +6,10 @@
 
 <style id="css_disabled_color_picker" type="text/css">.mColorPicker[disabled] + span, .mColorPicker[disabled="disabled"] + span, .mColorPicker[disabled="true"] + span {filter:alpha(opacity=50);-moz-opacity:0.5;-webkit-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;cursor:default;}</style>
 
-    <link rel="stylesheet" href="./kanban/jquery-ui.css" type="text/css" media="all">
-    <link rel="stylesheet" href="./kanban/kanban.css" type="text/css" media="all">
+    <link rel="stylesheet" href="js/jquery-ui.css" type="text/css" media="all">
+    <link rel="stylesheet" href="js/kanban.css" type="text/css" media="all">
     <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="js/jquery.mCustomScrollbar.css">
 {% endblock %}
 
 {% block page_body %}
