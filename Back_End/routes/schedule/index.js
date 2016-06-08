@@ -16,12 +16,10 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/load', function (req, res) {
-    project_id = req.body.project_id;
-    connection.query('Select * from project_content where project_id = ?', [project_id], function (error, result) {
+    connection.query('Select * from project_content where project_id = ? AND flag = 1', [session.flash('pro')], function (error, result) {
         for(var i = 0; i < result.length; i++ )
         {
-            result[i].start_date.setTime(result[i].start_date.getTime() + 32400000);
-            result[i].end_date.setTime(result[i].end_date.getTime() + 32400000);
+            
         }
         res.send(result);
     });
@@ -39,7 +37,7 @@ router.post('/add_card', function (req, res) {
     	if(result.length == 0) seq = 0;
     	else	seq = result[result.length-1].seq + 1;
 
-        connection.query('insert into project_content values (?,?,?,?,?,?,?,?)', [seq, req.body.project_id, req.body.column, req.body.row, req.body.startDate, req.body.endDate, req.body.title, req.body.content], function (error, result) {
+        connection.query('insert into project_content values (?,?,?,?,?,?,?,?)', [seq, session.flash('pro'), req.body.column, req.body.row, req.body.startDate, req.body.endDate, req.body.title, req.body.content], function (error, result) {
         });
     });
 });
@@ -47,13 +45,13 @@ router.post('/add_card', function (req, res) {
 router.post('/modify_card', function (req, res) {
     var date = new Date();
     connection.query('Select * from project_content', function (error, result) {
-        connection.query('UPDATE project_content SET column = ?, row = ?, start_date = ?, end_date = ?, title = ?, content = ? WHERE project_id = ? AND column = ? AND row = ?', [req.body.new_column, req.body.new_row, req.body.new_start_date, req.body.new_end_date, req.body.new_title, req.body.new_content, req.body.project_id, req.body.original_column, req.body.original_row], function (error, result) {
+        connection.query('UPDATE project_content SET column = ?, row = ?, start_date = ?, end_date = ?, title = ?, content = ? WHERE project_id = ? AND column = ? AND row = ?', [req.body.new_column, req.body.new_row, req.body.new_start_date, req.body.new_end_date, req.body.new_title, req.body.new_content, session.flash('pro'), req.body.original_column, req.body.original_row], function (error, result) {
         });
     });
 });
 
 router.post('/remove_card', function (req, res) {
-    connection.query('delete from project_content where project_id = ? AND column = ? AND row = ?', [req.body.project_id, req.body.column, req.body.row], function (error, result) {    
+    connection.query('delete from project_content where project_id = ? AND column = ? AND row = ?', [session.flash('pro'), req.body.column, req.body.row], function (error, result) {    
     });
 });
 
@@ -64,7 +62,7 @@ router.post('/add_log', function (req, res) {
         if(result.length == 0) seq = 0;
     	else	seq = result[result.length-1].seq + 1;
 
-        connection.query('insert into project_log values (?,?,?,?)', [seq, req.body.project_id, date, log], function (error, result) {
+        connection.query('insert into project_log values (?,?,?,?)', [seq, session.flash('pro'), date, log], function (error, result) {
         });
     });
 });

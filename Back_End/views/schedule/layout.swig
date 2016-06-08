@@ -12,13 +12,13 @@
     <link href="/public/css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome//public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
     <link rel="stylesheet" href="/public/css/jquery-ui-1.8.6.css" type="text/css" media="all">
     <link rel="stylesheet" href="/public/css/kanban.css" type="text/css" media="all">
     <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="/public//public/js/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/public/js/jquery.mCustomScrollbar.css">
 
     {% block page_header %}{% endblock %}
 
