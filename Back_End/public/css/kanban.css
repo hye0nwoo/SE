@@ -1,4 +1,3 @@
-html, body { height: 100%;  margin: 0; padding: 0;}
 .background{background-color: white; cursor: auto;font-family: 'Karla', sans-serif;height:100%;}
 .main_div{margin:0;align:left;max-width:100%;}
 .container-fluid{width:100%;height:100%;overflow-y:scroll;overflow-x:scroll;padding-bottom: 0px;}
@@ -11,7 +10,9 @@ html, body { height: 100%;  margin: 0; padding: 0;}
    -webkit-border-radius: 5px;
    -o-border-radius: 5px;
  }
-
+#task_pool_container{
+    height : 1200px;
+}
 .header_input{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}7
 .header_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
 .header_check_name{margin:5px;text-align:left;font: 15px "Helvetica Neue",Arial,Helvetica,sans-serif;}
@@ -60,6 +61,9 @@ footer{height:0px;}
 /* Color Declarations */
 /* Color Config */
 /* Menu Config */
+a{
+
+}
 #side-nav a {
   text-decoration: none;
 }
@@ -69,7 +73,7 @@ footer{height:0px;}
   color: transparent;
 }
 
-.nav {
+.side {
   max-height: 100%;
     top: 0;
   -moz-transition: right 0.2s linear;

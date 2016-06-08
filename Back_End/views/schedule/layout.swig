@@ -1,25 +1,18 @@
-{% extends '../index.swig' %}
+﻿{% extends '../index.swig' %}
 
 
 
 {% block p_layout_header %}
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/public/css/bootstrap-theme.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/public/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 
     <link rel="stylesheet" href="/public/css/jquery-ui-1.8.6.css" type="text/css" media="all">
-    <link rel="stylesheet" href="/public/css/kanban.css" type="text/css" media="all">
-    <!-- custom scrollbar stylesheet -->
-    <link rel="stylesheet" href="/public/js/jquery.mCustomScrollbar.css">
+	   <link rel="stylesheet" href="/public/css/jquery.mCustomScrollbar.css">
+	<style id="css_disabled_color_picker" type="text/css">.mColorPicker[disabled] + span, .mColorPicker[disabled="disabled"] + span, .mColorPicker[disabled="true"] + span {filter:alpha(opacity=50);-moz-opacity:0.5;-webkit-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;cursor:default;}</style>
 
+    <link rel="stylesheet" href="/public/css/kanban.css" type="text/css" media="all">
+
+	<!-- custom scrollbar stylesheet -->
+ 
     {% block page_header %}{% endblock %}
 
 {% endblock %}
@@ -37,28 +30,14 @@
 
 {% block p_layout_footer %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!--Include all compiled plugins (below), or include individual files as needed-->
-    <script src="/public/js/bootstrap.min.js"></script>
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    
+	<script src="/public/js/jquery-ui-1.8.1.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript" async="" src="/public/js/ga.js"></script>
-    <script src="/public/js/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/public/js/kanban.js"></script>
-    <script src="/public/js/jquery-ui-1.8.6.js" type="text/javascript"></script>
-    <script src="css/kanban.css" type="text/css"></script>
-    <script type="text/javascript" src="/public/js/mColorPicker_min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/public/js/kanban.js"></script>
+	<script type="text/javascript" src="/public/js/mColorPicker_min.js" charset="UTF-8"></script>
     <!-- custom scrollbar plugin -->
     <script src="/public/js/jquery.mCustomScrollbar.concat.min.js"></script>
-
-    <script>
+	 <script>
     (function($){
       $(window).load(function(){
 
@@ -104,7 +83,7 @@
       });
     })(jQuery);
     </script>
-    
-    {% block page_footer %}{% endblock %}
+	{% block page_footer %}
+	{% endblock %}
 
 {% endblock %}

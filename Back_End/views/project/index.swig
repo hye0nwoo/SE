@@ -29,7 +29,7 @@
         <div class="modal-content">
         <form>
             <div class="modal-header">          
-            <h4 class="modal-title" id="myModalLabel">프로젝트 생성</h4>
+            <h4 id="myModalLabel">프로젝트 생성</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
