@@ -9,30 +9,30 @@ var connection = mysql.createConnection(config.default.db);
 router.get('/', function (req, res, next) {
     var sid = req.flash('sid');
     var name = req.flash('name');
+
     req.flash('sid', sid);
     req.flash('name', name);
-    res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule", 
-            titles:"John"
+    connection.query('Select * from project_content where project_id = ? AND flag = 1', ["test"], function (error, result) {
+        var title = result;
+      
+        connection.query('Select * from project_content where project_id = ? AND flag = 0 ORDER BY column', ["test"], function (error, result) {
+            var card = result;
 
-});
-});
+            connection.query('Select * from project_log where project_id = ? ORDER BY date', ["test"], function (error, result) {
+            var history = result;
 
-
-router.post('/load', function (req, res) {
-    connection.query('Select * from project_content where project_id = ? AND flag = 1', [session.flash('pro')], function (error, result) {
-        for(var i = 0; i < result.length; i++ )
-        {
-            
-        }
-        res.send(result);
+                res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule", 
+                    titles : title,
+                    cards : card,
+                    historys : history
+                });
+            });
+      
+        });   
     });
+    
+    
 });
-
-
-
-
-
-
 
 router.post('/add_card', function (req, res) {
     var seq;

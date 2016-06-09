@@ -25,19 +25,21 @@
                     <table class="table rounded" style="align:left;">
                         <tbody><tr id="task_pool_header_container">
                         {% for title in titles %}
-                        <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ title }}</span></div></th>
+                            <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ title.title }}</span></div></th>
                         {% endfor %}
-                    </tr>
-                    <tr id="task_pool_container">
+                        </tr>
+                        
+                        <tr id="task_pool_container">
                         {% for column in columns %}
-                        <td {% if loop.last %} class="task_pool ui-sortable" {% else %} class="task_pool dotted_separator ui-sortable" {% endif %}>
+                            <td {% if loop.last %} class="task_pool ui-sortable" {% else %} class="task_pool dotted_separator ui-sortable" {% endif %}>
                             {% for list in column.lists %}
-                            <div class="big_container">
-                                {{ list }}
-                            </div>
+                                <div class="big_container">
+                                {{ list.content }}
+                                </div>
                             {% endfor %}
-                        </td>
+                            </td>
                         {% endfor %}
+                        </tr>
                     </tbody></table>
                 </div>
             </div>
@@ -51,15 +53,12 @@
                 <a class="side-nav-list" title="header"></a>
                 <a class="side-nav-list" data-toggle="collapse" href=".collapse-activity" title="Item 3">Activity</a>
                 <div class="collapse well side-collapse-well rec collapse-activity" id="content-m">
-                    {% for activity in activitys %}
+                    {% for history in historys %}
                     <li class="board-list">
                       <div class="media">
                         <div class="activity-list">
                           <p>
-                             <a href="#a'+{{ activity.member.link }}+'">
-                                <strong style="float:left;">{{ activity.member }} &nbsp;</strong>
-                             </a><br />{{ activity.action }} &nbsp;  {{ activity.name }}
-                             <span class="small text-muted">{{ activity.time }}</span>
+                             {{ history.log }}
                           </p>
                         </div>
                       </div>
