@@ -11,7 +11,10 @@ router.get('/', function (req, res, next) {
     var name = req.flash('name');
     req.flash('sid', sid);
     req.flash('name', name);
-    res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule" });
+    res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule", 
+            titles:"John"
+
+});
 });
 
 

@@ -300,4 +300,9 @@ router.post('/editcommit', function (req, res) {
     
 })
 
+router.get('/ppt_sample', function (req, res, next) {
+    res.render('ppt_sample.swig');
+   
+});
+
 module.exports = router;

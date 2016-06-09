@@ -19,7 +19,7 @@ var connection = mysql.createConnection(config.default.db);
 
 var app = express();
 app.use(session({
-    secret: 'PMS',
+    secret: 'CYO',
     resave: true,
     saveUninitialized: true,
     store: sessionStore

@@ -76,7 +76,7 @@
                                 <a href="#">Tip</a>
                             </li>
                             <li>
-                                <a href="#">PPT-Sample</a>
+                                <a href="/ppt_sample">PPT-Sample</a>
                             </li>
                             <li>
                                 <a href="#">ETC../<a>
@@ -185,11 +185,13 @@
   </div>
 </div>
 
-    {% endblock %}
-    {% block site_footer %}
-	<script src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript" src="../public/js/chatting.js"></script>
-	{% block p_layout_footer %}{% endblock %}
-	{% endblock %}
+{% endblock %}
+
+
+{% block site_footer %}
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../public/js/chatting.js"></script>
+    {% block p_layout_footer %}{% endblock %}
+{% endblock %}
 
 

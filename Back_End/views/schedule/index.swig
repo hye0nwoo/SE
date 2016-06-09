@@ -25,7 +25,7 @@
                     <table class="table rounded" style="align:left;">
                         <tbody><tr id="task_pool_header_container">
                         {% for title in titles %}
-                        <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ column.title }}</span></div></th>
+                        <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ title }}</span></div></th>
                         {% endfor %}
                     </tr>
                     <tr id="task_pool_container">
