@@ -8,10 +8,10 @@ var connection = mysql.createConnection(config.default.db);
 
 router.get('/', function (req, res, next) {
     var sid = req.flash('sid');
-    var name = req.flash('name');
+    var pro = req.flash('pro');
 
     req.flash('sid', sid);
-    req.flash('name', name);
+    req.flash('pro', pro);
     connection.query('Select * from project_content where project_id = ? AND flag = 1', ["test"], function (error, result) {
         var title = result;
       
@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
             connection.query('Select * from project_log where project_id = ? ORDER BY date', ["test"], function (error, result) {
             var history = result;
 
-                res.render('schedule/index.swig', { sid: sid, name: name, flag:"schedule", 
+                res.render('schedule/index.swig', { sid: sid, pro: pro, flag:"schedule", 
                     titles : title,
                     cards : card,
                     historys : history
@@ -34,16 +34,60 @@ router.get('/', function (req, res, next) {
     
 });
 
-router.post('/add_card', function (req, res) {
-    var seq;
-    connection.query('Select * from project_content', function (error, result) {
-    	if(result.length == 0) seq = 0;
-    	else	seq = result[result.length-1].seq + 1;
+router.post('/', function (req, res, next) {
+    var sid = req.flash('sid');
+    var pro = req.flash('pro');
 
-        connection.query('insert into project_content values (?,?,?,?,?,?,?,?)', [seq, session.flash('pro'), req.body.column, req.body.row, req.body.startDate, req.body.endDate, req.body.title, req.body.content], function (error, result) {
+    req.flash('sid', sid);
+    req.flash('pro', pro);
+    connection.query('Select * from project_content where (project_id = ? AND flag = 1) order by seq', [pro], function (error, result1) {
+        var title = result1;
+        
+        connection.query('Select * from project_content where (project_id = ? AND flag = 0) order by seq', [pro], function (error, result2) {
+            console.log(error)
+            var card = result2;
+            console.log(card);
+            res.send({
+                sid: sid, pro: pro, 
+                titles: title,
+                cards: card}
+                   
+               
+            );
+
         });
     });
+
+
 });
+
+router.post('/add_card', function (req, res) {
+    var seq;
+    var pro = req.flash('pro');
+    req.flash('pro', pro);
+    console.log(pro);
+
+    connection.query('Select * from project_content ORDER BY seq', function (error, result) {
+        if (result.length == 0) seq = 0;
+        else seq = result[result.length - 1].seq + 1;
+        if (req.body.flag == 0) {
+            connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 0], function (error, result) {
+                console.log(error);
+                res.send('성공');
+            });
+        }
+        else if (req.body.flag == 1) {
+            connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 1], function (error, result) {
+                console.log(error);
+                res.send('성공');
+            });
+        }
+
+
+    });
+});
+   
+
 
 router.post('/modify_card', function (req, res) {
     var date = new Date();
@@ -68,6 +112,17 @@ router.post('/add_log', function (req, res) {
         connection.query('insert into project_log values (?,?,?,?)', [seq, session.flash('pro'), date, log], function (error, result) {
         });
     });
+});
+
+router.post('/getSeq',function(req,res){
+   var seq
+   connection.query('Select * from project_content ORDER BY seq', function (error, result) {
+        if(result.length == 0) seq = 0;
+        else	seq = result[result.length-1].seq + 1;
+        seq = 'card'+seq;
+        res.send(seq);
+    });
+
 });
 
 module.exports = router;

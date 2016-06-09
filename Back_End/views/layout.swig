@@ -35,6 +35,7 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="../public/js/bootstrap.min.js"></script>
+		<script src="../public/js/jquery.blockUI.js"></script>
         {# 전체 페이지 푸터 부분 #}
         {% block site_footer %}{% endblock %}
 

@@ -24,21 +24,11 @@
                     </div>
                     <table class="table rounded" style="align:left;">
                         <tbody><tr id="task_pool_header_container">
-                        {% for title in titles %}
-                            <th {% if loop.last %} class="task_pool_header" {% else %} class="task_pool_header dotted_separator" {% endif %}><div class="header_name click"><span class="title_text">{{ title.title }}</span></div></th>
-                        {% endfor %}
+                       
                         </tr>
                         
                         <tr id="task_pool_container">
-                        {% for column in columns %}
-                            <td {% if loop.last %} class="task_pool ui-sortable" {% else %} class="task_pool dotted_separator ui-sortable" {% endif %}>
-                            {% for list in column.lists %}
-                                <div class="big_container">
-                                {{ list.content }}
-                                </div>
-                            {% endfor %}
-                            </td>
-                        {% endfor %}
+                        
                         </tr>
                     </tbody></table>
                 </div>

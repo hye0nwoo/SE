@@ -5,7 +5,7 @@ var config = require('../config/config.json');
 var mysql = require("mysql");
 var connection = mysql.createConnection(config.default.db);
 var crypto = require('crypto');
-
+var flash = require('connect-flash')
 connection.connect();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.get('/', function (req, res) {

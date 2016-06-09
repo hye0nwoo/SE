@@ -21,23 +21,69 @@ AGPL to LGPL v3 change
 *
 *
 *** */
+var tag = 0;
 
 $(document).ready(function() {
 
 
-	// 칼럼 추가하는 함수
-	$('#add_col').click(function(){
-		var id=$(".task_pool").size();
-		var current_col = $(".task_pool_header:last").css('background');
-		$(".task_pool_header:last").addClass("dotted_separator");
-		$(".task_pool:last").addClass("dotted_separator");
+    $.ajax({
+        type: 'post',
+        url: '/schedule',
+        success : function(data)
+        {
+            for(var i = 0;i<data.titles.length;i++)
+            {
+                var current_col = $(".task_pool_header:last").css('background');
+                $(".task_pool_header:last").addClass("dotted_separator");
+                $(".task_pool:last").addClass("dotted_separator");
+                $("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">' + data.titles[i].content + '</span></div></th>');
 
-		$("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">'+id+'</span></div></th>');
-		$(".task_pool_header:last").css('background', current_col);
-		$("#task_pool_container").append('<td class="task_pool"><div /></td>');
-		intialize_sortables();
-		// 칼럼 추가 후 정보 정송
-	});
+                $(".task_pool_header:last").css('background', current_col);
+                $("#task_pool_container").append('<td class="task_pool" id =' + data.titles[i].column + '><div /></td>');
+                intialize_sortables();
+            }
+            for (var i = 0; i < data.cards.length; i++) {
+                
+                $('#' + data.cards[i].column).first().append(data.cards[i].content);
+            }
+        }
+    })
+
+	// 칼럼 추가하는 함수
+    $('#add_col').click(function () {
+        var id = $(".task_pool").size();
+        var current_col = $(".task_pool_header:last").css('background');
+        $(".task_pool_header:last").addClass("dotted_separator");
+        $(".task_pool:last").addClass("dotted_separator");
+
+        $("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">' + id + '</span></div></th>');
+        $(".task_pool_header:last").css('background', current_col);
+        $("#task_pool_container").append('<td class="task_pool" id =' + id + '><div /></td>');
+        intialize_sortables();
+        $.blockUI();
+        $.ajax({
+            type: 'post',
+            url: '/schedule/getSeq',
+            success: function (data) {
+               $.ajax({
+                    type: 'post',
+                    url: '/schedule/add_card',
+                    data:
+                    {
+                        col: id,
+                        title: '',
+                        content: $("#task_pool_header_container").children().last().text(),
+                        flag: 1
+                    },
+                    success: function () {
+                        $.unblockUI();
+                    }
+
+                })
+            }
+            // 칼럼 추가 후 정보 정송
+        });
+    });
 	// 칼럼 삭제하는 함수
 	$('#remove_col').click(function(){
 	   if($(".task_pool_header").size()>1){
@@ -106,30 +152,39 @@ $(document).ready(function() {
 	});
 
 	//work list 새롭게 생성									검색용 태그 #task list #work list #list
-	$('#add_task').click(function(){
-		var id=find_next_box_itm_free(1);
-		$(".task_pool").first().append(' \
-		  <div class="big_container"> \
-			  <div id="box_itm'+id+'"class="box_itm rounded"> \
-			  	  <div id="name'+id+'" class="name"><div class="header_name click"><span>Item '+id+'</span></div></div>\
-			  	  <div class="clear"></div> \
-			  	  <div id="resp'+id+'" class="name"><div class="header_name click"><span>resp '+id+'</span></div></div>\
-			  	  <div class="clear"></div> \
-				  <div n="0" id="checkbox'+id+'"></div> \
-				  <div class="small"> \
-					  <div n="'+id+'" class="itm_box_option"><input n="'+id+'"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm'+id+'" value="rgb(180,255,200)"></div> \
-					  <div n="'+id+'" class="option close_remove itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
-					  <div n="'+id+'" class="option addcheck itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button></div>\
-				  </div> \
-				  <div class="clear"></div> \
-			  </div> \
-			  <div id="box_itm'+id+'_shadow" class="shadow" /> \
-			</div> \
-		');
+	$('#add_task').click(function () {
+	    $.blockUI();
+	      $.ajax({
+	        type: 'post',
+	        url: '/schedule/getSeq',
+	        success :function(data)
+	        {
+	            addCard(data, 0)
+	            $.ajax({
+	                type: 'post',
+	                url: '/schedule/add_card',
+	                data:
+                    {
+                        col: 0,
+                        title:'',
+                        content: $('#' + data).html(),
+                        flag : 0
+                    },
+	                success:function()
+	                {
+	                    $.unblockUI();
+	                }
+
+	            })
+	        }
+	    })
+		
 //WIP		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 //WIP		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
-		$( "#box_itm"+id+" .itm_box_option input" ).mColorPicker();
-		$('.itm_box_option').hide();
+		
+	});
+	$(document).on('dragend', '.big_container', function () {
+	    alert('실험');
 	});
 	// 버튼 hidden에서 show로
 	$(document).on('mouseover', '.box_itm', function () {
@@ -322,6 +377,7 @@ function intialize_sortables(){
 						$(ui.sender).sortable('cancel');
 						//alert("WIP exceded");
 					}
+					
 				}
 	});
 	$('.itm_box_option').hide();
@@ -369,4 +425,34 @@ function save_edit_h(e){
 // 배경 색깔 변경 함수
 function changeBackground(color) {
    document.body.style.background = color;
+}
+function addCard(id2,col)
+{
+    var id = find_next_box_itm_free(1);
+    $("#"+col).first().append(' \
+		         <div class="big_container" id='+ id2 + '> \
+			  <div id="box_itm'+ id + '"class="box_itm rounded"> \
+			  	  <div id="name'+ id + '" class="name"><div class="header_name click"><span>Item ' + id + '</span></div></div>\
+			  	  <div class="clear"></div> \
+			  	  <div id="resp'+ id + '" class="name"><div class="header_name click"><span>resp ' + id + '</span></div></div>\
+			  	  <div class="clear"></div> \
+				  <div n="0" id="checkbox'+ id + '"></div> \
+				  <div class="small"> \
+					  <div n="'+ id + '" class="itm_box_option"><input n="' + id + '"  class="color colorete" type="color" data-text="hidden" data-colorlink="box_itm' + id + '" value="rgb(180,255,200)"></div> \
+					  <div n="'+ id + '" class="option close_remove itm_box_option"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></div> \
+					  <div n="'+ id + '" class="option addcheck itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-check"></i></button></div>\
+				  </div> \
+				  <div class="clear"></div> \
+			  </div> \
+			  <div id="box_itm'+ id + '_shadow" class="shadow" /> \
+			</div> \
+		');
+    $("#box_itm" + id + " .itm_box_option input").mColorPicker();
+    $('.itm_box_option').hide();
+
+    
+}
+function addCard2(data,col)
+{
+    $("#" + col).first().append(data);
 }

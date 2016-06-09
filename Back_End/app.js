@@ -70,7 +70,7 @@ app.use(function(err, req, res, next) {
 
 
 
-var sessionSockets = new SessionSockets(io, sessionStore, cookieParser("PMS"));
+var sessionSockets = new SessionSockets(io, sessionStore, cookieParser("CYO"));
 
 
 sessionSockets.on('connection', function (err,socket,session) {
