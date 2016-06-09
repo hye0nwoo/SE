@@ -44,9 +44,7 @@ router.post('/', function (req, res, next) {
         var title = result1;
         
         connection.query('Select * from project_content where (project_id = ? AND flag = 0) order by seq', [pro], function (error, result2) {
-            console.log(error)
             var card = result2;
-            console.log(card);
             res.send({
                 sid: sid, pro: pro, 
                 titles: title,
@@ -65,20 +63,21 @@ router.post('/add_card', function (req, res) {
     var seq;
     var pro = req.flash('pro');
     req.flash('pro', pro);
-    console.log(pro);
+  
 
     connection.query('Select * from project_content ORDER BY seq', function (error, result) {
         if (result.length == 0) seq = 0;
         else seq = result[result.length - 1].seq + 1;
         if (req.body.flag == 0) {
             connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 0], function (error, result) {
-                console.log(error);
+               
                 res.send('성공');
             });
         }
         else if (req.body.flag == 1) {
             connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 1], function (error, result) {
-                console.log(error);
+                
+
                 res.send('성공');
             });
         }
@@ -121,6 +120,15 @@ router.post('/getSeq',function(req,res){
         else	seq = result[result.length-1].seq + 1;
         seq = 'card'+seq;
         res.send(seq);
+    });
+
+});
+
+router.post('/update', function (req, res) {
+    
+    connection.query('update project_content set col = ?, content = ? where seq = ?',[req.body.col,req.body.content,req.body.seq], function (error, result) {
+        console.log(error);
+        res.send();
     });
 
 });

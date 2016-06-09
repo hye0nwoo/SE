@@ -36,15 +36,15 @@ $(document).ready(function() {
                 var current_col = $(".task_pool_header:last").css('background');
                 $(".task_pool_header:last").addClass("dotted_separator");
                 $(".task_pool:last").addClass("dotted_separator");
-                $("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">' + data.titles[i].content + '</span></div></th>');
+                $("#task_pool_header_container").append('<th class="task_pool_header" id = "colu'+data.titles[i].col+'"><div class="header_name click"><span class="title_text">' + data.titles[i].content + '</span></div></th>');
 
                 $(".task_pool_header:last").css('background', current_col);
-                $("#task_pool_container").append('<td class="task_pool" id =' + data.titles[i].column + '><div /></td>');
+                $("#task_pool_container").append('<td class="task_pool" id =' + data.titles[i].col + '><div /></td>');
                 intialize_sortables();
             }
             for (var i = 0; i < data.cards.length; i++) {
                 
-                $('#' + data.cards[i].column).first().append(data.cards[i].content);
+                $('#' + data.cards[i].col).first().append(data.cards[i].content);
             }
         }
     })
@@ -56,7 +56,7 @@ $(document).ready(function() {
         $(".task_pool_header:last").addClass("dotted_separator");
         $(".task_pool:last").addClass("dotted_separator");
 
-        $("#task_pool_header_container").append('<th class="task_pool_header"><div class="header_name click"><span class="title_text">' + id + '</span></div></th>');
+        $("#task_pool_header_container").append('<th class="task_pool_header" id = "colu'+id+'"><div class="header_name click"><span class="title_text">' + id + '</span></div></th>');
         $(".task_pool_header:last").css('background', current_col);
         $("#task_pool_container").append('<td class="task_pool" id =' + id + '><div /></td>');
         intialize_sortables();
@@ -113,13 +113,29 @@ $(document).ready(function() {
 	// 내용 html에 적용하는 함수
 	$(document).on('click', '.save_header', function () {
     	var index=$(this).parent().parent().index();
-		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
-		if(new_name == ""){
-			alert("내용을 입력하세요.");
-		}
-		else{
-			$(this).parent().parent().html('<div class="header_name click"><span class="title_text">'+new_name+'</span></div>');
-		}
+    	var new_name = $(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
+    	var id = $(this).parent().parent().parent().parent().attr('id');
+    	if (id == null) {
+    	    id = $(this).parent().parent().attr('id');
+    	    if (new_name == "") {
+    	        alert("내용을 입력하세요.");
+    	    }
+    	    else {
+    	        $(this).parent().parent().html('<div class="header_name click"><span class="title_text">' + new_name + '</span></div>');
+    	    }
+    	    updateContent($('#' + id).parent().attr('id'), $('#' + id).text(), parseInt(id.substr(4, id.length - 1)))
+    	}
+    	else {
+    	    if (new_name == "") {
+    	        alert("내용을 입력하세요.");
+    	    }
+    	    else {
+    	        $(this).parent().parent().html('<div class="header_name click"><span class="title_text">' + new_name + '</span></div>');
+    	    }
+    	    updateContent($('#' + id).parent().attr('id'), $('#' + id).outerHTML(), parseInt(id.substr(4, id.length - 1)))
+
+    	}
+        
 	});
 	//checklist 함수 위에 함수랑 기능 똑같은데 차이점은 체크 버튼
 	$(document).on('click', '.header_check_name', function () {
@@ -136,7 +152,8 @@ $(document).ready(function() {
 	});
 	//checklist 함수 위에 함수랑 기능 똑같은데 차이점은 체크 버튼
 	$(document).on('click', '.save_header_check', function () {
-    	var index=$(this).parent().parent().index();
+	    var index = $(this).parent().parent().index();
+	    var id = $(this).parent().parent().parent().parent().parent().attr('id');
 		var new_name=$(this).parent().parent().children("div:eq(0)").first().children(".input").first().val();
 		if(new_name == ""){
 			alert("내용을 입력하세요.");
@@ -149,6 +166,7 @@ $(document).ready(function() {
 	    	// 체크리스트 체크 해제
 	    	else  $(this).next().children().children().css("text-decoration","none");
 		}
+		updateContent($("#" + id).parent().attr('id'), $("#" + id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
 	});
 
 	//work list 새롭게 생성									검색용 태그 #task list #work list #list
@@ -167,7 +185,8 @@ $(document).ready(function() {
                     {
                         col: 0,
                         title:'',
-                        content: $('#' + data).html(),
+                        content: $('#' + data).outerHTML(),
+                            
                         flag : 0
                     },
 	                success:function()
@@ -196,7 +215,10 @@ $(document).ready(function() {
 	});
 	// work list background 색깔 변경
 	$(document).on('colorpicked', '.mColorPicker', function () {
-    	$('#box_itm'+$(this).attr('n')).css('background',$(this).val());
+	    $('#box_itm' + $(this).attr('n')).css('background', $(this).val());
+	    var id = $(this).parent().parent().parent().parent().attr('id');
+
+	    updateContent($("#" + id).parent().attr('id'), $("#" + id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
 	});
 	// 배경 화면 색깔 변경
 	$(document).on('colorpicked', '.colorete_background', function () {
@@ -266,23 +288,39 @@ $(document).ready(function() {
 			<input class="check_left checked-list" type="checkbox" aria-label="Check"><div id="checkbox'+id+'" class="checkbox-list"><div class="header_check_name click"><span>checklist</span></div></div>\
 			<div class="clear"></div> \
 		');
+		var id = $(this).parent().parent().parent().attr('id');
+
+		updateContent($("#" + id).parent().attr('id'), $("#" + id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
 		// 체크리스트 추가 되었습니다.
 	});
 	// 체크리스트 체크 버튼
 	$(document).on('click', ".checked-list", function () {
+	    
 	    var chk = $(this).is(":checked");//.attr('checked');
 	    // 체크리스트 체크
-	    if(chk) $(this).next().children().children().css("text-decoration","line-through");
-	    // 체크리스트 체크 해제
-	    else  $(this).next().children().children().css("text-decoration","none");
+	    if (chk) {
+	        $(this).next().children().children().css("text-decoration", "line-through");
+	        $(this).attr('checked', 'checked');
+	    }
+	        // 체크리스트 체크 해제
+	    else {
+	        $(this).next().children().children().css("text-decoration", "none");
+	        $(this).removeAttr('checked');
+	    }
+	    var id = $(this).parent().parent().parent().attr('id');
+	    
+	    updateContent($("#"+id).parent().attr('id'), $("#"+id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
 	});
 	// 체크리스트 삭제
 	$(document).on('click', ".deletecheck", function () {
-		var id = $(this).parent().parent().parent().attr("id");
-		$("#"+id).attr("n",Number($("#"+id).attr("n"))-1);
+	    var id2 = $(this).parent().parent().parent().attr("id");
+	    var id = $(this).parent().parent().parent().parent().parent().attr('id');
+		$("#"+id2).attr("n",Number($("#"+id2).attr("n"))-1);
 		$(this).parent().parent().prev().remove();
 		$(this).parent().parent().remove();
-		// 체크리스트 삭제 되었습니다.
+	    // 체크리스트 삭제 되었습니다.
+		
+		updateContent($("#" + id).parent().attr('id'), $("#" + id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
 	});
 
 // edit 안씀
@@ -377,6 +415,7 @@ function intialize_sortables(){
 						$(ui.sender).sortable('cancel');
 						//alert("WIP exceded");
 					}
+					alert(index);
 					
 				}
 	});
@@ -455,4 +494,37 @@ function addCard(id2,col)
 function addCard2(data,col)
 {
     $("#" + col).first().append(data);
+}
+
+function updateContent(col,content,seq)
+{
+    $.blockUI();
+
+    $.ajax({
+        type: 'post',
+        url: '/schedule/update',
+        data:
+            {
+                col: col,
+                content: content,
+                seq : seq
+            },
+        success: function()
+        {
+            $.unblockUI();
+        }
+    });
+}
+
+$.fn.outerHTML = function () {
+    var el = $(this);
+    if (!el[0]) return "";
+
+    if (el[0].outerHTML) {
+        return el[0].outerHTML;
+    } else {
+        var content = el.wrap('<p/>').parent().html();
+        el.unwrap();
+        return content;
+    }
 }
