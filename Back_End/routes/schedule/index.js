@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
     }
     
        
-              connection.query('Select * from project_log where project_id = ?', [pro], function (error, result) {
+              connection.query('Select * from project_log where project_id = ? ORDER BY date', [pro], function (error, result) {
             var history = result;
 
                 res.render('schedule/index.swig', { sid: sid, pro: pro, flag:"schedule", 

@@ -222,7 +222,7 @@ $(document).ready(function() {
 				                data:
 			                    {
 
-			                    	log : 'add card by ' + ''
+			                    	log : 'add card by ' + $('#session').val()
 			                       
 			                    }
 				            })
@@ -403,7 +403,7 @@ $(document).ready(function() {
 				                data:
 			                    {
 
-			                    	log : 'remove card by ' + ''
+			                    	log : 'remove card by ' + $('#session').val()
 			                       
 			                    }
 				            })
@@ -583,7 +583,7 @@ function updateContent(col,content,seq)
 				                data:
 			                    {
 
-			                    	log : 'update card by ' + ''
+			                    	log : 'update card by ' + $('#session').val()
 			                       
 			                    }
 				            })
