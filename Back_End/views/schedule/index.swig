@@ -48,7 +48,8 @@
                       <div class="media">
                         <div class="activity-list">
                           <p>
-                             {{ history.log }}
+                             {{ history.log }}<br />
+                             {{ history.date }}
                           </p>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-var express = require('express');
+锘縱ar express = require('express');
 var router = express.Router();
 var config = require('../../config/config.json');
 var mysql = require("mysql");
@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
     }
     
        
-              connection.query('Select * from project_log where project_id = ? ORDER BY date', ["test"], function (error, result) {
+              connection.query('Select * from project_log where project_id = ?', [pro], function (error, result) {
             var history = result;
 
                 res.render('schedule/index.swig', { sid: sid, pro: pro, flag:"schedule", 
@@ -77,14 +77,14 @@ router.post('/add_card', function (req, res) {
         if (req.body.flag == 0) {
             connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 0], function (error, result) {
                
-                res.send('己傍');
+                res.send('????');
             });
         }
         else if (req.body.flag == 1) {
             connection.query('insert into project_content values (?,?,?,?,?,?,?,?,?) ', [seq, pro, req.body.col, '', '', '', req.body.title, req.body.content, 1], function (error, result) {
                 
 
-                res.send('己傍');
+                res.send('????');
             });
         }
 
@@ -97,7 +97,7 @@ router.post('/remove_col', function (req, res) {
     req.flash('pro', pro);
     connection.query('delete from project_content where project_id = ? AND col = ?', [pro, req.body.col], function (error, result) {
         console.log(error);
-        res.send('己傍');
+        res.send('????');
     });
 });
 router.post('/remove_card', function (req, res) {
@@ -105,18 +105,22 @@ router.post('/remove_card', function (req, res) {
     req.flash('pro', pro);
     connection.query('delete from project_content where project_id = ? AND seq = ?', [pro, req.body.seq], function (error, result) {
         console.log(error);
-        res.send('己傍');
+        res.send('????');
     });
 });
 
 router.post('/add_log', function (req, res) {
+    var pro = req.flash('pro');
+    req.flash('pro', pro);
+    
     var seq;
-    var date = new Date();
-    connection.query('Select * from project_log', function (error, result) {
+   
+    connection.query('Select * from project_log ORDER BY seq', function (error, result) {
         if(result.length == 0) seq = 0;
     	else	seq = result[result.length-1].seq + 1;
-
-        connection.query('insert into project_log values (?,?,?,?)', [seq, session.flash('pro'), date, log], function (error, result) {
+        var date = new Date();
+        connection.query('insert into project_log values (?,?,?,?)', [seq, pro, date, req.body.log], function (error, result) {
+            res.send('????');
         });
     });
 });

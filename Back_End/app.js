@@ -32,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'swig');
 app.set('view cache',({cache:false}));
 
-var httpServer = http.createServer(app).listen(3000, function (req, res) {
+var httpServer = http.createServer(app).listen(8005, function (req, res) {
     console.log("Server on!");
 });
 var io = require("socket.io").listen(httpServer);

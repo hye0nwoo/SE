@@ -76,7 +76,9 @@ $(document).ready(function() {
                         flag: 1
                     },
                     success: function () {
+                 		
                         $.unblockUI();
+
                     }
 
                 })
@@ -213,9 +215,20 @@ $(document).ready(function() {
                     },
 	                success:function()
 	                {
+	                	var date = new Date();
+	                	$.ajax({
+				                type: 'post',
+				                url: '/schedule/add_log',
+				                data:
+			                    {
+
+			                    	log : 'add card by ' + ''
+			                       
+			                    }
+				            })
+	       				 
 	                    $.unblockUI();
 	                }
-
 	            })
 	        }
 	    })
@@ -381,9 +394,22 @@ $(document).ready(function() {
                 {
                     seq: seq
                 },
-	        success: function () {
-	            $.unblockUI();
-	        }
+	        success:function()
+	                {
+	                	var date = new Date();
+	                	$.ajax({
+				                type: 'post',
+				                url: '/schedule/add_log',
+				                data:
+			                    {
+
+			                    	log : 'remove card by ' + ''
+			                       
+			                    }
+				            })
+	       				 
+	                    $.unblockUI();
+	                }
 	    })
 		$('#box_itm'+id).parent().remove();
 		$('#box_itm'+id+'_shadow').remove();
@@ -418,15 +444,14 @@ $(document).ready(function() {
 
 
 // activity 추가 함수 
-function logging_activity(mem, mem_page_id, title, currentTime, work){
+function logging_activity(mem, currentTime, work){
 	$(".collapse-activity").append('\
 		<li class="message-preview">\
 		    <div class="media">\
                 <div class="activity-list">\
-                    <p><a href="#'+mem_page_id+'"><strong style="float:left;"><br />'+mem+' &nbsp;</strong></a>\
-                	<br />'+title+'을/를 '+work+'>\
-                	<span class="small text-muted">'+currentTime+'</span></p>\
-        </div></div></li>\
+                    '+work + ' by ' +mem+'\
+                    <br /> '+currentTime+'\
+			        </div></div></li>\
 		');
 }
 function intialize_sortables(){
@@ -549,10 +574,22 @@ function updateContent(col,content,seq)
                 content: content,
                 seq : seq
             },
-        success: function()
-        {
-            $.unblockUI();
-        }
+        success:function()
+	                {
+	                	var date = new Date();
+	                	$.ajax({
+				                type: 'post',
+				                url: '/schedule/add_log',
+				                data:
+			                    {
+
+			                    	log : 'update card by ' + ''
+			                       
+			                    }
+				            })
+	       				 
+	                    $.unblockUI();
+	                }
     });
 }
 
