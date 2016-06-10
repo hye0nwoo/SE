@@ -96,7 +96,6 @@ router.post('/remove_col', function (req, res) {
     var pro = req.flash('pro');
     req.flash('pro', pro);
     connection.query('delete from project_content where project_id = ? AND col = ?', [pro, req.body.col], function (error, result) {
-        console.log(error);
         res.send('????');
     });
 });
@@ -104,7 +103,6 @@ router.post('/remove_card', function (req, res) {
     var pro = req.flash('pro');
     req.flash('pro', pro);
     connection.query('delete from project_content where project_id = ? AND seq = ?', [pro, req.body.seq], function (error, result) {
-        console.log(error);
         res.send('????');
     });
 });
@@ -139,7 +137,6 @@ router.post('/getSeq',function(req,res){
 router.post('/update', function (req, res) {
     
     connection.query('update project_content set col = ?, content = ? where seq = ?',[req.body.col,req.body.content,req.body.seq], function (error, result) {
-        console.log(error);
         res.send();
     });
 
