@@ -36,7 +36,7 @@ $(document).ready(function() {
                 var current_col = $(".task_pool_header:last").css('background');
                 $(".task_pool_header:last").addClass("dotted_separator");
                 $(".task_pool:last").addClass("dotted_separator");
-                $("#task_pool_header_container").append('<th class="task_pool_header" id = "colu'+data.titles[i].col+'"><div class="header_name click"><span class="title_text">' + data.titles[i].content + '</span></div></th>');
+                $("#task_pool_header_container").append('<th class="task_pool_header" id = "colu'+data.titles[i].seq+'"><div class="header_name click"><span class="title_text">' + data.titles[i].content + '</span></div></th>');
 
                 $(".task_pool_header:last").css('background', current_col);
                 $("#task_pool_container").append('<td class="task_pool" id =' + data.titles[i].col + '><div /></td>');
@@ -85,14 +85,34 @@ $(document).ready(function() {
         });
     });
 	// 칼럼 삭제하는 함수
-	$('#remove_col').click(function(){
-	   if($(".task_pool_header").size()>1){
-	    	$(".task_pool_header").last().remove();
-    		$(".task_pool").last().remove();
+    $('#remove_col').click(function () {
+        if ($(".task_pool_header").size() > 1) {
+	        if ($("#" + $(".task_pool_header").last().index()).children(".big_container").length !=0) {
+                alert("칼럼을 지우기 전에 내부의 카드를 전부 제거해 주세요.")
+	        }
+	        else {
+	            
+                
+	            $.blockUI();
+	            $.ajax({
+	                type: 'post',
+	                url: '/schedule/remove_col',
+	                data :
+                        {
+                            col: $(".task_pool").last().attr('id')
+                        },
+	                success:function()
+                        {
+                            $.unblockUI();
+                        }
+	            })
+	            $(".task_pool_header").last().remove();
+	            $(".task_pool").last().remove();
 
-    		$(".task_pool_header:last").removeClass("dotted_separator");
-			$(".task_pool:last").removeClass("dotted_separator");
-		    intialize_sortables();
+	            $(".task_pool_header:last").removeClass("dotted_separator");
+	            $(".task_pool:last").removeClass("dotted_separator");
+	            intialize_sortables();
+	        }
 		    // 칼럼 삭제 후 정보 정송, 칼럼은 무조건 1개는 있어야 함
 		}
 	});
@@ -117,13 +137,15 @@ $(document).ready(function() {
     	var id = $(this).parent().parent().parent().parent().attr('id');
     	if (id == null) {
     	    id = $(this).parent().parent().attr('id');
+    	    
     	    if (new_name == "") {
     	        alert("내용을 입력하세요.");
     	    }
     	    else {
     	        $(this).parent().parent().html('<div class="header_name click"><span class="title_text">' + new_name + '</span></div>');
     	    }
-    	    updateContent($('#' + id).parent().attr('id'), $('#' + id).text(), parseInt(id.substr(4, id.length - 1)))
+    	    
+    	    updateContent(index, $('#' + id).text(), parseInt(id.substr(4, id.length - 1)))
     	}
     	else {
     	    if (new_name == "") {
@@ -201,9 +223,6 @@ $(document).ready(function() {
 //WIP		  <div n="'+id+'" class="option edit itm_box_option"><button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-ok"></i></button></div> \
 //WIP		  <progress max="100" id="progress_bar'+id+'" class="pbar" value="0"></progress> \
 		
-	});
-	$(document).on('dragend', '.big_container', function () {
-	    alert('실험');
 	});
 	// 버튼 hidden에서 show로
 	$(document).on('mouseover', '.box_itm', function () {
@@ -351,8 +370,22 @@ $(document).ready(function() {
 
 	// work list 삭제
 	$(document).on('click', '.close_remove', function () {
-		var id = $(this).attr("n");
-		$('#box_itm'+id).remove();
+	    var id = $(this).attr("n");
+	    var id2 = $('#box_itm' + id).parent().attr('id');
+	    var seq = parseInt(id2.substr(4, id2.length - 1))
+	    $.blockUI();
+	    $.ajax({
+	        type: 'post',
+	        url: '/schedule/remove_card',
+	        data:
+                {
+                    seq: seq
+                },
+	        success: function () {
+	            $.unblockUI();
+	        }
+	    })
+		$('#box_itm'+id).parent().remove();
 		$('#box_itm'+id+'_shadow').remove();
 		// 삭제되었습니다.
 	});
@@ -415,7 +448,14 @@ function intialize_sortables(){
 						$(ui.sender).sortable('cancel');
 						//alert("WIP exceded");
 					}
-					alert(index);
+					var children = $(this).children(".big_container");
+					
+					children.each(function () {
+					    var id = $(this).attr('id');
+					    
+					    updateContent($("#" + id).parent().attr('id'), $("#" + id).outerHTML(), parseInt(id.substr(4, id.length - 1)));
+					})
+                    
 					
 				}
 	});

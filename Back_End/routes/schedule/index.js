@@ -7,28 +7,34 @@ var connection = mysql.createConnection(config.default.db);
 
 
 router.get('/', function (req, res, next) {
+    if (req.session.flash == null) {
+        res.redirect('/');
+        return;
+    }
     var sid = req.flash('sid');
     var pro = req.flash('pro');
+    var name = req.flash('name');
+    if (pro[0] == null) {
 
+        pro = "";
+    }
     req.flash('sid', sid);
     req.flash('pro', pro);
-    connection.query('Select * from project_content where project_id = ? AND flag = 1', ["test"], function (error, result) {
-        var title = result;
-      
-        connection.query('Select * from project_content where project_id = ? AND flag = 0 ORDER BY column', ["test"], function (error, result) {
-            var card = result;
-
-            connection.query('Select * from project_log where project_id = ? ORDER BY date', ["test"], function (error, result) {
+    req.flash('name', name);
+    if (pro[0] == null) {
+        res.redirect('/main');
+        return;
+    }
+    
+       
+              connection.query('Select * from project_log where project_id = ? ORDER BY date', ["test"], function (error, result) {
             var history = result;
 
                 res.render('schedule/index.swig', { sid: sid, pro: pro, flag:"schedule", 
-                    titles : title,
-                    cards : card,
-                    historys : history
+                    historys: history,
+                    name : name
                 });
-            });
-      
-        });   
+           
     });
     
     
@@ -86,18 +92,20 @@ router.post('/add_card', function (req, res) {
     });
 });
    
-
-
-router.post('/modify_card', function (req, res) {
-    var date = new Date();
-    connection.query('Select * from project_content', function (error, result) {
-        connection.query('UPDATE project_content SET column = ?, row = ?, start_date = ?, end_date = ?, title = ?, content = ? WHERE project_id = ? AND column = ? AND row = ?', [req.body.new_column, req.body.new_row, req.body.new_start_date, req.body.new_end_date, req.body.new_title, req.body.new_content, session.flash('pro'), req.body.original_column, req.body.original_row], function (error, result) {
-        });
+router.post('/remove_col', function (req, res) {
+    var pro = req.flash('pro');
+    req.flash('pro', pro);
+    connection.query('delete from project_content where project_id = ? AND col = ?', [pro, req.body.col], function (error, result) {
+        console.log(error);
+        res.send('성공');
     });
 });
-
 router.post('/remove_card', function (req, res) {
-    connection.query('delete from project_content where project_id = ? AND column = ? AND row = ?', [session.flash('pro'), req.body.column, req.body.row], function (error, result) {    
+    var pro = req.flash('pro');
+    req.flash('pro', pro);
+    connection.query('delete from project_content where project_id = ? AND seq = ?', [pro, req.body.seq], function (error, result) {
+        console.log(error);
+        res.send('성공');
     });
 });
 
